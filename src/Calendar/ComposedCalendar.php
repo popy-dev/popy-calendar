@@ -1,0 +1,56 @@
+<?php
+
+namespace Popy\Calendar\Calendar;
+
+use DateTimeInterface;
+use Popy\Calendar\CalendarInterface;
+use Popy\Calendar\FormaterInterface;
+use Popy\Calendar\ParserInterface;
+
+/**
+ * Composition implementation.
+ */
+class ComposedCalendar implements CalendarInterface
+{
+    /**
+     * Formater
+     * 
+     * @var FormaterInterface
+     */
+    protected $formater;
+
+    /**
+     * Parser
+     * 
+     * @var ParserInterface
+     */
+    protected $parser;
+
+    /**
+     * Class constructor.
+     *
+     * @param FormaterInterface $formater
+     * @param ParserInterface   $parser
+     */
+    public function __construct(FormaterInterface $formater, ParserInterface $parser)
+    {
+        $this->formater = $formater;
+        $this->parser   = $parser;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function format(DateTimeInterface $input, $format)
+    {
+        return $this->formater->format($input, $format);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function parse($input, $format)
+    {
+        return $this->parser->parse($input, $format);
+    }
+}
