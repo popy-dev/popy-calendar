@@ -1,5 +1,5 @@
 PHP Calendar Library
-================
+====================
 
 This repository holds interfaces defining a Calendar, whose purpose is to
 manipulate (format, parse) php dates, and a few utilities and very basic
@@ -40,5 +40,27 @@ use Popy\Calendar\PresetFormater;
 $formater = new PresetFormater($AnyCalendarOrFormaterImplementation, 'Y-m-d');
 
 echo $formater->format(new DateTime());
+?>
+```
+
+Preset Parser
+---------------
+
+The preset parser is a helper object taking any parse and a format as
+constructor parameter, allowing to be able to parse a date without knowing
+which format is expected.
+
+Could be used, for instance, by a service hydrating data fetched from a
+webservice, without having to know which calendar/format is used.
+
+```php
+<?php
+
+use Popy\Calendar\PresetParser;
+
+$formater = new PresetParser($AnyCalendarOrParserImplementation, 'Y-m-d');
+
+var_dump($formater->parse('2017-05-01'));
+
 ?>
 ```
