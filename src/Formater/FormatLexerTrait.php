@@ -33,7 +33,9 @@ trait FormatLexerTrait
                 continue;
             }
 
-            $res = $this->formatSymbol($res, $input, $symbol);
+            if (false === $this->formatSymbol($res, $input, $symbol)) {
+                return $res;
+            }
         }
 
         return $res;
@@ -42,11 +44,11 @@ trait FormatLexerTrait
     /**
      * Format a single symbol.
      *
-     * @param string $res    Accumulated formatted symbols.
+     * @param string &$res   Accumulated formatted symbols.
      * @param mixed  $input  Date input.
      * @param string $symbol Symbol to format.
      * 
-     * @return string The new $res
+     * @return bool true if formatting should continue, false to stop.
      */
-    abstract protected function formatSymbol($res, $input, $symbol);
+    abstract protected function formatSymbol(&$res, $input, $symbol);
 }
