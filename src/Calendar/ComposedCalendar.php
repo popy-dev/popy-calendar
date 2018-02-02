@@ -2,6 +2,7 @@
 
 namespace Popy\Calendar\Calendar;
 
+use DateTimeZone;
 use DateTimeInterface;
 use Popy\Calendar\CalendarInterface;
 use Popy\Calendar\FormaterInterface;
@@ -49,8 +50,8 @@ class ComposedCalendar implements CalendarInterface
     /**
      * @inheritDoc
      */
-    public function parse($input, $format)
+    public function parse($input, $format, DateTimeZone $timezone = null)
     {
-        return $this->parser->parse($input, $format);
+        return $this->parser->parse($input, $format, $timezone);
     }
 }

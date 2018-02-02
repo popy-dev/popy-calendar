@@ -2,6 +2,7 @@
 
 namespace Popy\Calendar\Calendar;
 
+use DateTimeZone;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Popy\Calendar\CalendarInterface;
@@ -47,7 +48,7 @@ class MankindImperialCalendar implements CalendarInterface
     /**
      * @inheritDoc
      */
-    public function parse($input, $format)
+    public function parse($input, $format, DateTimeZone $timezone = null)
     {
         $match = [];
 

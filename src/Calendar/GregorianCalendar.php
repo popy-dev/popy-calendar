@@ -2,6 +2,7 @@
 
 namespace Popy\Calendar\Calendar;
 
+use DateTimeZone;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Popy\Calendar\CalendarInterface;
@@ -22,8 +23,12 @@ class GregorianCalendar implements CalendarInterface
     /**
      * @inheritDoc
      */
-    public function parse($input, $format)
+    public function parse($input, $format, DateTimeZone $timezone = null)
     {
+        if ($timezone !== null) {
+            return DateTimeImmutable::createFromFormat($format, $input, $timezone) ?: null;
+        }
+
         return DateTimeImmutable::createFromFormat($format, $input) ?: null;
     }
 }
