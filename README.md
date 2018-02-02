@@ -8,7 +8,7 @@ implementations.
 Usage
 -----
 
-(see also (example.php)[example.php] file)
+(see also [example.php](example.php) file)
 
 ```php
 <?php
