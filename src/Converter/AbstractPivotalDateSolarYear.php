@@ -10,7 +10,8 @@ use Popy\Calendar\Converter\LeapYearCalculator\Modern;
 
 /**
  * Abstract implementation of a convertor using a "Era start date" to calculate
- * solar years, days & time from a timestamp.
+ * solar years, days & time from a timestamp. The calculation works fine, but
+ * the abstraction isn't nice.
  */
 abstract class AbstractPivotalDateSolarYear
 {

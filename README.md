@@ -8,6 +8,8 @@ implementations.
 Usage
 -----
 
+(see also (example.php)[example.php] file)
+
 ```php
 <?php
 
