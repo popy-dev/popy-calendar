@@ -15,7 +15,11 @@ class RomanConverter
      * @return string
      */
     public function decimalToRoman($input) 
-    { 
+    {
+        if ($input < 0) {
+            return '-' . $this->decimalToRoman(-$input);
+        }
+
         $table = array(
             'M'  => 1000,
             'CM' => 900,
