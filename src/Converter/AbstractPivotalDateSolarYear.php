@@ -119,9 +119,9 @@ abstract class AbstractPivotalDateSolarYear
 
         $timestamp = $this->getEraStart()
             + ($dayIndex * self::SECONDS_PER_DAY)
-            + intval($remainingMicroSeconds / 1000000)
+            + intval($microsec / 1000000)
         ;
-        $microseconds = $remainingMicroSeconds % 1000000;
+        $microseconds = $microsec % 1000000;
 
         // Looking for timezone offset matching the incomplete timestamp.
         // The LMT transition is skipped to mirror the behaviour of
