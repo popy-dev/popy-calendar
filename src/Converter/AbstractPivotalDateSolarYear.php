@@ -116,7 +116,7 @@ abstract class AbstractPivotalDateSolarYear implements ConverterInterface
             $year,
             $eraDayIndex,
             $time,
-            $offset,
+            $offset
         );
     }
 
