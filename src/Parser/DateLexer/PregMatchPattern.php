@@ -53,7 +53,7 @@ class PregMatchPattern implements DateLexerInterface
         }
 
         if ($pattern instanceof self) {
-            $this->regexp .= $pattern->getNestedPattern();
+            $this->regexp .= $pattern->compiled;
             $this->symbols = array_merge($this->symbols, $pattern->symbols);
             return;
         }
@@ -64,27 +64,40 @@ class PregMatchPattern implements DateLexerInterface
 
     public function close()
     {
-        if ($this->compiled !== null) {
-            throw new BadMethodCallException(
-                'You can\'t register any new symbol once the object is compiled'
-            );
+        if ($this->regexp) {
+            $this->expressions[] = $this->regexp;
+            $this->regexp = '';
         }
-
-        $this->expressions[] = $this->regexp;
-        $this->regexp = '';
     }
 
+    public function compile()
+    {
+        if ($this->compiled !== null) {
+            return;
+        }
+
+        $this->regexp = '';
+        $this->expressions = [];
+        $this->compiled = $this->compileExpressions();
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function tokenizeDate($string)
     {
         $this->compile();
 
-        $match = [];
+        $match = $res = [];
 
-        if (!preg_match('/^'.$this->compiled.'$/', $string, $match, PREG_OFFSET_CAPTURE)) {
+        if (!preg_match(
+            '/^'.$this->compiled.'$/',
+            $string,
+            $match,
+            PREG_OFFSET_CAPTURE
+        )) {
             return null;
         }
-
-        $res = [];
 
         foreach ($this->symbols as $key => $symbol) {
             if (!isset($res[$symbol])) {
@@ -104,25 +117,11 @@ class PregMatchPattern implements DateLexerInterface
         return $res;
     }
 
-    public function compile()
-    {
-        if ($this->compiled !== null) {
-            return;
-        }
-
-        $this->compiled = $this->compileExpressions();
-        $this->expressions = null;
-    }
-
-    protected function getNestedPattern()
-    {
-        $this->compile();
-
-        return $this->compiled;
-    }
-
     protected function compileExpressions()
     {
+        if (count($this->expressions) === 0) {
+            throw new BadMethodCallException('Can\'t compile an empty expression');
+        }
         if (count($this->expressions) === 1) {
             return reset($this->expressions);
         }

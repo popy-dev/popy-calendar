@@ -54,6 +54,18 @@ class FormatToken
     }
 
     /**
+     * Checks if token is a non litteral symbol matching the input symbol.
+     *
+     * @param string $symbol
+     *
+     * @return boolean
+     */
+    public function is($symbol)
+    {
+        return !$this->litteral && $this->symbol === $symbol;
+    }
+
+    /**
      * Set litteral.
      *
      * @param boolean $litteral
