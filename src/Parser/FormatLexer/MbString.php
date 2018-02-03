@@ -1,0 +1,42 @@
+<?php
+
+namespace Popy\Calendar\Parser\FormatLexer;
+
+use Popy\Calendar\Parser\FormatToken;
+use Popy\Calendar\Parser\FormatLexerInterface;
+
+/**
+ * mb_string based implementation.
+ */
+class MbString implements FormatLexerInterface
+{
+    /**
+     * @inheritDoc
+     */
+    public function tokenize($format)
+    {
+        $res = [];
+        $escaped = false;
+        $symbols = str_split($format, 1);
+        $length = mb_strlen($format);
+
+        for ($i=0; $i < $length; $i++) { 
+            $symbol = mb_substr($format, $i, 1);
+
+            if ($escaped) {
+                $escaped = false;
+                $res[] = new FormatToken($symbol, true);
+                continue;
+            }
+
+            if ($symbol === '\\') {
+                $escaped = true;
+                continue;
+            }
+
+            $res[] = new FormatToken($symbol, false);
+        }
+
+        return $res;
+    }
+}
