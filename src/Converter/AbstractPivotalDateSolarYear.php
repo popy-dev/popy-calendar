@@ -2,18 +2,19 @@
 
 namespace Popy\Calendar\Converter;
 
-use DateTimeZone;
 use DateTimeImmutable;
 use DateTimeInterface;
+use InvalidArgumentException;
+use Popy\Calendar\ConverterInterface;
+use Popy\Calendar\Converter\TimeConverterInterface;
 use Popy\Calendar\Converter\LeapYearCalculatorInterface;
-use Popy\Calendar\Converter\LeapYearCalculator\Modern;
 
 /**
  * Abstract implementation of a convertor using a "Era start date" to calculate
  * solar years, days & time from a timestamp. The calculation works fine, but
  * the abstraction isn't nice.
  */
-abstract class AbstractPivotalDateSolarYear
+abstract class AbstractPivotalDateSolarYear implements ConverterInterface
 {
     /**
      * Self-explanatory.
@@ -28,13 +29,22 @@ abstract class AbstractPivotalDateSolarYear
     protected $calculator;
 
     /**
+     * Time converter.
+     *
+     * @var TimeConverterInterface
+     */
+    protected $timeConverter;
+
+    /**
      * Class constructor.
      *
-     * @param LeapYearCalculatorInterface|null $calculator Leap year calculator.
+     * @param LeapYearCalculatorInterface $calculator    Leap year calculator.
+     * @param TimeConverterInterface      $timeConverter Time converter.
      */
-    public function __construct(LeapYearCalculatorInterface $calculator = null)
+    public function __construct(LeapYearCalculatorInterface $calculator, TimeConverterInterface $timeConverter)
     {
-        $this->calculator = $calculator ?: new Modern();
+        $this->calculator = $calculator;
+        $this->timeConverter = $timeConverter;
     }
 
     /**
@@ -45,16 +55,26 @@ abstract class AbstractPivotalDateSolarYear
     abstract protected function getEraStart();
 
     /**
-     * Helps converting from a DateTimeInterface by calculating year, day index,
-     *    time (in milliseconds), and DST offset (in seconds)
+     * Instanciates a SolarTimeRepresentationInterface.
      *
-     * @param DateTimeInterface $input
-     * 
-     * @return array<int> [year, dayIndex, microtime, offset]
+     * @see self::fromDateTimeInterface
+     *
+     * @param DateTimeInterface $input        Initial input.
+     * @param integer           $year         Era solar year.
+     * @param integer           $dayIndex     Day index.
+     * @param array<int>        $microseconds Time information.
+     * @param integer           $offset       Used offset.
+     *
+     * @return SolarTimeRepresentationInterface
+     */
+    abstract protected function buildDateRepresentation(DateTimeInterface $input, $year, $dayIndex, array $time, $offset);
+
+    /**
+     * @inheritDoc
      */
     public function fromDateTimeInterface(DateTimeInterface $input)
     {
-        $offset = intval($input->format('Z'));
+        $offset = $this->getOffsetFrom($input);
 
         // Use a timestamp relative to the first year and including timezone offset
         $relativeTimestamp = $input->getTimestamp()
@@ -89,28 +109,37 @@ abstract class AbstractPivotalDateSolarYear
             + ($relativeTimestamp % static::SECONDS_PER_DAY) * 1000000
         ;
 
-        return [
+        $time = $this->timeConverter->fromMicroSeconds($microsec);
+
+        return $this->buildDateRepresentation(
+            $input,
             $year,
             $eraDayIndex,
-            $remainingMicroSeconds,
+            $time,
             $offset,
-        ];
+        );
     }
 
     /**
-     * Builds a DateTime taking some parameters from a custom-era date
-     *     representation.
-     *
-     * @param integer      $year     Custom era year.
-     * @param integer      $dayIndex Custom era day index.
-     * @param integer      $microsec Remaining microseconds in the day (defining
-     *                               time)
-     * @param DateTimeZone $timezone input date timezone.
-     *
-     * @return DateTimeImmutable
+     * @inheritDoc
      */
-    public function toDateTimeInterface($year, $dayIndex, $microsec, DateTimeZone $timezone)
+    public function toDateTimeInterface(DateTimeRepresentationInterface $input)
     {
+        if (!$input instanceof SolarTimeRepresentationInterface) {
+            throw new InvalidArgumentException(sprintf(
+                '%s->%s only supports SolarTimeRepresentationInterface, %s given',
+                get_class($this),
+                __METHOD__,
+                get_class($input)
+            ));
+        }
+
+        $year = $input->getYear();
+        $dayIndex = $input->getDayIndex();
+        $microsec = $this->timeConverter->toMicroSeconds(
+            $input->getTime()
+        );
+
         $sign = $year < 1 ? -1 : 1;
 
         for ($i=min($year, 1); $i < max($year, 1); $i++) {
@@ -124,26 +153,8 @@ abstract class AbstractPivotalDateSolarYear
         ;
         $microseconds = $microsec % 1000000;
 
-        // Looking for timezone offset matching the incomplete timestamp.
-        // The LMT transition is skipped to mirror the behaviour of
-        // DateTimeZone->getOffset()
-        $offset = 0;
-        $previous = null;
-        $offsets = $timezone->getTransitions($timestamp - self::SECONDS_PER_DAY);
-        foreach ($offsets as $info) {
-            if (
-                (!$previous || $previous['abbr'] !== 'LMT')
-                && $timestamp - $info['offset'] < $info['ts']
-            ) {
-                break;
-            }
 
-            $previous = $info;
-
-            $offset = $info['offset'];
-        }
-
-        $timestamp -= $offset;
+        $timestamp -= $this->getOffsetFor($input, $timestamp);
 
         $timestring = sprintf(
             '%s.%06d UTC',
@@ -154,5 +165,61 @@ abstract class AbstractPivotalDateSolarYear
         return DateTimeImmutable::createFromFormat('U.u e', $timestring)
             ->setTimezone($timezone)
         ;
+    }
+
+    /**
+     * Gets offset from input.
+     *
+     * @param DateTimeInterface $input
+     * 
+     * @return integer
+     */
+    protected function getOffsetFrom(DateTimeInterface $input)
+    {
+        return intval($input->format('Z'));
+    }
+
+    /**
+     * Search for the offset that have (or might) have been used for the input
+     * date representation, trying to mirror which offset the "getOffsetFrom"
+     * method returned.
+     *
+     * @param SolarTimeRepresentationInterface $input
+     * @param integer                          $timestamp Calculated offsetted timestamp
+     *
+     * @return integer
+     */
+    protected function getOffsetFor(DateTimeRepresentationInterface $input, $timestamp)
+    {
+        if (null !== $offset = $input->getOffset()) {
+            return $offset
+        }
+
+        // Looking for timezone offset matching the incomplete timestamp.
+        // The LMT transition is skipped to mirror the behaviour of
+        // DateTimeZone->getOffset()
+        $offset = 0;
+        $previous = null;
+        $offsets = $input->getTimezone()->getTransitions(
+            $timestamp - self::SECONDS_PER_DAY,
+            // Usually, $timestamp += self::SECONDS_PER_DAY should be enougth,
+            // but for dates before 1900-01-01 timezones fallback to LMT that
+            // we are trying to skip.
+            max(0, $timestamp += self::SECONDS_PER_DAY)
+        );
+        foreach ($offsets as $info) {
+            if (
+                (!$previous || $previous !== 'LMT')
+                && $timestamp - $info['offset'] < $info['ts']
+            ) {
+                break;
+            }
+
+            $previous = $info['abbr'];
+
+            $offset = $info['offset'];
+        }
+
+        return $offset;
     }
 }
