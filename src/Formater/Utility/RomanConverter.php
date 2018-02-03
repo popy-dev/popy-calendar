@@ -9,12 +9,12 @@ class RomanConverter
 {
     /**
      * Converts an integer to its roman version.
-     * 
+     *
      * @param integer $input
      *
      * @return string
      */
-    public function decimalToRoman($input) 
+    public function decimalToRoman($input)
     {
         if ($input < 0) {
             return '-' . $this->decimalToRoman(-$input);
@@ -34,7 +34,7 @@ class RomanConverter
             'V'  => 5,
             'IV' => 4,
             'I'  => 1,
-        ); 
+        );
         $res = '';
 
         foreach ($table as $symbol => $value) {
@@ -45,6 +45,5 @@ class RomanConverter
         }
 
         return $res;
-    } 
-
+    }
 }

@@ -11,7 +11,7 @@ use DateTimeZone;
  * Keep in mind that this class is only a date representation. The only "real"
  * time value is the timestamp, which is meant to represent a single moment of
  * time, independant from timezone, DST, etc etc.
- * 
+ *
  * An instance may not know the timestamp it represents, for instance when it
  * has been built by a parser.
  */

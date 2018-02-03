@@ -18,13 +18,13 @@ use DateTimeInterface;
 interface ParserInterface
 {
     /**
-     * Parses a time string according to a specified format, then returns 
+     * Parses a time string according to a specified format, then returns
      * DateTimeInterface or null if not able to match.
      *
      * @param string            $input  Input date string.
      * @param string            $format Date format
      * @param DateTimeZone|null $timezone
-     * 
+     *
      * @return DateTimeInterface|null
      */
     public function parse($input, $format, DateTimeZone $timezone = null);

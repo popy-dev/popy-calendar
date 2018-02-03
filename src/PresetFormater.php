@@ -39,7 +39,7 @@ class PresetFormater
      * Format the input date.
      *
      * @param DateTimeInterface $input
-     * 
+     *
      * @return string
      */
     public function format(DateTimeInterface $input)

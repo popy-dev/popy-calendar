@@ -20,7 +20,7 @@ interface FormaterInterface
      *
      * @param DateTimeInterface $input  Input date.
      * @param string            $format Date format
-     * 
+     *
      * @return string
      */
     public function format(DateTimeInterface $input, $format);

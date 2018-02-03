@@ -171,7 +171,7 @@ abstract class AbstractPivotalDateSolarYear implements ConverterInterface
      * Gets offset from input.
      *
      * @param DateTimeInterface $input
-     * 
+     *
      * @return integer
      */
     protected function getOffsetFrom(DateTimeInterface $input)

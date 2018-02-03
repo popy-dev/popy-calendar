@@ -20,7 +20,7 @@ class DecimalTime implements TimeConverterInterface
      *
      * @var array<int>
      */
-    static $ranges = [10, 100, 100, 1000000];
+    public static $ranges = [10, 100, 100, 1000000];
 
     /**
      * Time conversion utility.

@@ -32,7 +32,8 @@ class MankindImperialCalendar implements CalendarInterface
 
         $yearLength = (365 + $input->format('L')) * 24 * 3600;
 
-        $yearFraction = intval(1000 * ($input->getTimestamp() - $ref->getTimestamp())
+        $yearFraction = intval(
+            1000 * ($input->getTimestamp() - $ref->getTimestamp())
             / $yearLength
         );
 

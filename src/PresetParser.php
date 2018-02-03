@@ -39,7 +39,7 @@ class PresetParser
      * Parses the input string into a date.
      *
      * @param string $input
-     * 
+     *
      * @return DateTimeInterface
      */
     public function format($input)

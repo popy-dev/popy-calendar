@@ -6,7 +6,7 @@ interface LocalisationInterface
 {
     /**
      * Get month name.
-     * 
+     *
      * @param mixed $month Month identifier.
      *
      * @return string|null
@@ -15,7 +15,7 @@ interface LocalisationInterface
 
     /**
      * Get month short name.
-     * 
+     *
      * @param mixed $month Month identifier.
      *
      * @return string|null
@@ -24,18 +24,18 @@ interface LocalisationInterface
 
     /**
      * Get day name.
-     * 
+     *
      * @param mixed $day Day identifier.
-     * 
+     *
      * @return string|null
      */
     public function getDayName($day);
 
     /**
      * Get day short name.
-     * 
+     *
      * @param mixed $day Day identifier.
-     * 
+     *
      * @return string|null
      */
     public function getDayShortName($day);

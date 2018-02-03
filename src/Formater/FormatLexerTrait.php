@@ -47,7 +47,7 @@ trait FormatLexerTrait
      * @param string &$res   Accumulated formatted symbols.
      * @param mixed  $input  Date input.
      * @param string $symbol Symbol to format.
-     * 
+     *
      * @return bool true if formatting should continue, false to stop.
      */
     abstract protected function formatSymbol(&$res, $input, $symbol);

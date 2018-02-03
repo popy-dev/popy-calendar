@@ -13,7 +13,7 @@ class TimeConverter
      * @param array<int> $timeParts           Time constituents array.
      * @param array<int> $sourceFractionSizes Source time constituants ranges.
      * @param array<int> $targetFractionSizes Target time constituants ranges.
-     * 
+     *
      * @return array<int>
      */
     public function convertTime(array $timeParts, array $sourceFractionSizes, array $targetFractionSizes)
@@ -35,7 +35,7 @@ class TimeConverter
      * Converts a "Time" (represented by an array of each of its constituents)
      *     into the lowest of its defined units (usefull if you want, for
      *     instance, to convert a [h,m,s,u] into seconds)
-     * 
+     *
      * @param array<int> $timeParts     Time constituents array.
      * @param array<int> $fractionSizes Time constituants ranges.
      *
@@ -68,7 +68,7 @@ class TimeConverter
         $len = count($fractionSizes);
         $res = array_fill(0, $len, 0);
 
-        for ($i=$len - 1; $i > -1 ; $i--) { 
+        for ($i=$len - 1; $i > -1 ; $i--) {
             $res[$i] = $count % $fractionSizes[$i];
             $count = intval($count / $fractionSizes[$i]);
         }

@@ -15,14 +15,14 @@ class ComposedCalendar implements CalendarInterface
 {
     /**
      * Formater
-     * 
+     *
      * @var FormaterInterface
      */
     protected $formater;
 
     /**
      * Parser
-     * 
+     *
      * @var ParserInterface
      */
     protected $parser;

@@ -12,5 +12,4 @@ namespace Popy\Calendar;
  */
 interface CalendarInterface extends FormaterInterface, ParserInterface
 {
-
 }

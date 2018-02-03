@@ -17,7 +17,7 @@ class DuoDecimalTime implements TimeConverterInterface
      */
     protected $converter;
 
-    static $ranges = [24, 60, 60, 1000000];
+    public static $ranges = [24, 60, 60, 1000000];
 
     /**
      * Class constructor.
