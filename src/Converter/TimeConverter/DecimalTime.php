@@ -16,7 +16,7 @@ class DecimalTime implements TimeConverterInterface
     const MICROSECONDS_IN_DAY = 24*3600*1000000;
 
     /**
-     * Decimat format ranges
+     * Decimal format ranges.
      *
      * @var array<int>
      */

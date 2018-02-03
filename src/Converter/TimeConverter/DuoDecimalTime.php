@@ -17,6 +17,11 @@ class DuoDecimalTime implements TimeConverterInterface
      */
     protected $converter;
 
+    /**
+     * DuoDecimal format ranges.
+     *
+     * @var array<int>
+     */
     public static $ranges = [24, 60, 60, 1000000];
 
     /**
