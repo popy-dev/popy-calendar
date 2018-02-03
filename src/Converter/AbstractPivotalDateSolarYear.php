@@ -109,7 +109,7 @@ abstract class AbstractPivotalDateSolarYear implements ConverterInterface
             + ($relativeTimestamp % static::SECONDS_PER_DAY) * 1000000
         ;
 
-        $time = $this->timeConverter->fromMicroSeconds($microsec);
+        $time = $this->timeConverter->fromMicroSeconds($remainingMicroSeconds);
 
         return $this->buildDateRepresentation(
             $input,
@@ -192,7 +192,7 @@ abstract class AbstractPivotalDateSolarYear implements ConverterInterface
     protected function getOffsetFor(DateTimeRepresentationInterface $input, $timestamp)
     {
         if (null !== $offset = $input->getOffset()) {
-            return $offset
+            return $offset;
         }
 
         // Looking for timezone offset matching the incomplete timestamp.
