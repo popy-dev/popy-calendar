@@ -14,5 +14,5 @@ interface FormatLexerInterface
      *
      * @return array<FormatToken>
      */
-    public function tokenize($format);
+    public function tokenizeFormat($format);
 }

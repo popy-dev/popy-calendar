@@ -13,7 +13,7 @@ class MbString implements FormatLexerInterface
     /**
      * @inheritDoc
      */
-    public function tokenize($format)
+    public function tokenizeFormat($format)
     {
         $res = [];
         $escaped = false;
