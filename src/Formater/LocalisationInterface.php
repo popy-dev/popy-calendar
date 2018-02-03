@@ -7,29 +7,38 @@ interface LocalisationInterface
     /**
      * Get month name.
      * 
-     * @param integer $month Month number.
+     * @param mixed $month Month identifier.
      *
      * @return string|null
      */
     public function getMonthName($month);
 
     /**
-     * Get day week name.
+     * Get month short name.
      * 
-     * @param integer $day Day week index.
+     * @param mixed $month Month identifier.
      *
      * @return string|null
      */
-    public function getWeekDayName($day);
+    public function getMonthShortName($month);
 
     /**
      * Get day name.
      * 
-     * @param integer $day Day index (in year).
+     * @param mixed $day Day identifier.
      * 
      * @return string|null
      */
     public function getDayName($day);
+
+    /**
+     * Get day short name.
+     * 
+     * @param mixed $day Day identifier.
+     * 
+     * @return string|null
+     */
+    public function getDayShortName($day);
 
     /**
      * Get number ordinal suffix.
