@@ -15,6 +15,13 @@ abstract class AbstractSolarTime extends AbstractDateTime implements SolarTimeRe
      * @var integer
      */
     protected $year;
+
+    /**
+     * Is leap year
+     *
+     * @var boolean
+     */
+    protected $leapYear;
     
     /**
      * Day Index
@@ -36,6 +43,14 @@ abstract class AbstractSolarTime extends AbstractDateTime implements SolarTimeRe
     public function getYear()
     {
         return $this->year;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function isLeapYear()
+    {
+        return $this->leapYear;
     }
 
     /**

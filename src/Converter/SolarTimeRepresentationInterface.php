@@ -17,6 +17,13 @@ interface SolarTimeRepresentationInterface extends DateTimeRepresentationInterfa
     public function getYear();
 
     /**
+     * Is a leap year.
+     *
+     * @return boolean
+     */
+    public function isLeapYear();
+
+    /**
      * Gets day index (in the year).
      *
      * @return integer.

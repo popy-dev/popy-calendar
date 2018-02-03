@@ -48,7 +48,7 @@ abstract class AbstractPivotalDateSolarYear implements ConverterInterface
     }
 
     /**
-     * Get era starting timestamp (year 1 begining)
+     * Get era starting timestamp.
      *
      * @return integer
      */
