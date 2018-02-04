@@ -81,4 +81,23 @@ class DateLexerResult
         $this->offset = $result->offset;
         $this->data = array_merge($this->data, $result->data);
     }
+
+    /**
+     * Get first set symbol value.
+     *
+     * @param string $name 
+     * @param string ...$name
+     * 
+     * @return mixed
+     */
+    public function getFirst($name)
+    {
+        $names = func_get_args();
+
+        foreach ($names as $name) {
+            if (isset($this->data[$name])) {
+                return $this->data[$name];
+            }
+        }
+    }
 }
