@@ -70,4 +70,15 @@ class DateLexerResult
 
         return $default;
     }
+
+    /**
+     * Merges a result into this one.
+     *
+     * @param DateLexerResult $result
+     */
+    public function merge(DateLexerResult $result)
+    {
+        $this->offset = $result->offset;
+        $this->data = array_merge($this->data, $result->data);
+    }
 }

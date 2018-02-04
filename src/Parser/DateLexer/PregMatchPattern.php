@@ -12,6 +12,8 @@ use Popy\Calendar\Parser\DateLexerInterface;
  *
  * To build one, either give non-null pattern to the constructor, or use
  * the progressive building methods regiser & close.
+ *
+ * This lexer handles self nesting.
  */
 class PregMatchPattern implements DateLexerInterface
 {
@@ -70,8 +72,8 @@ class PregMatchPattern implements DateLexerInterface
      * @throws InvalidArgumentException if any non compatible DateLexerInterface
      *             is given as pattern
      *
-     * @param FormatToken|null          $token
-     * @param string|DateLexerInterface $pattern
+     * @param FormatToken|null               $token
+     * @param DateLexerInterface|string|null $pattern
      */
     public function register(FormatToken $token, $pattern = null)
     {
@@ -155,7 +157,7 @@ class PregMatchPattern implements DateLexerInterface
             return null;
         }
 
-        $res = new DateLexerResult($offset + $match[0][1]);
+        $res = new DateLexerResult($offset + strlen($match[0][0]));
 
         foreach ($this->symbols as $key => $symbol) {
             if (

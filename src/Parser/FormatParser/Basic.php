@@ -2,14 +2,22 @@
 
 namespace Popy\Calendar\Parser\FormatParser;
 
-use Popy\Calendar\Parser\FormatToken;
 use Popy\Calendar\Parser\FormatLexerInterface;
 use Popy\Calendar\Parser\FormatLexer\MbString;
 use Popy\Calendar\Parser\FormatParserInterface;
-use Popy\Calendar\Parser\DateLexer\PregMatchPattern;
+use Popy\Calendar\Parser\DateLexer\Collection;
+use Popy\Calendar\Parser\DateLexer\NonSymbolMatcher;
 use Popy\Calendar\Parser\SymbolParser\NativeFormatPregMatch;
 
-class PregMatchPatternFactory implements FormatParserInterface
+/**
+ * Basic implementation : builds a Collection DateLexer containing every lexer
+ * built by the SymbolParser.
+ *
+ * The results are highly dependent on the quality of the Lexers provided by the
+ * SymbolParser, as everything fails on the first error, while some lexers could
+ * try matching more characters.
+ */
+class Basic implements FormatParserInterface
 {
     /**
      * Class constructor.
@@ -30,17 +38,10 @@ class PregMatchPatternFactory implements FormatParserInterface
     {
         $tokens = $this->lexer->tokenizeFormat($format);
 
-        $dateParser = new PregMatchPattern();
+        $dateParser = new Collection();
 
         foreach ($tokens as $token) {
             $lexer = null;
-            if ($token->is('|')) {
-                $dateParser->register(
-                    new FormatToken(null, FormatToken::TYPE_EOF)
-                );
-                $dateParser->close();
-                continue;
-            }
 
             if (
                 $token->isSymbol()
@@ -53,11 +54,12 @@ class PregMatchPatternFactory implements FormatParserInterface
                 $token = $token->setLitteral();
             }
 
-            $dateParser->register($token, $lexer);
-        }
+            if ($lexer === null) {
+                $lexer = new NonSymbolMatcher($token);
+            }
 
-        $dateParser->close();
-        $dateParser->compile();
+            $dateParser->addLexer($lexer);
+        }
 
         return $dateParser;
     }
