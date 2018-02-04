@@ -6,6 +6,8 @@ use Popy\Calendar\Parser\FormatToken;
 use Popy\Calendar\Parser\SymbolParserInterface;
 use Popy\Calendar\Parser\FormatParserInterface;
 use Popy\Calendar\Parser\DateLexer\PregSimple;
+use Popy\Calendar\Formater\LocalisationInterface;
+use Popy\Calendar\Formater\Localisation\NativeHardcoded;
 
 /**
  * Implementation of the native DateTime formats using preg patterns &

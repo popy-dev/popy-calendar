@@ -9,18 +9,18 @@ use Popy\Calendar\Parser\DateLexerResult;
 class PregSimple extends AbstractPreg
 {
     /**
+     * Registered symbol.
+     *
+     * @var string|null
+     */
+    protected $symbol;
+
+    /**
      * Expression.
      *
      * @var string
      */
     protected $expression;
-
-    /**
-     * Registered symbol.
-     *
-     * @var string|null
-     */
-    protected $symbols;
 
     /**
      * Class constructor.
@@ -73,7 +73,7 @@ class PregSimple extends AbstractPreg
             return $offset;
         }
 
-        // Didn't match
+        // Did match
         if ($match[$offset][1] !== -1) {
             $result->set($this->symbol, $match[$offset][0]);
         }

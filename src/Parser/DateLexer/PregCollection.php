@@ -3,10 +3,9 @@
 namespace Popy\Calendar\Parser\DateLexer;
 
 use BadMethodCallException;
-use InvalidArgumentException;
-use Popy\Calendar\Parser\FormatToken;
 use Popy\Calendar\Parser\DateLexerResult;
 use Popy\Calendar\Parser\PregDateLexerInterface;
+
 /**
  * PregMatchPattern uses preg_match to tokenize dates.
  *
