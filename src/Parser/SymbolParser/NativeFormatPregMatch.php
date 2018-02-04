@@ -80,12 +80,6 @@ class NativeFormatPregMatch implements SymbolParserInterface
             return new PregMatchPattern($token, '.{1,3}');
         }
 
-        // NOt standard : to remove
-        if ($token->is('X')) {
-            // Added symbol : Day individual name
-            return new PregMatchPattern($token, '\S.*?');
-        }
-
         if ($token->is('S')) {
             // S   English ordinal suffix for the day of the month, 2 characters
             return new PregMatchPattern($token, '\S{1,2}');

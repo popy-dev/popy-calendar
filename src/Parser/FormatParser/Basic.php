@@ -15,7 +15,7 @@ use Popy\Calendar\Parser\SymbolParser\NativeFormatPregMatch;
  *
  * The results are highly dependent on the quality of the Lexers provided by the
  * SymbolParser, as everything fails on the first error, while some lexers could
- * try matching more characters.
+ * try matching more characters. PregMatchPatternFactory works better for now.
  */
 class Basic implements FormatParserInterface
 {

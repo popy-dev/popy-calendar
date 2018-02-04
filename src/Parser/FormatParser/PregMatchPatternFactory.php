@@ -9,6 +9,11 @@ use Popy\Calendar\Parser\FormatParserInterface;
 use Popy\Calendar\Parser\DateLexer\PregMatchPattern;
 use Popy\Calendar\Parser\SymbolParser\NativeFormatPregMatch;
 
+/**
+ * PREG based parser.
+ *
+ * Handles a special | character.
+ */
 class PregMatchPatternFactory implements FormatParserInterface
 {
     /**
