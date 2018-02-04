@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use Popy\Calendar\Parser\FormatToken;
 use Popy\Calendar\Parser\DateLexerResult;
 
-class SimplePreg extends AbstractPreg
+class PregSimple extends AbstractPreg
 {
     /**
      * Expression.

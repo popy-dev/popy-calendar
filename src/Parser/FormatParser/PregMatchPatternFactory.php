@@ -6,8 +6,8 @@ use Popy\Calendar\Parser\FormatToken;
 use Popy\Calendar\Parser\FormatLexerInterface;
 use Popy\Calendar\Parser\FormatLexer\MbString;
 use Popy\Calendar\Parser\FormatParserInterface;
-use Popy\Calendar\Parser\DateLexer\SimplePreg;
-use Popy\Calendar\Parser\DateLexer\PregMatchPattern;
+use Popy\Calendar\Parser\DateLexer\PregSimple;
+use Popy\Calendar\Parser\DateLexer\PregCollection;
 use Popy\Calendar\Parser\SymbolParser\NativeFormatPregMatch;
 
 /**
@@ -36,10 +36,10 @@ class PregMatchPatternFactory implements FormatParserInterface
     {
         $tokens = $this->lexer->tokenizeFormat($format);
 
-        $dateParser = new PregMatchPattern();
+        $dateParser = new PregCollection();
 
         $eof = new FormatToken(null, FormatToken::TYPE_EOF);
-        $eofLexer = new SimplePreg($eof);
+        $eofLexer = new PregSimple($eof);
 
         foreach ($tokens as $token) {
             if ($token->is('|')) {
@@ -62,10 +62,10 @@ class PregMatchPatternFactory implements FormatParserInterface
             }
 
             if ($lexer === null) {
-                $lexer = new SimplePreg($token);
+                $lexer = new PregSimple($token);
             }
 
-            $dateParser->register($token, $lexer);
+            $dateParser->register($lexer);
         }
 
         $dateParser->close();

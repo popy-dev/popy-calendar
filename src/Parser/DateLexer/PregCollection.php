@@ -15,7 +15,7 @@ use Popy\Calendar\Parser\PregDateLexerInterface;
  *
  * This lexer handles self nesting.
  */
-class PregMatchPattern extends AbstractPreg
+class PregCollection extends AbstractPreg
 {
     /**
      * Currently built expression.
@@ -25,11 +25,11 @@ class PregMatchPattern extends AbstractPreg
     protected $regexp = '';
 
     /**
-     * Registered symbols.
+     * Registered lexers.
      *
-     * @var array
+     * @var array<PregDateLexerInterface>
      */
-    protected $symbols = [];
+    protected $lexers = [];
 
     /**
      * Built expressions.
@@ -46,36 +46,14 @@ class PregMatchPattern extends AbstractPreg
     protected $compiled;
 
     /**
-     * Class constructor. If any pattern is given, will register $pattern &
-     * $symbol, close and compile the lexer.
-     *
-     * @param string|null $pattern Regular expression
-     * @param string|null $symbol  Symbol
-     */
-    public function __construct(FormatToken $token = null, $pattern = null)
-    {
-        if ($token !== null) {
-            $this->register($token, $pattern);
-            $this->close();
-            $this->compile();
-        }
-    }
-
-    /**
-     * Adds a pattern and its related symbol into the current expression. If the
-     * pattern is a PregDateLexerInterface, it will be included as a nested
-     * subpattern. IF the pattern is a string and no symbol is given, the 
-     * pattern will be considered as a litteral expression and will be escaped.
+     * Registers a pattern in the collection.
      *
      * @throws BadMethodCallException if called while the pattern has already
      *             been compiled
-     * @throws InvalidArgumentException if any non compatible PregDateLexerInterface
-     *             is given as pattern
      *
-     * @param FormatToken|null               $token
-     * @param PregDateLexerInterface|string|null $pattern
+     * @param PregDateLexerInterface $lexer
      */
-    public function register(FormatToken $token, PregDateLexerInterface $pattern)
+    public function register(PregDateLexerInterface $lexer)
     {
         if ($this->compiled !== null) {
             throw new BadMethodCallException(
@@ -83,33 +61,8 @@ class PregMatchPattern extends AbstractPreg
             );
         }
 
-        if ($pattern instanceof PregDateLexerInterface) {
-            $this->regexp .= $pattern->getExpression();
-            $this->symbols[] = $pattern;
-            return;
-        }
-
-        if (is_object($pattern)) {
-            throw new InvalidArgumentException(
-                'You can\'t register an ' . get_class($pattern) . ' instance !'
-            );
-        }
-
-        if ($token->isLitteral()) {
-            $this->regexp .= preg_quote($token->getValue());
-            return;
-        }
-
-        if ($token->isSymbol()) {
-            $this->symbols[] = $token->getValue();
-            $this->regexp .= '(' . $pattern . ')';
-            return;
-        }
-
-        if ($token->isType(FormatToken::TYPE_EOF)) {
-            $this->regexp .= '$';
-            return;
-        }
+        $this->regexp .= $lexer->getExpression();
+        $this->lexers[] = $lexer;
     }
 
     /**
@@ -152,23 +105,13 @@ class PregMatchPattern extends AbstractPreg
      */
     public function hydrateResult(DateLexerResult $result, $match, $offset = 1)
     {
-        foreach ($this->symbols as $symbol) {
-            if ($symbol instanceof PregDateLexerInterface) {
-                $offset = $symbol->hydrateResult($result, $match, $offset);
-                continue;
-            }
-
+        foreach ($this->lexers as $lexer) {
             // No more matches : useless to continue
             if (!isset($match[$offset])) {
                 return $offset;
             }
 
-            // Did match
-            if ($match[$offset][1] !== -1) {
-                $result->set($symbol, $match[$offset][0]);
-            }
-            
-            $offset++;
+            $offset = $lexer->hydrateResult($result, $match, $offset);
         }
 
         return $offset;
