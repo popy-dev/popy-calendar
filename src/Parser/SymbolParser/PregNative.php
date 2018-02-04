@@ -13,7 +13,7 @@ use Popy\Calendar\Formater\Localisation\NativeHardcoded;
 /**
  * Implementation of the native DateTime formats using preg lexers.
  */
-class NativeFormatPregMatch implements SymbolParserInterface
+class PregNative implements SymbolParserInterface
 {
     /**
      * Localisation

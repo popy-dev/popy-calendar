@@ -5,6 +5,9 @@ namespace Popy\Calendar\Parser\DateLexer;
 use Popy\Calendar\Parser\DateLexerResult;
 use Popy\Calendar\Parser\PregDateLexerInterface;
 
+/**
+ * Abstract implementation of Preg based lexers.
+ */
 abstract class AbstractPreg implements PregDateLexerInterface
 {
     /**
@@ -18,7 +21,8 @@ abstract class AbstractPreg implements PregDateLexerInterface
             '/\G'.$this->getExpression().'/',
             $string,
             $match,
-            PREG_OFFSET_CAPTURE
+            PREG_OFFSET_CAPTURE,
+            $offset
         )) {
             return null;
         }

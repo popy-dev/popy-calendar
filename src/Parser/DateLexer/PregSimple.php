@@ -6,6 +6,12 @@ use InvalidArgumentException;
 use Popy\Calendar\Parser\FormatToken;
 use Popy\Calendar\Parser\DateLexerResult;
 
+/**
+ * Simple Preg lexer implementation : will match a single pattern and associate
+ * it with the input token if it's a symbol.
+ *
+ * Litterals and EOF are also handled, but the input pattern is not used.
+ */
 class PregSimple extends AbstractPreg
 {
     /**

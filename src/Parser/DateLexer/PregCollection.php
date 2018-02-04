@@ -7,12 +7,14 @@ use Popy\Calendar\Parser\DateLexerResult;
 use Popy\Calendar\Parser\PregDateLexerInterface;
 
 /**
- * PregMatchPattern uses preg_match to tokenize dates.
- *
- * To build one, either give non-null pattern to the constructor, or use
- * the progressive building methods regiser & close.
- *
- * This lexer handles self nesting.
+ * Collection/Chain implementation of Preg lexer. It differs from a standard
+ * collection on few points :
+ *  - accept only PregDateLexerInterface lexers
+ *  - will not call tokenizeDate on lexers
+ *  - will integrate sub lexers' patterns into it's own, in order to perform
+ *      a single preg_match
+ * At the end, this collection will perform 3x faster than the standard
+ * Collection implementation with the same internal lexers.
  */
 class PregCollection extends AbstractPreg
 {
@@ -47,19 +49,10 @@ class PregCollection extends AbstractPreg
     /**
      * Registers a pattern in the collection.
      *
-     * @throws BadMethodCallException if called while the pattern has already
-     *             been compiled
-     *
      * @param PregDateLexerInterface $lexer
      */
     public function register(PregDateLexerInterface $lexer)
     {
-        if ($this->compiled !== null) {
-            throw new BadMethodCallException(
-                'You can\'t register any new symbol once the object is compiled'
-            );
-        }
-
         $this->regexp .= $lexer->getExpression();
         $this->lexers[] = $lexer;
     }
@@ -87,8 +80,6 @@ class PregCollection extends AbstractPreg
         }
 
         $this->compiled = $this->compileExpressions();
-        $this->regexp = '';
-        $this->expressions = [];
     }
 
     /**
@@ -96,6 +87,8 @@ class PregCollection extends AbstractPreg
      */
     public function getExpression()
     {
+        $this->compile();
+
         return $this->compiled;
     }
 

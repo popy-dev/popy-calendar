@@ -11,11 +11,15 @@ use Popy\Calendar\Parser\DateLexer\PregCollection;
 use Popy\Calendar\Parser\SymbolParser\NativeFormatPregMatch;
 
 /**
- * PREG based parser.
+ * Preg based implementation of the native DateTimeInterface format, with an
+ * "extension" : | symbols delimits format alternatives.
  *
- * Handles a special | character.
+ * Uses PregCollection date lexer, so is only compatible with SymbolParsers that
+ * returns Preg lexers. Otherwise, use another parser, like the basic one.
+ *
+ * PregCollection is usually 3x faster than a standard Collection lexer.
  */
-class PregMatchPatternFactory implements FormatParserInterface
+class PregExtendedNative implements FormatParserInterface
 {
     /**
      * Class constructor.
@@ -38,12 +42,11 @@ class PregMatchPatternFactory implements FormatParserInterface
 
         $dateParser = new PregCollection();
 
-        $eof = new FormatToken(null, FormatToken::TYPE_EOF);
-        $eofLexer = new PregSimple($eof);
+        $eofLexer = new PregSimple(new FormatToken(null, FormatToken::TYPE_EOF));
 
         foreach ($tokens as $token) {
             if ($token->is('|')) {
-                $dateParser->register($eof, $eofLexer);
+                $dateParser->register($eofLexer);
                 $dateParser->close();
                 continue;
             }

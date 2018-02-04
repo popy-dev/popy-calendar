@@ -6,7 +6,8 @@ use Popy\Calendar\Parser\DateLexerResult;
 use Popy\Calendar\Parser\DateLexerInterface;
 
 /**
- * Collection/Chain implementation : every contained lexer has to match its own part.
+ * Collection/Chain implementation : every contained lexer has to match its own
+ * part, then the full result is returned.
  */
 class Collection implements DateLexerInterface
 {
