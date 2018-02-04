@@ -6,7 +6,7 @@ use BadMethodCallException;
 use InvalidArgumentException;
 use Popy\Calendar\Parser\FormatToken;
 use Popy\Calendar\Parser\DateLexerResult;
-use Popy\Calendar\Parser\DateLexerInterface;
+use Popy\Calendar\Parser\PregDateLexerInterface;
 /**
  * PregMatchPattern uses preg_match to tokenize dates.
  *
@@ -15,7 +15,7 @@ use Popy\Calendar\Parser\DateLexerInterface;
  *
  * This lexer handles self nesting.
  */
-class PregMatchPattern implements DateLexerInterface
+class PregMatchPattern extends AbstractPreg
 {
     /**
      * Currently built expression.
@@ -63,19 +63,19 @@ class PregMatchPattern implements DateLexerInterface
 
     /**
      * Adds a pattern and its related symbol into the current expression. If the
-     * pattern is a DateLexerInterface, it will be included as a nested
+     * pattern is a PregDateLexerInterface, it will be included as a nested
      * subpattern. IF the pattern is a string and no symbol is given, the 
      * pattern will be considered as a litteral expression and will be escaped.
      *
      * @throws BadMethodCallException if called while the pattern has already
      *             been compiled
-     * @throws InvalidArgumentException if any non compatible DateLexerInterface
+     * @throws InvalidArgumentException if any non compatible PregDateLexerInterface
      *             is given as pattern
      *
      * @param FormatToken|null               $token
-     * @param DateLexerInterface|string|null $pattern
+     * @param PregDateLexerInterface|string|null $pattern
      */
-    public function register(FormatToken $token, $pattern = null)
+    public function register(FormatToken $token, PregDateLexerInterface $pattern)
     {
         if ($this->compiled !== null) {
             throw new BadMethodCallException(
@@ -83,15 +83,15 @@ class PregMatchPattern implements DateLexerInterface
             );
         }
 
-        if ($pattern instanceof self) {
-            $this->regexp .= $pattern->getCompiledExpression();
-            $this->symbols = array_merge($this->symbols, $pattern->getSymbols());
+        if ($pattern instanceof PregDateLexerInterface) {
+            $this->regexp .= $pattern->getExpression();
+            $this->symbols[] = $pattern;
             return;
         }
 
-        if ($pattern instanceof DateLexerInterface) {
+        if (is_object($pattern)) {
             throw new InvalidArgumentException(
-                'You can\'t nest another kind of lexer in ' . get_class($this)
+                'You can\'t register an ' . get_class($pattern) . ' instance !'
             );
         }
 
@@ -142,38 +142,37 @@ class PregMatchPattern implements DateLexerInterface
     /**
      * @inheritDoc
      */
-    public function tokenizeDate($string, $offset = 0)
+    public function getExpression()
     {
-        $this->compile();
+        return $this->compiled;
+    }
 
-        $match = $res = [];
-
-        if (!preg_match(
-            '/\G'.$this->compiled.'/',
-            $string,
-            $match,
-            PREG_OFFSET_CAPTURE
-        )) {
-            return null;
-        }
-
-        $res = new DateLexerResult($offset + strlen($match[0][0]));
-
-        foreach ($this->symbols as $key => $symbol) {
-            if (
-                !isset($match[$key + 1])
-                || $match[$key + 1][1] === -1
-            ) {
+    /**
+     * @inheritDoc
+     */
+    public function hydrateResult(DateLexerResult $result, $match, $offset = 1)
+    {
+        foreach ($this->symbols as $symbol) {
+            if ($symbol instanceof PregDateLexerInterface) {
+                $offset = $symbol->hydrateResult($result, $match, $offset);
                 continue;
             }
 
-            $res->set($symbol, $match[$key + 1][0]);
+            // No more matches : useless to continue
+            if (!isset($match[$offset])) {
+                return $offset;
+            }
+
+            // Did match
+            if ($match[$offset][1] !== -1) {
+                $result->set($symbol, $match[$offset][0]);
+            }
+            
+            $offset++;
         }
 
-        return $res;
+        return $offset;
     }
-
-
 
     /**
      * Compile expression list.
@@ -198,25 +197,5 @@ class PregMatchPattern implements DateLexerInterface
         }
 
         return '(?:' . implode('|', $parts) . ')';
-    }
-
-    /**
-     * Gets the registered symbols.
-     *
-     * @return array
-     */
-    public function getSymbols()
-    {
-        return $this->symbols;
-    }
-
-    /**
-     * Gets the Final compiled regular expression.
-     *
-     * @return string|null
-     */
-    public function getCompiledExpression()
-    {
-        return $this->compiled;
     }
 }
