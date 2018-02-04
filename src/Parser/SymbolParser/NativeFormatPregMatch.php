@@ -6,15 +6,32 @@ use Popy\Calendar\Parser\FormatToken;
 use Popy\Calendar\Parser\SymbolParserInterface;
 use Popy\Calendar\Parser\FormatParserInterface;
 use Popy\Calendar\Parser\DateLexer\PregSimple;
+use Popy\Calendar\Parser\DateLexer\PregChoice;
 use Popy\Calendar\Formater\LocalisationInterface;
 use Popy\Calendar\Formater\Localisation\NativeHardcoded;
 
 /**
- * Implementation of the native DateTime formats using preg patterns &
- * PregSimple lexer
+ * Implementation of the native DateTime formats using preg lexers.
  */
 class NativeFormatPregMatch implements SymbolParserInterface
 {
+    /**
+     * Localisation
+     *
+     * @var LocalisationInterface
+     */
+    protected $locale;
+
+    /**
+     * Class constructor.
+     *
+     * @param LocalisationInterface|null $locale
+     */
+    public function __construct(LocalisationInterface $locale = null)
+    {
+        $this->locale = $locale ?: new NativeHardcoded();
+    }
+
     /**
      * @inheritDoc
      */
@@ -39,12 +56,12 @@ class NativeFormatPregMatch implements SymbolParserInterface
 
         if ($token->is('F')) {
             // F   A full textual representation of a month, such as January or March
-            return new PregSimple($token, '\S.*?');
+            return $this->buildXNamesLexer('Month', $token);
         }
 
         if ($token->is('M')) {
             // M   A short textual representation of a month, three letters    Jan through Dec
-            return new PregSimple($token, '.{1,3}');
+            return $this->buildXNamesLexer('MonthShort', $token);
         }
 
         if ($token->is('m')) {
@@ -74,17 +91,17 @@ class NativeFormatPregMatch implements SymbolParserInterface
 
         if ($token->is('l')) {
             // l (lowercase 'L')   A full textual representation of the day of the week
-            return new PregSimple($token, '\S.*?');
+            return $this->buildXNamesLexer('Day', $token);
         }
 
         if ($token->is('D')) {
             // D   A textual representation of a day, three letters
-            return new PregSimple($token, '.{1,3}');
+            return $this->buildXNamesLexer('DayShort', $token);
         }
 
         if ($token->is('S')) {
             // S   English ordinal suffix for the day of the month, 2 characters
-            return new PregSimple($token, '\S{1,2}');
+            return $this->buildSuffixesLexer($token);
         }
 
         if ($token->is('w')) {
@@ -192,7 +209,53 @@ class NativeFormatPregMatch implements SymbolParserInterface
 
         if ($token->is('U')) {
             // U   Seconds since the Unix Epoch (January 1 1970 00:00:00 GMT)  See also time()
-            return new PregSimple($token, '-?\d+?');
+            return new PregSimple($token, '-?\d+');
         }
+    }
+
+    /**
+     * Builds a choice lexer based on a get*name localisation method.
+     *
+     * @param string      $x     Method name middle part.
+     * @param FormatToken $token Token.
+     * 
+     * @return PregChoice
+     */
+    protected function buildXNamesLexer($x, FormatToken $token)
+    {
+        $choices = [];
+        $i = 0;
+
+        while (null !== $label = $this->locale->{"get${x}Name"}($i++)) {
+            $choices[] = $label;
+        }
+
+        return new PregChoice($token, $choices);
+    }
+
+    /**
+     * Builds a choice lexer based on the getNumberOrdinalSuffix localisation
+     * method.
+     *
+     * @param FormatToken $token Token.
+     * 
+     * @return PregChoice
+     */
+    protected function buildSuffixesLexer(FormatToken $token)
+    {
+
+        $choices = [];
+        $i = $repetitions = 0;
+
+        while (null !== $label = $this->locale->getNumberOrdinalSuffix($i++)) {
+            if (!in_array($label, $choices)) {
+                $choices[] = $label;
+                $repetitions = 0;
+            } else if (++$repetitions > 5) {
+                break;
+            }
+        }
+
+        return new PregChoice($token, $choices);
     }
 }
