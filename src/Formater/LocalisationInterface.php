@@ -45,7 +45,7 @@ interface LocalisationInterface
      *
      * @param integer $number
      *
-     * @return string|null
+     * @return string
      */
     public function getNumberOrdinalSuffix($number);
 }
