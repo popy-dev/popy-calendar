@@ -6,6 +6,7 @@ use Popy\Calendar\Parser\FormatToken;
 use Popy\Calendar\Parser\FormatLexerInterface;
 use Popy\Calendar\Parser\FormatLexer\MbString;
 use Popy\Calendar\Parser\FormatParserInterface;
+use Popy\Calendar\Parser\SymbolParserInterface;
 use Popy\Calendar\Parser\DateLexer\PregSimple;
 use Popy\Calendar\Parser\DateLexer\PregCollection;
 use Popy\Calendar\Parser\SymbolParser\NativeFormatPregMatch;
