@@ -66,6 +66,28 @@ class FormatToken
     }
 
     /**
+     * Checks if token is a non litteral symbol matching one of the arguments,
+     * or one of the symbol contained in the first argument if it is an array
+     * 
+     * @param array|string $symbols 
+     * @param string       ...$symbol
+     *
+     * @return boolean
+     */
+    public function isOne($symbols)
+    {
+        if ($this->litteral) {
+            return false;
+        }
+
+        if (!is_array($symbols)) {
+            $symbols = func_get_args();
+        }
+
+        return in_array($this->symbol, $symbols);
+    }
+
+    /**
      * Set litteral.
      *
      * @param boolean $litteral

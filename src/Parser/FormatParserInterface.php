@@ -15,5 +15,5 @@ interface FormatParserInterface
      *
      * @return DateLexerInterface
      */
-    public function parseFormat($format):
+    public function parseFormat($format);
 }
