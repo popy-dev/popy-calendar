@@ -5,8 +5,8 @@ namespace Popy\Calendar\Parser\DateLexer;
 use BadMethodCallException;
 use InvalidArgumentException;
 use Popy\Calendar\Parser\FormatToken;
+use Popy\Calendar\Parser\DateLexerResult;
 use Popy\Calendar\Parser\DateLexerInterface;
-
 /**
  * PregMatchPattern uses preg_match to tokenize dates.
  *
@@ -50,10 +50,10 @@ class PregMatchPattern implements DateLexerInterface
      * @param string|null $pattern Regular expression
      * @param string|null $symbol  Symbol
      */
-    public function __construct($pattern = null, $symbol = null)
+    public function __construct(FormatToken $token = null, $pattern = null)
     {
-        if ($pattern !== null) {
-            $this->register($pattern, $symbol);
+        if ($token !== null) {
+            $this->register($token, $pattern);
             $this->close();
             $this->compile();
         }
@@ -70,10 +70,10 @@ class PregMatchPattern implements DateLexerInterface
      * @throws InvalidArgumentException if any non compatible DateLexerInterface
      *             is given as pattern
      *
+     * @param FormatToken|null          $token
      * @param string|DateLexerInterface $pattern
-     * @param string|null               $symbol
      */
-    public function register($pattern, $symbol = null)
+    public function register(FormatToken $token, $pattern = null)
     {
         if ($this->compiled !== null) {
             throw new BadMethodCallException(
@@ -93,13 +93,21 @@ class PregMatchPattern implements DateLexerInterface
             );
         }
 
-        if ($symbol === null) {
-            $this->regexp .= preg_quote($pattern);
+        if ($token->isLitteral()) {
+            $this->regexp .= preg_quote($token->getValue());
             return;
         }
 
-        $this->symbols[] = $symbol;
-        $this->regexp .= '(' . $pattern . ')';
+        if ($token->isSymbol()) {
+            $this->symbols[] = $token->getValue();
+            $this->regexp .= '(' . $pattern . ')';
+            return;
+        }
+
+        if ($token->isType(FormatToken::TYPE_EOF)) {
+            $this->regexp .= '$';
+            return;
+        }
     }
 
     /**
@@ -132,14 +140,14 @@ class PregMatchPattern implements DateLexerInterface
     /**
      * @inheritDoc
      */
-    public function tokenizeDate($string)
+    public function tokenizeDate($string, $offset = 0)
     {
         $this->compile();
 
         $match = $res = [];
 
         if (!preg_match(
-            '/^'.$this->compiled.'$/',
+            '/\G'.$this->compiled.'/',
             $string,
             $match,
             PREG_OFFSET_CAPTURE
@@ -147,11 +155,9 @@ class PregMatchPattern implements DateLexerInterface
             return null;
         }
 
-        foreach ($this->symbols as $key => $symbol) {
-            if (!isset($res[$symbol])) {
-                $res[$symbol] = null;
-            }
+        $res = new DateLexerResult($offset + $match[0][1]);
 
+        foreach ($this->symbols as $key => $symbol) {
             if (
                 !isset($match[$key + 1])
                 || $match[$key + 1][1] === -1
@@ -159,7 +165,7 @@ class PregMatchPattern implements DateLexerInterface
                 continue;
             }
 
-            $res[$symbol] = $match[$key + 1][0];
+            $res->set($symbol, $match[$key + 1][0]);
         }
 
         return $res;

@@ -2,6 +2,7 @@
 
 namespace Popy\Calendar\Parser\FormatParser;
 
+use Popy\Calendar\Parser\FormatToken;
 use Popy\Calendar\Parser\FormatLexerInterface;
 use Popy\Calendar\Parser\FormatLexer\MbString;
 use Popy\Calendar\Parser\FormatParserInterface;
@@ -33,6 +34,9 @@ class PregMatchPatternFactory implements FormatParserInterface
 
         foreach ($tokens as $token) {
             if ($token->is('|')) {
+                $dateParser->register(
+                    new FormatToken(null, FormatToken::TYPE_EOF)
+                );
                 $dateParser->close();
                 continue;
             }
@@ -48,14 +52,12 @@ class PregMatchPatternFactory implements FormatParserInterface
                 $token = $token->setLitteral();
             }
 
-            if ($token->isLitteral()) {
-                $dateParser->register($token->getSymbol());
-                continue;
-            }
-
-            $dateParser->register($pattern, $token->getSymbol());
+            $dateParser->register($token, $pattern);
         }
 
+        $dateParser->register(
+            new FormatToken(null, FormatToken::TYPE_EOF)
+        );
         $dateParser->close();
         $dateParser->compile();
 

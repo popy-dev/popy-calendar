@@ -7,54 +7,48 @@ namespace Popy\Calendar\Parser;
  */
 class FormatToken
 {
-    /**
-     * Symbol value.
-     *
-     * @var string
-     */
-    protected $symbol;
+    const TYPE_LITTERAL = 1;
+    const TYPE_SYMBOL = 2;
+    const TYPE_EOF = 3;
 
     /**
-     * Is litteral.
+     * Token value.
      *
-     * @var boolean
+     * @var string|null
      */
-    protected $litteral;
+    protected $value;
+
+    /**
+     * Token type.
+     *
+     * @var integer
+     */
+    protected $type;
 
     /**
      * Class constructor.
      *
-     * @param string  $symbol   Symbol value.
-     * @param boolean $litteral Is litteral.
+     * @param string|null $value Token value.
+     * @param integer     $type  Token type.
      */
-    public function __construct($symbol, $litteral)
+    public function __construct($value, $type)
     {
-        $this->symbol   = $symbol;
-        $this->litteral = $litteral;
+        $this->value = $value;
+        $this->type  = $type;
     }
 
     /**
-     * Gets the Symbol value.
+     * Gets the token value.
      *
      * @return string
      */
-    public function getSymbol()
+    public function getValue()
     {
-        return $this->symbol;
+        return $this->value;
     }
 
     /**
-     * Checks if symbol is litteral
-     *
-     * @return boolean
-     */
-    public function isLitteral()
-    {
-        return $this->litteral;
-    }
-
-    /**
-     * Checks if token is a non litteral symbol matching the input symbol.
+     * Checks if token is a TYPE_SYMBOL matching the input symbol.
      *
      * @param string $symbol
      *
@@ -62,11 +56,11 @@ class FormatToken
      */
     public function is($symbol)
     {
-        return !$this->litteral && $this->symbol === $symbol;
+        return $this->type === self::TYPE_SYMBOL && $this->value === $symbol;
     }
 
     /**
-     * Checks if token is a non litteral symbol matching one of the arguments,
+     * Checks if token is a TYPE_SYMBOL matching one of the arguments,
      * or one of the symbol contained in the first argument if it is an array
      * 
      * @param array|string $symbols 
@@ -76,7 +70,7 @@ class FormatToken
      */
     public function isOne($symbols)
     {
-        if ($this->litteral) {
+        if ($this->type !== self::TYPE_SYMBOL) {
             return false;
         }
 
@@ -84,20 +78,70 @@ class FormatToken
             $symbols = func_get_args();
         }
 
-        return in_array($this->symbol, $symbols);
+        return in_array($this->value, $symbols);
+    }
+
+    /**
+     * Set type.
+     *
+     * @param integer $type
+     */
+    public function setType($type)
+    {
+        $res = clone $this;
+
+        $res->type = $type;
+
+        return $res;
+    }
+
+    /**
+     * Checks if token is a symbol.
+     *
+     * @return boolean
+     */
+    public function isSymbol()
+    {
+        return $this->type === self::TYPE_SYMBOL;
+    }
+
+    /**
+     * Checks if symbol is litteral
+     *
+     * @return boolean
+     */
+    public function isLitteral()
+    {
+        return $this->type === self::TYPE_LITTERAL;
     }
 
     /**
      * Set litteral.
-     *
-     * @param boolean $litteral
      */
-    public function setLitteral($litteral = true)
+    public function setLitteral()
     {
-        $res = clone $this;
+        return $this->setType(self::TYPE_LITTERAL);
+    }
 
-        $res->litteral = $litteral;
+    /**
+     * Checks if token is of given type.
+     *
+     * @param integer $type
+     * 
+     * @return boolean
+     */
+    public function isType($type)
+    {
+        return $this->type === $type;
+    }
 
-        return $res;
+    /**
+     * Get token type.
+     *
+     * @return integer
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }

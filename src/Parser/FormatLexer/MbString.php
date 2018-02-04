@@ -25,7 +25,7 @@ class MbString implements FormatLexerInterface
 
             if ($escaped) {
                 $escaped = false;
-                $res[] = new FormatToken($symbol, true);
+                $res[] = new FormatToken($symbol, FormatToken::TYPE_LITTERAL);
                 continue;
             }
 
@@ -34,8 +34,10 @@ class MbString implements FormatLexerInterface
                 continue;
             }
 
-            $res[] = new FormatToken($symbol, false);
+            $res[] = new FormatToken($symbol, FormatToken::TYPE_SYMBOL);
         }
+
+        $res[] = new FormatToken(null, FormatToken::TYPE_EOF);
 
         return $res;
     }
