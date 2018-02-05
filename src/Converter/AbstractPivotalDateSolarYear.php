@@ -103,7 +103,7 @@ abstract class AbstractPivotalDateSolarYear implements ConverterInterface
         $year = static::FIRST_YEAR;
 
         // Will exit once the negative year will be found
-        while ($eraDayIndex < 0) {
+        while ($dayIndex < 0) {
             $dayCount = 365 + $this->calculator->isLeapYear($year - 1);
 
             $dayIndex += $dayCount;
