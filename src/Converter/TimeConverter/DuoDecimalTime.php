@@ -2,6 +2,7 @@
 
 namespace Popy\Calendar\Converter\TimeConverter;
 
+use Popy\Calendar\Converter\Time;
 use Popy\Calendar\Converter\Utility\TimeConverter;
 use Popy\Calendar\Converter\TimeConverterInterface;
 
