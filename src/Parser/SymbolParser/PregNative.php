@@ -35,7 +35,7 @@ class PregNative implements SymbolParserInterface
     /**
      * @inheritDoc
      */
-    public function parseSymbol(FormatToken $token, FormatParserInterface $formater)
+    public function parseSymbol(FormatToken $token, FormatParserInterface $parser)
     {
         if ($token->is('y')) {
             // y   A two digit representation of a year
