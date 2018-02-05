@@ -81,9 +81,11 @@ abstract class AbstractPivotalDateSolarYear implements ConverterInterface
         $unixMicrotime = (int)$input->format('u');
         $offset = $this->getOffsetFrom($input);
 
-
-        // Use a timestamp relative to the first year and including timezone offset
-        $relativeTimestamp = $unixTime - $this->getEraStart() + $offset;
+        // Use a timestamp relative to the first year and including timezone
+        // offset
+        $relativeTimestamp = $unixTime - $this->getEraStart()
+            + $offset->getValue()
+        ;
 
         $eraDayIndex = intval($relativeTimestamp / self::SECONDS_PER_DAY);
         $year = 1;
@@ -168,8 +170,7 @@ abstract class AbstractPivotalDateSolarYear implements ConverterInterface
             ;
             $unixMicroTime = $microsec % 1000000;
 
-
-            $unixTime -= $this->getOffsetFor($input, $unixTime);
+            $unixTime -= $this->getOffsetFor($input, $unixTime)->getValue();
         }
 
         $timestamp = sprintf(
@@ -188,11 +189,11 @@ abstract class AbstractPivotalDateSolarYear implements ConverterInterface
      *
      * @param DateTimeInterface $input
      *
-     * @return integer
+     * @return TimeOffset
      */
     protected function getOffsetFrom(DateTimeInterface $input)
     {
-        return intval($input->format('Z'));
+        return TimeOffset::buildFromDateTimeInterface($input);
     }
 
     /**
@@ -203,19 +204,21 @@ abstract class AbstractPivotalDateSolarYear implements ConverterInterface
      * @param SolarTimeRepresentationInterface $input
      * @param integer                          $timestamp Calculated offsetted timestamp
      *
-     * @return integer
+     * @return TimeOffset
      */
     protected function getOffsetFor(DateTimeRepresentationInterface $input, $timestamp)
     {
-        if (null !== $offset = $input->getOffset()) {
+        $offset = $input->getOffset();
+
+        if (null !== $offset->getValue()) {
             return $offset;
         }
 
         // Looking for timezone offset matching the incomplete timestamp.
         // The LMT transition is skipped to mirror the behaviour of
         // DateTimeZone->getOffset()
-        $offset = 0;
         $previous = null;
+        
         $offsets = $input->getTimezone()->getTransitions(
             $timestamp - self::SECONDS_PER_DAY,
             // Usually, $timestamp += self::SECONDS_PER_DAY should be enougth,
@@ -223,19 +226,37 @@ abstract class AbstractPivotalDateSolarYear implements ConverterInterface
             // we are trying to skip.
             max(0, $timestamp += self::SECONDS_PER_DAY)
         );
+
+        // DateTimeZone
+        if (false === $offsets) {
+            return $offset
+                ->withValue(
+                    $input->getTimezone()->getOffset(
+                        new DateTimeImmutable()
+                    )
+                )
+            ;
+        }
+
         foreach ($offsets as $info) {
             if (
-                (!$previous || $previous !== 'LMT')
+                (!$previous || $previous['abbr'] !== 'LMT')
                 && $timestamp - $info['offset'] < $info['ts']
             ) {
                 break;
             }
 
-            $previous = $info['abbr'];
-
-            $offset = $info['offset'];
+            $previous = $info;
         }
 
-        return $offset;
+        if ($previous === null) {
+            return $offset;
+        }
+
+        return new TimeOffset(
+            $previous['offset'],
+            $previous['isdst'],
+            $previous['abbr']
+        );
     }
 }

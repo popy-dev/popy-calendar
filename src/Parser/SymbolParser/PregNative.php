@@ -189,7 +189,7 @@ class PregNative implements SymbolParserInterface
 
         if ($token->is('T')) {
             // T   Timezone abbreviation   Examples: EST, MDT ...
-            return new PregSimple($token, '[A-Z]{1,3}');
+            return new PregSimple($token, '[A-Z]{1,4}');
         }
 
         if ($token->is('Z')) {

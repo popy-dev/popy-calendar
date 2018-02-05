@@ -3,6 +3,7 @@
 namespace Popy\Calendar\Converter\DateTimeRepresentation;
 
 use DateTimeZone;
+use Popy\Calendar\Converter\TimeOffset;
 use Popy\Calendar\Converter\DateRepresentationInterface;
 
 /**
@@ -34,7 +35,7 @@ abstract class AbstractDate implements DateRepresentationInterface
     /**
      * TimeZone offset used when building this date object.
      *
-     * @var integer
+     * @var TimeOffset
      */
     protected $offset;
 
@@ -95,7 +96,7 @@ abstract class AbstractDate implements DateRepresentationInterface
     /**
      * @inheritDoc
      */
-    public function withOffset($offset)
+    public function withOffset(TimeOffset $offset)
     {
         $res = clone $this;
         $res->offset = $offset;

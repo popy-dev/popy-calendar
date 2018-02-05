@@ -33,9 +33,9 @@ interface DateRepresentationInterface
     public function getUnixMicroTime();
 
     /**
-     * Gets time offset, if available.
+     * Gets time offset.
      *
-     * @return integer|null
+     * @return TimeOffset
      */
     public function getOffset();
 
@@ -67,11 +67,11 @@ interface DateRepresentationInterface
     /**
      * Gets a new date instance having the input offset.
      *
-     * @param integer|null $offset
+     * @param TimeOffset $offset
      *
      * @return static
      */
-    public function withOffset($offset);
+    public function withOffset(TimeOffset $offset);
 
     /**
      * Gets a new date instance having the input timezone.
