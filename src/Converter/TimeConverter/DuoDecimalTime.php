@@ -35,26 +35,24 @@ class DuoDecimalTime implements TimeConverterInterface
     }
 
     /**
-     * Converts a microsecond count into the implemented time format, as array.
-     *
-     * @param integer $input
-     *
-     * @return array<int> [hours, minutes, seconds, microseconds, ...]
+     * @inheritDoc
      */
     public function fromMicroSeconds($input)
     {
-        return $this->converter->getTimeFromLowerUnityCount($input, static::$ranges);
+        return new Time($this->converter->getTimeFromLowerUnityCount(
+            $input,
+            static::$ranges
+        ));
     }
 
     /**
-     * Converts a time (of implemented format) into a microsecond count.
-     *
-     * @param array<int> $input
-     *
-     * @return integer
+     * @inheritDoc
      */
-    public function toMicroSeconds(array $input)
+    public function toMicroSeconds(Time $input)
     {
-        return $this->converter->getLowerUnityCountFromTime($input, static::$ranges);
+        return $this->converter->getLowerUnityCountFromTime(
+            $input->all(),
+            static::$ranges
+        );
     }
 }

@@ -12,16 +12,16 @@ interface TimeConverterInterface
      *
      * @param integer $input
      *
-     * @return array<int> [hours, minutes, seconds, microseconds, ...]
+     * @return Time
      */
     public function fromMicroSeconds($input);
 
     /**
      * Converts a time (of implemented format) into a microsecond count.
      *
-     * @param array<int> $input
+     * @param Time $input
      *
      * @return integer
      */
-    public function toMicroSeconds(array $input);
+    public function toMicroSeconds(Time $input);
 }

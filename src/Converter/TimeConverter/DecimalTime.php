@@ -2,6 +2,7 @@
 
 namespace Popy\Calendar\Converter\TimeConverter;
 
+use Popy\Calendar\Converter\Time;
 use Popy\Calendar\Converter\Utility\TimeConverter;
 use Popy\Calendar\Converter\TimeConverterInterface;
 
@@ -40,11 +41,7 @@ class DecimalTime implements TimeConverterInterface
     }
 
     /**
-     * Converts a microsecond count into the implemented time format, as array.
-     *
-     * @param integer $input
-     *
-     * @return array<int> [hours, minutes, seconds, microseconds, ...]
+     * @inheritDoc
      */
     public function fromMicroSeconds($input)
     {
@@ -53,19 +50,18 @@ class DecimalTime implements TimeConverterInterface
             / static::MICROSECONDS_IN_DAY
         );
 
-        return $this->converter->getTimeFromLowerUnityCount($input, static::$ranges);
+        return new Time($this->converter->getTimeFromLowerUnityCount(
+            $input,
+            static::$ranges
+        ));
     }
 
     /**
-     * Converts a time (of implemented format) into a microsecond count.
-     *
-     * @param array<int> $input
-     *
-     * @return integer
+     * @inheritDoc
      */
-    public function toMicroSeconds(array $input)
+    public function toMicroSeconds(Time $input)
     {
-        $res = $this->converter->getLowerUnityCountFromTime($input, static::$ranges);
+        $res = $this->converter->getLowerUnityCountFromTime($input->all(), static::$ranges);
 
         return intval(
             ($res * static::MICROSECONDS_IN_DAY)
