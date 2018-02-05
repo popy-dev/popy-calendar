@@ -1,0 +1,25 @@
+<?php
+
+namespace Popy\Calendar\Converter;
+
+/**
+ * Date representation having a "fragmented" structure.
+ */
+interface DateFragmentedRepresentationInterface extends DateRepresentationInterface
+{
+    /**
+     * Gets the date parts representation.
+     *
+     * @return DateParts
+     */
+    public function getDateParts();
+
+    /**
+     * Gets a new date instance with the input DateParts.
+     *
+     * @param DateParts $DateParts
+     *
+     * @return static
+     */
+    public function withDateParts(DateParts $DateParts);
+}

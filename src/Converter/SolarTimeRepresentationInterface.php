@@ -9,6 +9,7 @@ namespace Popy\Calendar\Converter;
  *
  * TODO :
  *  - make a month/day aware interface ?
+ *  - extends DateRepresentationInterface instead ?
  */
 interface SolarTimeRepresentationInterface extends DateTimeRepresentationInterface
 {

@@ -2,8 +2,6 @@
 
 namespace Popy\Calendar\Converter;
 
-use DateTimeZone;
-
 /**
  * Date representation having a "time" notion.
  */

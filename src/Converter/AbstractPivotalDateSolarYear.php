@@ -18,9 +18,14 @@ use Popy\Calendar\Converter\DateTimeRepresentation\SolarTime;
 abstract class AbstractPivotalDateSolarYear implements ConverterInterface
 {
     /**
-     * Self-explanatory.
+     * Solar day duration on earth.
      */
     const SECONDS_PER_DAY = 24 * 3600;
+
+    /**
+     * Year number of era start.
+     */
+    const FIRST_YEAR = 1;
 
     /**
      * Leap year calculator.
@@ -42,10 +47,11 @@ abstract class AbstractPivotalDateSolarYear implements ConverterInterface
      * @param LeapYearCalculatorInterface $calculator    Leap year calculator.
      * @param TimeConverterInterface      $timeConverter Time converter.
      */
-    public function __construct(LeapYearCalculatorInterface $calculator, TimeConverterInterface $timeConverter)
+    public function __construct(LeapYearCalculatorInterface $calculator, TimeConverterInterface $timeConverter = null, DatePartsConverterInterface $partsConverter = null)
     {
         $this->calculator = $calculator;
         $this->timeConverter = $timeConverter;
+        $this->partsConverter = $partsConverter;
     }
 
     /**
@@ -87,49 +93,59 @@ abstract class AbstractPivotalDateSolarYear implements ConverterInterface
             + $offset->getValue()
         ;
 
-        $eraDayIndex = intval($relativeTimestamp / self::SECONDS_PER_DAY);
-        $year = 1;
+        $eraDayIndex = intval($relativeTimestamp / static::SECONDS_PER_DAY);
+        $dayIndex = $eraDayIndex;
+        $year = static::FIRST_YEAR;
 
         // Will exit once the negative year will be found
         while ($eraDayIndex < 0) {
             $dayCount = 365 + $this->calculator->isLeapYear($year - 1);
 
-            $eraDayIndex += $dayCount;
+            $dayIndex += $dayCount;
             $year--;
         }
 
         while (true) {
             $dayCount = 365 + $this->calculator->isLeapYear($year);
 
-            if ($eraDayIndex < $dayCount) {
+            if ($dayIndex < $dayCount) {
                 // $year and dayIndex found !
                 break;
             }
 
-            $eraDayIndex -= $dayCount;
+            $dayIndex -= $dayCount;
             $year++;
         }
 
-        $remainingMicroSeconds = $unixMicrotime
-            + ($relativeTimestamp % static::SECONDS_PER_DAY) * 1000000
-        ;
-
         $res = $this->buildDateRepresentation(
-            $input,
-            $year,
-            $this->calculator->isLeapYear($year),
-            $eraDayIndex
-        );
-
-        return $res
-            ->withTimezone($input->getTimezone())
-            ->withUnixTime($unixTime)
-            ->withUnixMicroTime((int)$input->format('u'))
-            ->withOffset($offset)
-            ->withTime(
-                $this->timeConverter->fromMicroSeconds($remainingMicroSeconds)
+                $input,
+                $year,
+                $this->calculator->isLeapYear($year),
+                $dayIndex
             )
+            ->withUnixTime($unixTime)
+            ->withUnixMicroTime($unixMicrotime)
+            ->withOffset($offset)
+            ->withTimezone($input->getTimezone())
         ;
+
+        if ($res instanceof DateFragmentedRepresentationInterface) {
+            $res = $res->withDateParts(
+                $this->partsConverter->fromDayIndex($res, $dayIndex)
+            );
+        }
+
+        if ($res instanceof DateTimeRepresentationInterface) {
+            $remainingMicroSeconds = $unixMicrotime
+                + ($relativeTimestamp % static::SECONDS_PER_DAY) * 1000000
+            ;
+
+            $res = $res->withTime(
+                $this->timeConverter->fromMicroSeconds($remainingMicroSeconds)
+            );
+        }
+
+        return $res;
     }
 
     /**
@@ -150,18 +166,27 @@ abstract class AbstractPivotalDateSolarYear implements ConverterInterface
         $unixMicroTime = $input->getUnixMicroTime();
 
         if (null === $unixTime) {
-            // If input doesn't contain its timestamp, we'll have to calculate it
             $year = $input->getYear();
             $dayIndex = $input->getDayIndex();
-            $microsec = $this->timeConverter->toMicroSeconds(
-                $input->getTime()
-            );
 
             $sign = $year < 1 ? -1 : 1;
 
-            for ($i=min($year, 1); $i < max($year, 1); $i++) {
+            // Determine dayIndex from fragmented representation if possible.
+            if (null === $dayIndex && $input instanceof DateFragmentedRepresentationInterface) {
+                $dayIndex = $this->partsConverter->toDayIndex($input, $input->getDateParts());
+            }
+
+
+            for ($i=min($year, static::FIRST_YEAR); $i < max($year, static::FIRST_YEAR); $i++) {
                 $dayCount = 365 + $this->calculator->isLeapYear($i);
                 $dayIndex += $sign * $dayCount;
+            }
+
+
+            if ($input instanceof DateTimeRepresentationInterface) {
+                $microsec = $this->timeConverter->toMicroSeconds(
+                    $input->getTime()
+                );
             }
 
             $unixTime = $this->getEraStart()

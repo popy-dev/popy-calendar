@@ -8,7 +8,7 @@ namespace Popy\Calendar\Converter;
 interface TimeConverterInterface
 {
     /**
-     * Converts a microsecond count into the implemented time format, as array.
+     * Converts a microsecond count into the implemented time format.
      *
      * @param integer $input
      *
