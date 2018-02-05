@@ -11,6 +11,11 @@ use Popy\Calendar\Converter\TimeConverterInterface;
 class DuoDecimalTime implements TimeConverterInterface
 {
     /**
+     * Microseconds in a day
+     */
+    const MICROSECONDS_IN_DAY = 24*3600*1000000;
+
+    /**
      * Time conversion utility.
      *
      * @var TimeConverter
@@ -39,10 +44,14 @@ class DuoDecimalTime implements TimeConverterInterface
      */
     public function fromMicroSeconds($input)
     {
-        return new Time($this->converter->getTimeFromLowerUnityCount(
+        $res = new Time($this->converter->getTimeFromLowerUnityCount(
             $input,
             static::$ranges
         ));
+
+        return $res
+            ->withRatio(1000000 * $input / static::MICROSECONDS_IN_DAY)
+        ;
     }
 
     /**
@@ -50,6 +59,13 @@ class DuoDecimalTime implements TimeConverterInterface
      */
     public function toMicroSeconds(Time $input)
     {
+        if (
+            empty($input->getAllMeaningfull())
+            && null !== $ratio = $input->getRatio()
+        ) {
+            return $ratio * static::MICROSECONDS_IN_DAY;
+        }
+
         return $this->converter->getLowerUnityCountFromTime(
             $input->all(),
             static::$ranges

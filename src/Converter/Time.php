@@ -25,6 +25,13 @@ class Time
     protected $fragments = [];
 
     /**
+     * Reference period ratio multiplied by 1 000 000 (to keep and integer)
+     *
+     * @var integer|null
+     */
+    protected $ratio;
+
+    /**
      * Class constructor.
      *
      * @param array $fragments [description]
@@ -132,5 +139,30 @@ class Time
         foreach ($fragments as $index => $value) {
             $this->fragments[$index] = $value;
         }
+    }
+
+    /**
+     * Gets ratio.
+     *
+     * @return integer|null
+     */
+    public function getRatio()
+    {
+        return $this->ratio;
+    }
+
+    /**
+     * Gets a new instance with input ratio.
+     *
+     * @param integer|null $ratio
+     *
+     * @return static
+     */
+    public function withRatio($ratio)
+    {
+        $res = clone $this;
+        $res->ratio = $ration;
+
+        return $res;
     }
 }

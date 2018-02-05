@@ -50,10 +50,14 @@ class DecimalTime implements TimeConverterInterface
             / static::MICROSECONDS_IN_DAY
         );
 
-        return new Time($this->converter->getTimeFromLowerUnityCount(
+        $res = new Time($this->converter->getTimeFromLowerUnityCount(
             $input,
             static::$ranges
         ));
+
+        return $res
+            ->withRatio(1000000 * $input / static::MICROSECONDS_IN_DAY)
+        ;
     }
 
     /**
@@ -61,6 +65,13 @@ class DecimalTime implements TimeConverterInterface
      */
     public function toMicroSeconds(Time $input)
     {
+        if (
+            empty($input->getAllMeaningfull())
+            && null !== $ratio = $input->getRatio()
+        ) {
+            return $ratio * static::MICROSECONDS_IN_DAY;
+        }
+
         $res = $this->converter->getLowerUnityCountFromTime($input->all(), static::$ranges);
 
         return intval(
