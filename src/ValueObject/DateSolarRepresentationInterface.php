@@ -3,15 +3,15 @@
 namespace Popy\Calendar\ValueObject;
 
 /**
- * DateTime retresentation handling a usual solar date system, whare a year is
+ * DateTime retresentation handling a usual solar date system, where a year is
  * the duration of a the earth's revolution around teh Sun, and a day the
  * duration of a earth rotation on itself.
  *
- * TODO :
- *  - make a month/day aware interface ?
- *  - extends DateRepresentationInterface instead ?
+ * TODO : 
+ *  - setters
+ *  - eraDayIndex
  */
-interface SolarTimeRepresentationInterface extends DateTimeRepresentationInterface
+interface DateSolarRepresentationInterface extends DateRepresentationInterface
 {
     /**
      * Gets year.

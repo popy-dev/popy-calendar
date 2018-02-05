@@ -2,34 +2,17 @@
 
 namespace Popy\Calendar\ValueObject\DateRepresentation;
 
-use Popy\Calendar\ValueObject\SolarTimeRepresentationInterface;
+use Popy\Calendar\ValueObject\DateTimeRepresentationInterface;
+use Popy\Calendar\ValueObject\DateSolarRepresentationInterface;
 
 /**
  * Minimal implementatuon.
  */
-class SolarTime extends AbstractDateTime implements SolarTimeRepresentationInterface
+class SolarTime extends AbstractDate implements DateTimeRepresentationInterface, DateSolarRepresentationInterface
 {
-    /**
-     * Year
-     *
-     * @var integer
-     */
-    protected $year;
-
-    /**
-     * Is leap year
-     *
-     * @var boolean
-     */
-    protected $leapYear;
-
-    /**
-     * Day Index
-     *
-     * @var integer
-     */
-    protected $dayIndex;
-
+    use DateTimeTrait;
+    use DateSolarTrait;
+    
     /**
      * Class constructor.
      *
@@ -42,29 +25,5 @@ class SolarTime extends AbstractDateTime implements SolarTimeRepresentationInter
         $this->year     = $year;
         $this->leapYear = $leapYear;
         $this->dayIndex = $dayIndex;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getYear()
-    {
-        return $this->year;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function isLeapYear()
-    {
-        return $this->leapYear;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getDayIndex()
-    {
-        return $this->dayIndex;
     }
 }

@@ -12,7 +12,7 @@ use Popy\Calendar\ValueObject\TimeOffset;
 use Popy\Calendar\ValueObject\DateRepresentation\SolarTime;
 use Popy\Calendar\ValueObject\DateRepresentationInterface;
 use Popy\Calendar\ValueObject\DateTimeRepresentationInterface;
-use Popy\Calendar\ValueObject\SolarTimeRepresentationInterface;
+use Popy\Calendar\ValueObject\DateSolarRepresentationInterface;
 use Popy\Calendar\ValueObject\DateFragmentedRepresentationInterface;
 
 /**
@@ -67,7 +67,7 @@ abstract class AbstractPivotalDateSolarYear implements ConverterInterface
     abstract protected function getEraStart();
 
     /**
-     * Instanciates a SolarTimeRepresentationInterface.
+     * Instanciates a DateSolarRepresentationInterface.
      *
      * @see self::fromDateTimeInterface
      *
@@ -76,7 +76,7 @@ abstract class AbstractPivotalDateSolarYear implements ConverterInterface
      * @param boolean           $isLeapYear   Is a leap year.
      * @param integer           $dayIndex     Day index.
      *
-     * @return SolarTimeRepresentationInterface
+     * @return DateSolarRepresentationInterface
      */
     protected function buildDateRepresentation(DateTimeInterface $input, $year, $isLeapYear, $dayIndex)
     {
@@ -158,9 +158,9 @@ abstract class AbstractPivotalDateSolarYear implements ConverterInterface
      */
     public function toDateTimeInterface(DateRepresentationInterface $input)
     {
-        if (!$input instanceof SolarTimeRepresentationInterface) {
+        if (!$input instanceof DateSolarRepresentationInterface) {
             throw new InvalidArgumentException(sprintf(
-                '%s->%s only supports SolarTimeRepresentationInterface, %s given',
+                '%s->%s only supports DateSolarRepresentationInterface, %s given',
                 get_class($this),
                 __METHOD__,
                 get_class($input)
@@ -231,7 +231,7 @@ abstract class AbstractPivotalDateSolarYear implements ConverterInterface
      * date representation, trying to mirror which offset the "getOffsetFrom"
      * method returned.
      *
-     * @param SolarTimeRepresentationInterface $input
+     * @param DateSolarRepresentationInterface $input
      * @param integer                          $timestamp Calculated offsetted timestamp
      *
      * @return TimeOffset

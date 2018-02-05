@@ -3,7 +3,7 @@
 namespace Popy\Calendar\Converter\DatePartsConverter;
 
 use InvalidArgumentException;
-use Popy\Calendar\ValueObject\SolarTimeRepresentationInterface;
+use Popy\Calendar\ValueObject\DateSolarRepresentationInterface;
 use Popy\Calendar\ValueObject\DateFragmentedRepresentationInterface;
 
 /**
@@ -16,10 +16,10 @@ class StandardMonthes extends AbstractConverter
      */
     protected function getAllFragmentSizes(DateFragmentedRepresentationInterface $input)
     {
-        if (!$input instanceof SolarTimeRepresentationInterface) {
+        if (!$input instanceof DateSolarRepresentationInterface) {
             throw new InvalidArgumentException(sprintf(
                 'This converter can only handle "%s" objects, "%s" given',
-                SolarTimeRepresentationInterface::class,
+                DateSolarRepresentationInterface::class,
                 get_class($input)
             ));
         }
