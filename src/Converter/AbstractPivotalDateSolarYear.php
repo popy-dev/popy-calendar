@@ -163,7 +163,7 @@ abstract class AbstractPivotalDateSolarYear implements ConverterInterface
         );
 
         return DateTimeImmutable::createFromFormat('U.u e', $timestring)
-            ->setTimezone($timezone)
+            ->setTimezone($input->getTimezone())
         ;
     }
 
