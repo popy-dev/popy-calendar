@@ -20,7 +20,7 @@ class MbString implements FormatLexerInterface
         $symbols = str_split($format, 1);
         $length = mb_strlen($format);
 
-        for ($i=0; $i < $length; $i++) { 
+        for ($i=0; $i < $length; $i++) {
             $symbol = mb_substr($format, $i, 1);
 
             if ($escaped) {

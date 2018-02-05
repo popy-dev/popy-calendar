@@ -21,7 +21,7 @@ class NonSymbolMatcher implements DateLexerInterface
     /**
      * Class constructor.
      *
-     * @param FormatToken $token 
+     * @param FormatToken $token
      */
     public function __construct(FormatToken $token)
     {
@@ -35,7 +35,7 @@ class NonSymbolMatcher implements DateLexerInterface
     {
         if ($this->token->isType(FormatToken::TYPE_EOF)) {
             if (strlen($string) <= $offset) {
-                return new DateLexerResult($offset);   
+                return new DateLexerResult($offset);
             }
 
             return;

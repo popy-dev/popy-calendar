@@ -52,7 +52,7 @@ class RomanConverter
      * Converts a roman number to a decimal one.
      *
      * @param string $input
-     * 
+     *
      * @return integer
      */
     public function romanToDecimal($input)

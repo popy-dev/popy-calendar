@@ -96,7 +96,7 @@ class Time
     {
         $res = clone $this;
 
-        for ($i=count($res->fragments); $i < $index; $i++) { 
+        for ($i=count($res->fragments); $i < $index; $i++) {
             $res->fragments[$i] = null;
         }
 
@@ -118,7 +118,7 @@ class Time
 
         $res->setFragments($fragments);
 
-        return $res
+        return $res;
     }
 
     /**

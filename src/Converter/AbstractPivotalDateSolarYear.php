@@ -9,6 +9,7 @@ use Popy\Calendar\ConverterInterface;
 use Popy\Calendar\Converter\TimeConverterInterface;
 use Popy\Calendar\Converter\LeapYearCalculatorInterface;
 use Popy\Calendar\Converter\DateTimeRepresentation\SolarTime;
+
 /**
  * Abstract implementation of a convertor using a "Era start date" to calculate
  * solar years, days & time from a timestamp. The calculation works fine, but

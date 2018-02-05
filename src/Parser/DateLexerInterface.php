@@ -18,7 +18,7 @@ interface DateLexerInterface
      * of results, for cases where a single lexer could match different strings,
      * in order to try a full match with every result, just like regular
      * expression works.
-     * 
+     *
      * @param string $string
      *
      * @return DateLexerResult|null

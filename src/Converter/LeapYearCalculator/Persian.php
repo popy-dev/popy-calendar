@@ -27,7 +27,7 @@ class Persian implements LeapYearCalculatorInterface
         if ($cycle >= 29) {
             $cycle -= 29;
             if ($cycle >= 2*33) {
-                $cycle -= 2 * 33
+                $cycle -= 2 * 33;
             } else {
                 $cycle = $cycle % 33;
             }

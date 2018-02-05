@@ -218,7 +218,7 @@ class PregNative implements SymbolParserInterface
      *
      * @param string      $x     Method name middle part.
      * @param FormatToken $token Token.
-     * 
+     *
      * @return PregChoice
      */
     protected function buildXNamesLexer($x, FormatToken $token)
@@ -238,12 +238,11 @@ class PregNative implements SymbolParserInterface
      * method.
      *
      * @param FormatToken $token Token.
-     * 
+     *
      * @return PregChoice
      */
     protected function buildSuffixesLexer(FormatToken $token)
     {
-
         $choices = [];
         $i = 1;
         $repetitions = 0;
@@ -252,7 +251,7 @@ class PregNative implements SymbolParserInterface
             if (!in_array($label, $choices)) {
                 $choices[] = $label;
                 $repetitions = 0;
-            } else if (++$repetitions > 5) {
+            } elseif (++$repetitions > 5) {
                 break;
             }
         }

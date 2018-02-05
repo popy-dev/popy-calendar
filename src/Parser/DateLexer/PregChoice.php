@@ -46,7 +46,6 @@ class PregChoice extends AbstractPreg
         }
 
         $this->expression = '(' . implode('|', $parts) . ')';
-
     }
 
     /**

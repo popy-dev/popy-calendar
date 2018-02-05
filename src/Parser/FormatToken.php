@@ -62,8 +62,8 @@ class FormatToken
     /**
      * Checks if token is a TYPE_SYMBOL matching one of the arguments,
      * or one of the symbol contained in the first argument if it is an array
-     * 
-     * @param array|string $symbols 
+     *
+     * @param array|string $symbols
      * @param string       ...$symbol
      *
      * @return boolean
@@ -127,7 +127,7 @@ class FormatToken
      * Checks if token is of given type.
      *
      * @param integer $type
-     * 
+     *
      * @return boolean
      */
     public function isType($type)

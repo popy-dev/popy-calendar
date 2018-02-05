@@ -85,9 +85,9 @@ class DateLexerResult
     /**
      * Get first set symbol value.
      *
-     * @param string $name 
+     * @param string $name
      * @param string ...$name
-     * 
+     *
      * @return mixed
      */
     public function getFirst($name)
