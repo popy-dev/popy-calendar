@@ -29,6 +29,13 @@ class PregSimple extends AbstractPreg
     protected $expression;
 
     /**
+     * Match processing callback.
+     *
+     * @var callable
+     */
+    protected $callback;
+
+    /**
      * Class constructor.
      *
      * @param FormatToken $token   Token to match.
@@ -63,6 +70,19 @@ class PregSimple extends AbstractPreg
     }
 
     /**
+     * Match processing callback.
+     *
+     * The callback will receive the Lexer and the matched string as input, and
+     * must return the value to hydrate in the result.
+     *
+     * @param callable $callback
+     */
+    public function setCallback($callback)
+    {
+        $this->callback = $callback;
+    }
+
+    /**
      * @inheritDoc
      */
     public function getExpression()
@@ -81,7 +101,13 @@ class PregSimple extends AbstractPreg
 
         // Did match
         if ($match[$offset][1] !== -1) {
-            $result->set($this->symbol, $match[$offset][0]);
+            $res = $match[$offset][0];
+
+            if ($this->callback !== null) {
+                $res = call_user_func($this->callback, $this, $res);
+            }
+
+            $result->set($this->symbol, $res);
         }
 
         return $offset + 1;
