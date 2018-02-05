@@ -1,11 +1,11 @@
 <?php
 
-namespace Popy\Calendar\Converter\DateTimeRepresentation;
+namespace Popy\Calendar\ValueObject\DateRepresentation;
 
-use Popy\Calendar\Converter\DateParts;
+use Popy\Calendar\ValueObject\DateParts;
 
 /**
- * Popy\Calendar\Converter\DateFragmentedRepresentationInterface implementation.
+ * Popy\Calendar\ValueObject\DateFragmentedRepresentationInterface implementation.
  */
 trait DateFragmentedTrait
 {

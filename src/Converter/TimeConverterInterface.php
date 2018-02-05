@@ -2,6 +2,8 @@
 
 namespace Popy\Calendar\Converter;
 
+use Popy\Calendar\ValueObject\Time;
+
 /**
  * Time converter interface.
  */

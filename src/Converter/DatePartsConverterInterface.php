@@ -2,6 +2,9 @@
 
 namespace Popy\Calendar\Converter;
 
+use Popy\Calendar\ValueObject\DateParts;
+use Popy\Calendar\ValueObject\DateFragmentedRepresentationInterface;
+
 /**
  * DateParts converter interface.
  */

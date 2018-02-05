@@ -1,8 +1,8 @@
 <?php
 
-namespace Popy\Calendar\Converter\DateTimeRepresentation;
+namespace Popy\Calendar\ValueObject\DateRepresentation;
 
-use Popy\Calendar\Converter\SolarTimeRepresentationInterface;
+use Popy\Calendar\ValueObject\SolarTimeRepresentationInterface;
 
 /**
  * Minimal implementatuon.

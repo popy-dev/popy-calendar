@@ -3,8 +3,8 @@
 namespace Popy\Calendar\Converter\DatePartsConverter;
 
 use InvalidArgumentException;
-use Popy\Calendar\Converter\SolarTimeRepresentationInterface;
-use Popy\Calendar\Converter\DateFragmentedRepresentationInterface;
+use Popy\Calendar\ValueObject\SolarTimeRepresentationInterface;
+use Popy\Calendar\ValueObject\DateFragmentedRepresentationInterface;
 
 /**
  * Implementation of the standard (gregorian like) month calculation.

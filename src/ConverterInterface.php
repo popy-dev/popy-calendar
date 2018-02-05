@@ -3,7 +3,7 @@
 namespace Popy\Calendar;
 
 use DateTimeInterface;
-use Popy\Calendar\Converter\DateTimeRepresentationInterface;
+use Popy\Calendar\ValueObject\DateRepresentationInterface;
 
 /**
  * Handles date "conversions" between a DateTimeInterface into any other
@@ -16,16 +16,16 @@ interface ConverterInterface
      *
      * @param DateTime $input
      *
-     * @return DateTimeRepresentationInterface
+     * @return DateRepresentationInterface
      */
     public function fromDateTimeInterface(DateTimeInterface $input);
 
     /**
      * Converts a date representation into a DateTimeInterface
      *
-     * @param DateTimeRepresentationInterface $input
+     * @param DateRepresentationInterface $input
      *
      * @return DateTimeInterface
      */
-    public function toDateTimeInterface(DateTimeRepresentationInterface $input);
+    public function toDateTimeInterface(DateRepresentationInterface $input);
 }

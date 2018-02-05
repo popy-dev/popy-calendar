@@ -1,10 +1,10 @@
 <?php
 
-namespace Popy\Calendar\Converter\DateTimeRepresentation;
+namespace Popy\Calendar\ValueObject\DateRepresentation;
 
-use Popy\Calendar\Converter\DateTimeRepresentationInterface;
-use Popy\Calendar\Converter\SolarTimeRepresentationInterface;
-use Popy\Calendar\Converter\DateFragmentedRepresentationInterface;
+use Popy\Calendar\ValueObject\DateTimeRepresentationInterface;
+use Popy\Calendar\ValueObject\SolarTimeRepresentationInterface;
+use Popy\Calendar\ValueObject\DateFragmentedRepresentationInterface;
 
 /**
  * "Standard" time representation (like Gregorian calendar)

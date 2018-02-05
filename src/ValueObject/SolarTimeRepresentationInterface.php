@@ -1,6 +1,6 @@
 <?php
 
-namespace Popy\Calendar\Converter;
+namespace Popy\Calendar\ValueObject;
 
 /**
  * DateTime retresentation handling a usual solar date system, whare a year is

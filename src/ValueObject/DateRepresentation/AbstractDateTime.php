@@ -1,9 +1,9 @@
 <?php
 
-namespace Popy\Calendar\Converter\DateTimeRepresentation;
+namespace Popy\Calendar\ValueObject\DateRepresentation;
 
-use Popy\Calendar\Converter\Time;
-use Popy\Calendar\Converter\DateTimeRepresentationInterface;
+use Popy\Calendar\ValueObject\Time;
+use Popy\Calendar\ValueObject\DateTimeRepresentationInterface;
 
 /**
  * Minimal abstract implementatuon.

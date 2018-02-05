@@ -1,10 +1,10 @@
 <?php
 
-namespace Popy\Calendar\Converter\DateTimeRepresentation;
+namespace Popy\Calendar\ValueObject\DateRepresentation;
 
 use DateTimeZone;
-use Popy\Calendar\Converter\TimeOffset;
-use Popy\Calendar\Converter\DateRepresentationInterface;
+use Popy\Calendar\ValueObject\TimeOffset;
+use Popy\Calendar\ValueObject\DateRepresentationInterface;
 
 /**
  * Minimal abstract implementatuon.

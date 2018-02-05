@@ -1,6 +1,6 @@
 <?php
 
-namespace Popy\Calendar\Converter;
+namespace Popy\Calendar\ValueObject;
 
 /**
  * Date representation having a "fragmented" structure.

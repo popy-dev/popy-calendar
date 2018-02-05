@@ -1,11 +1,11 @@
 <?php
 
-namespace Popy\Calendar\Converter\DateTimeRepresentation;
+namespace Popy\Calendar\ValueObject\DateRepresentation;
 
-use Popy\Calendar\Converter\Time;
+use Popy\Calendar\ValueObject\Time;
 
 /**
- * Popy\Calendar\Converter\DateTimeRepresentationInterface implementation.
+ * Popy\Calendar\ValueObject\DateTimeRepresentationInterface implementation.
  */
 trait DateTimeTrait
 {

@@ -8,7 +8,12 @@ use InvalidArgumentException;
 use Popy\Calendar\ConverterInterface;
 use Popy\Calendar\Converter\TimeConverterInterface;
 use Popy\Calendar\Converter\LeapYearCalculatorInterface;
-use Popy\Calendar\Converter\DateTimeRepresentation\SolarTime;
+use Popy\Calendar\ValueObject\TimeOffset;
+use Popy\Calendar\ValueObject\DateRepresentation\SolarTime;
+use Popy\Calendar\ValueObject\DateRepresentationInterface;
+use Popy\Calendar\ValueObject\DateTimeRepresentationInterface;
+use Popy\Calendar\ValueObject\SolarTimeRepresentationInterface;
+use Popy\Calendar\ValueObject\DateFragmentedRepresentationInterface;
 
 /**
  * Abstract implementation of a convertor using a "Era start date" to calculate
@@ -151,7 +156,7 @@ abstract class AbstractPivotalDateSolarYear implements ConverterInterface
     /**
      * @inheritDoc
      */
-    public function toDateTimeInterface(DateTimeRepresentationInterface $input)
+    public function toDateTimeInterface(DateRepresentationInterface $input)
     {
         if (!$input instanceof SolarTimeRepresentationInterface) {
             throw new InvalidArgumentException(sprintf(

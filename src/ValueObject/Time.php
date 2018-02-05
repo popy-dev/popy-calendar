@@ -1,6 +1,6 @@
 <?php
 
-namespace Popy\Calendar\Converter;
+namespace Popy\Calendar\ValueObject;
 
 /**
  * A Time is a fragmented representation of a time period of fixed & static

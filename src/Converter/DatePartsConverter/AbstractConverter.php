@@ -4,9 +4,9 @@ namespace Popy\Calendar\Converter\DatePartsConverter;
 
 use OutOfBoundsException;
 use InvalidArgumentException;
-use Popy\Calendar\Converter\DateParts;
+use Popy\Calendar\ValueObject\DateParts;
 use Popy\Calendar\Converter\DatePartsConverterInterface;
-use Popy\Calendar\Converter\DateFragmentedRepresentationInterface;
+use Popy\Calendar\ValueObject\DateFragmentedRepresentationInterface;
 
 abstract class AbstractConverter implements DatePartsConverterInterface
 {

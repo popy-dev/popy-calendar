@@ -3,9 +3,9 @@
 namespace Popy\Calendar\Converter;
 
 use DateTimeInterface;
-use Popy\Calendar\Converter\TimeConverter\DuoDecimalTime;
 use Popy\Calendar\Converter\LeapYearCalculator\Modern;
-use Popy\Calendar\Converter\DateTimeRepresentation\Standard;
+use Popy\Calendar\Converter\TimeConverter\DuoDecimalTime;
+use Popy\Calendar\ValueObject\DateRepresentation\Standard;
 use Popy\Calendar\Converter\DatePartsConverter\StandardMonthes;
 
 class Gregorian extends AbstractPivotalDateSolarYear
