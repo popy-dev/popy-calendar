@@ -144,10 +144,10 @@ abstract class AbstractPivotalDateSolarYear implements ConverterInterface
             ));
         }
 
-        $microseconds = null;
-        $timestamp = $timestamp = $input->getTimestamp();
+        $unixTime      = $input->getUnixTime();
+        $unixMicroTime = $input->getUnixMicroTime();
 
-        if (null === $timestamp) {
+        if (null === $unixTime) {
             // If input doesn't contain its timestamp, we'll have to calculate it
             $year = $input->getYear();
             $dayIndex = $input->getDayIndex();
@@ -162,39 +162,23 @@ abstract class AbstractPivotalDateSolarYear implements ConverterInterface
                 $dayIndex += $sign * $dayCount;
             }
 
-            $timestamp = $this->getEraStart()
+            $unixTime = $this->getEraStart()
                 + ($dayIndex * self::SECONDS_PER_DAY)
                 + intval($microsec / 1000000)
             ;
-            $microseconds = $microsec % 1000000;
+            $unixMicroTime = $microsec % 1000000;
 
 
-            $timestamp -= $this->getOffsetFor($input, $timestamp);
-        } elseif (null !== $microsec = $input->getMicroseconds()) {
-            // A timestamp was available, but we also have microseconds.
-            // We have to ckeck if they are SI microseconds before adding it.
-            // TODO : should probably make microseconds part of the interface,
-            // making them part of the date real value along with timestamp,
-            // and introducing another format character for non-SI microsecs.
-            $cmp = $this->timeConverter->toMicroSeconds([
-                0,
-                0,
-                0,
-                $microsec
-            ]);
-
-            if ($microsec === $cmp) {
-                $microseconds = $microsec;
-            }
+            $unixTime -= $this->getOffsetFor($input, $unixTime);
         }
 
-        $timestring = sprintf(
+        $timestamp = sprintf(
             '%s.%06d UTC',
-            $timestamp,
-            $microseconds
+            $unixTime,
+            $unixMicroTime
         );
 
-        return DateTimeImmutable::createFromFormat('U.u e', $timestring)
+        return DateTimeImmutable::createFromFormat('U.u e', $timestamp)
             ->setTimezone($input->getTimezone())
         ;
     }

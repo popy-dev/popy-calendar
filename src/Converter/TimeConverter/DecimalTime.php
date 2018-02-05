@@ -21,7 +21,7 @@ class DecimalTime implements TimeConverterInterface
      *
      * @var array<int>
      */
-    public static $ranges = [10, 100, 100, 1000000];
+    public static $ranges = [10, 100, 100, 1000, 1000];
 
     /**
      * Time conversion utility.
@@ -75,7 +75,7 @@ class DecimalTime implements TimeConverterInterface
         $res = $this->converter->getLowerUnityCountFromTime($input->all(), static::$ranges);
 
         return intval(
-            ($res * static::MICROSECONDS_IN_DAY)
+            ($res * static::MICROSECONDS_IN_DAY / 1000000)
             / array_product(static::$ranges)
         );
     }

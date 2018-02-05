@@ -64,7 +64,7 @@ class DuoDecimalTime implements TimeConverterInterface
             empty($input->getAllMeaningfull())
             && null !== $ratio = $input->getRatio()
         ) {
-            return $ratio * static::MICROSECONDS_IN_DAY;
+            return $ratio * static::MICROSECONDS_IN_DAY / 1000000;
         }
 
         return $this->converter->getLowerUnityCountFromTime(
