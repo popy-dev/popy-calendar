@@ -47,7 +47,7 @@ interface DateRepresentationInterface
     public function getTimezone();
 
     /**
-     * Gets a new date instance having the input unix time
+     * Gets a new date instance having the input unix time.
      *
      * @param integer|null $unixTime
      *
@@ -56,7 +56,7 @@ interface DateRepresentationInterface
     public function withUnixTime($unixTime);
 
     /**
-     * Gets a new date instance having the input unix microtime
+     * Gets a new date instance having the input unix microtime.
      *
      * @param integer|null $unixMicroTime
      *
@@ -65,11 +65,20 @@ interface DateRepresentationInterface
     public function withUnixMicroTime($unixMicroTime);
 
     /**
-     * Gets a new date instance having the input offset
+     * Gets a new date instance having the input offset.
      *
      * @param integer|null $offset
      *
      * @return static
      */
     public function withOffset($offset);
+
+    /**
+     * Gets a new date instance having the input timezone.
+     *
+     * @param DateTimeZone $offset
+     *
+     * @return static
+     */
+    public function withTimezone(DateTimeZone $timezone);
 }

@@ -102,4 +102,15 @@ abstract class AbstractDate implements DateRepresentationInterface
 
         return $res;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function withTimezone(DateTimeZone $timezone)
+    {
+        $res = clone $this;
+        $res->timezone = $timezone;
+
+        return $res;
+    }
 }

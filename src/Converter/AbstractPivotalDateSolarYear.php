@@ -8,7 +8,7 @@ use InvalidArgumentException;
 use Popy\Calendar\ConverterInterface;
 use Popy\Calendar\Converter\TimeConverterInterface;
 use Popy\Calendar\Converter\LeapYearCalculatorInterface;
-
+use Popy\Calendar\Converter\DateTimeRepresentation\SolarTime;
 /**
  * Abstract implementation of a convertor using a "Era start date" to calculate
  * solar years, days & time from a timestamp. The calculation works fine, but
@@ -61,26 +61,28 @@ abstract class AbstractPivotalDateSolarYear implements ConverterInterface
      *
      * @param DateTimeInterface $input        Initial input.
      * @param integer           $year         Era solar year.
+     * @param boolean           $isLeapYear   Is a leap year.
      * @param integer           $dayIndex     Day index.
-     * @param array<int>        $microseconds Time information.
-     * @param integer           $offset       Used offset.
      *
      * @return SolarTimeRepresentationInterface
      */
-    abstract protected function buildDateRepresentation(DateTimeInterface $input, $year, $dayIndex, array $time, $offset);
+    protected function buildDateRepresentation(DateTimeInterface $input, $year, $isLeapYear, $dayIndex)
+    {
+        return new SolarTime($year, $isLeapYear, $dayIndex);
+    }
 
     /**
      * @inheritDoc
      */
     public function fromDateTimeInterface(DateTimeInterface $input)
     {
+        $unixTime = $input->getTimestamp();
+        $unixMicrotime = (int)$input->format('u');
         $offset = $this->getOffsetFrom($input);
 
+
         // Use a timestamp relative to the first year and including timezone offset
-        $relativeTimestamp = $input->getTimestamp()
-            - $this->getEraStart()
-            + $offset
-        ;
+        $relativeTimestamp = $unixTime - $this->getEraStart() + $offset;
 
         $eraDayIndex = intval($relativeTimestamp / self::SECONDS_PER_DAY);
         $year = 1;
@@ -105,19 +107,26 @@ abstract class AbstractPivotalDateSolarYear implements ConverterInterface
             $year++;
         }
 
-        $remainingMicroSeconds = intval($input->format('u'))
+        $remainingMicroSeconds = $unixMicrotime
             + ($relativeTimestamp % static::SECONDS_PER_DAY) * 1000000
         ;
 
-        $time = $this->timeConverter->fromMicroSeconds($remainingMicroSeconds);
-
-        return $this->buildDateRepresentation(
+        $res = $this->buildDateRepresentation(
             $input,
             $year,
-            $eraDayIndex,
-            $time,
-            $offset
+            $this->calculator->isLeapYear($year),
+            $eraDayIndex
         );
+
+        return $res
+            ->withTimezone($input->getTimezone())
+            ->withUnixTime($unixTime)
+            ->withUnixMicroTime((int)$input->format('u'))
+            ->withOffset($offset)
+            ->withTime(
+                $this->timeConverter->fromMicroSeconds($remainingMicroSeconds)
+            )
+        ;
     }
 
     /**
@@ -163,6 +172,9 @@ abstract class AbstractPivotalDateSolarYear implements ConverterInterface
         } elseif (null !== $microsec = $input->getMicroseconds()) {
             // A timestamp was available, but we also have microseconds.
             // We have to ckeck if they are SI microseconds before adding it.
+            // TODO : should probably make microseconds part of the interface,
+            // making them part of the date real value along with timestamp,
+            // and introducing another format character for non-SI microsecs.
             $cmp = $this->timeConverter->toMicroSeconds([
                 0,
                 0,

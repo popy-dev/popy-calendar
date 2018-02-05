@@ -5,9 +5,9 @@ namespace Popy\Calendar\Converter\DateTimeRepresentation;
 use Popy\Calendar\Converter\SolarTimeRepresentationInterface;
 
 /**
- * Minimal abstract implementatuon.
+ * Minimal implementatuon.
  */
-abstract class AbstractSolarTime extends AbstractDateTime implements SolarTimeRepresentationInterface
+class SolarTime extends AbstractDateTime implements SolarTimeRepresentationInterface
 {
     /**
      * Year
@@ -29,6 +29,20 @@ abstract class AbstractSolarTime extends AbstractDateTime implements SolarTimeRe
      * @var integer
      */
     protected $dayIndex;
+
+    /**
+     * Class constructor.
+     *
+     * @param integer $year
+     * @param boolean $leapYear
+     * @param integer $dayIndex
+     */
+    public function __construct($year, $leapYear, $dayIndex)
+    {
+        $this->year     = $year;
+        $this->leapYear = $leapYear;
+        $this->dayIndex = $dayIndex;
+    }
 
     /**
      * @inheritDoc
