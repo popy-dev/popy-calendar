@@ -161,7 +161,7 @@ class Time
     public function withRatio($ratio)
     {
         $res = clone $this;
-        $res->ratio = $ration;
+        $res->ratio = $ratio;
 
         return $res;
     }
