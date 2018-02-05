@@ -2,56 +2,37 @@
 
 namespace Popy\Calendar\Converter\DateTimeRepresentation;
 
-use DateTimeZone;
+use Popy\Calendar\Converter\Time;
 use Popy\Calendar\Converter\DateTimeRepresentationInterface;
 
 /**
  * Minimal abstract implementatuon.
  */
-abstract class AbstractDateTime implements DateTimeRepresentationInterface
+abstract class AbstractDateTime extends AbstractDate implements DateTimeRepresentationInterface
 {
     /**
-     * Timestamp : actual and trusted time representation.
+     * Time.
      *
-     * @var integer|null
+     * @var Time
      */
-    protected $timestamp;
-
-    /**
-     * Timezone.
-     *
-     * @var DateTimeZone
-     */
-    protected $timezone;
-
-    /**
-     * TimeZone offset used when building this date object.
-     *
-     * @var integer
-     */
-    protected $offset;
+    protected $time;
 
     /**
      * @inheritDoc
      */
-    public function getTimestamp()
+    public function getTime()
     {
-        return $this->timestamp;
+        return $this->time;
     }
 
     /**
      * @inheritDoc
      */
-    public function getTimezone()
+    public function withTime(Time $time)
     {
-        return $this->timezone;
-    }
+        $res = clone $this;
+        $res->time = $time;
 
-    /**
-     * @inheritDoc
-     */
-    public function getOffset()
-    {
-        return $this->offset;
+        return $res;
     }
 }

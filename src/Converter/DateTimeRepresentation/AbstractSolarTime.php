@@ -22,20 +22,13 @@ abstract class AbstractSolarTime extends AbstractDateTime implements SolarTimeRe
      * @var boolean
      */
     protected $leapYear;
-    
+
     /**
      * Day Index
      *
      * @var integer
      */
     protected $dayIndex;
-
-    /**
-     * Time informations.
-     *
-     * @var array<int>
-     */
-    protected $time;
 
     /**
      * @inheritDoc
@@ -59,13 +52,5 @@ abstract class AbstractSolarTime extends AbstractDateTime implements SolarTimeRe
     public function getDayIndex()
     {
         return $this->dayIndex;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getTime()
-    {
-        return $this->time;
     }
 }
