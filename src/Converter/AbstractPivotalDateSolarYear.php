@@ -134,27 +134,46 @@ abstract class AbstractPivotalDateSolarYear implements ConverterInterface
             ));
         }
 
-        $year = $input->getYear();
-        $dayIndex = $input->getDayIndex();
-        $microsec = $this->timeConverter->toMicroSeconds(
-            $input->getTime()
-        );
+        $microseconds = null;
+        $timestamp = $timestamp = $input->getTimestamp();
 
-        $sign = $year < 1 ? -1 : 1;
+        if (null === $timestamp) {
+            // If input doesn't contain its timestamp, we'll have to calculate it
+            $year = $input->getYear();
+            $dayIndex = $input->getDayIndex();
+            $microsec = $this->timeConverter->toMicroSeconds(
+                $input->getTime()
+            );
 
-        for ($i=min($year, 1); $i < max($year, 1); $i++) {
-            $dayCount = 365 + $this->calculator->isLeapYear($i);
-            $dayIndex += $sign * $dayCount;
+            $sign = $year < 1 ? -1 : 1;
+
+            for ($i=min($year, 1); $i < max($year, 1); $i++) {
+                $dayCount = 365 + $this->calculator->isLeapYear($i);
+                $dayIndex += $sign * $dayCount;
+            }
+
+            $timestamp = $this->getEraStart()
+                + ($dayIndex * self::SECONDS_PER_DAY)
+                + intval($microsec / 1000000)
+            ;
+            $microseconds = $microsec % 1000000;
+
+
+            $timestamp -= $this->getOffsetFor($input, $timestamp);
+        } elseif (null !== $microsec = $input->getMicroseconds()) {
+            // A timestamp was available, but we also have microseconds.
+            // We have to ckeck if they are SI microseconds before adding it.
+            $cmp = $this->timeConverter->toMicroSeconds([
+                0,
+                0,
+                0,
+                $microsec
+            ]);
+
+            if ($microsec === $cmp) {
+                $microseconds = $microsec;
+            }
         }
-
-        $timestamp = $this->getEraStart()
-            + ($dayIndex * self::SECONDS_PER_DAY)
-            + intval($microsec / 1000000)
-        ;
-        $microseconds = $microsec % 1000000;
-
-
-        $timestamp -= $this->getOffsetFor($input, $timestamp);
 
         $timestring = sprintf(
             '%s.%06d UTC',
