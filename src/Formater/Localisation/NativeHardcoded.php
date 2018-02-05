@@ -62,8 +62,8 @@ class NativeHardcoded implements LocalisationInterface
      */
     public function getMonthName($month)
     {
-        if (isset(static::$monthes[$month])) {
-            return static::$monthes[$month];
+        if (isset(static::$monthes[$month - 1])) {
+            return static::$monthes[$month - 1];
         }
     }
 
@@ -72,8 +72,8 @@ class NativeHardcoded implements LocalisationInterface
      */
     public function getMonthShortName($month)
     {
-        if (isset(static::$monthes[$month])) {
-            return substr(static::$monthes[$month], 0, 3);
+        if (isset(static::$monthes[$month - 1])) {
+            return substr(static::$monthes[$month - 1], 0, 3);
         }
     }
 
@@ -82,8 +82,8 @@ class NativeHardcoded implements LocalisationInterface
      */
     public function getDayName($day)
     {
-        if (isset(static::$days[$day])) {
-            return static::$days[$day];
+        if (isset(static::$days[$day - 1])) {
+            return static::$days[$day - 1];
         }
     }
 
@@ -93,8 +93,8 @@ class NativeHardcoded implements LocalisationInterface
      */
     public function getDayShortName($day)
     {
-        if (isset(static::$days[$day])) {
-            return substr(static::$days[$day], 0, 3);
+        if (isset(static::$days[$day - 1])) {
+            return substr(static::$days[$day - 1], 0, 3);
         }
     }
 

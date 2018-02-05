@@ -224,7 +224,7 @@ class PregNative implements SymbolParserInterface
     protected function buildXNamesLexer($x, FormatToken $token)
     {
         $choices = [];
-        $i = 0;
+        $i = 1;
 
         while (null !== $label = $this->locale->{"get${x}Name"}($i++)) {
             $choices[] = $label;
@@ -245,7 +245,8 @@ class PregNative implements SymbolParserInterface
     {
 
         $choices = [];
-        $i = $repetitions = 0;
+        $i = 1;
+        $repetitions = 0;
 
         while (null !== $label = $this->locale->getNumberOrdinalSuffix($i++)) {
             if (!in_array($label, $choices)) {
