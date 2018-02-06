@@ -77,6 +77,5 @@ class DateParts implements UnixTimeConverterInterface
         );
 
         $conversion->setTo($res);
-
     }
 }

@@ -71,7 +71,7 @@ abstract class AbstractConverter implements DatePartsConverterInterface
      * Returns an array containing, for each fragment, all its possible sizes in
      * days.
      *
-     * For instance, for the standard gregorian calendar, should return 
+     * For instance, for the standard gregorian calendar, should return
      * [ [31,28,31, ...] ]
      *
      * @param DateFragmentedRepresentationInterface $input

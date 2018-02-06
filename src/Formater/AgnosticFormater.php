@@ -15,7 +15,7 @@ class AgnosticFormater implements FormaterInterface
 {
     /**
      * Format lexer
-     * 
+     *
      * @var FormatLexerInterface
      */
     protected $lexer;

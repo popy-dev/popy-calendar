@@ -7,7 +7,7 @@ namespace Popy\Calendar\ValueObject;
  * the duration of a the earth's revolution around teh Sun, and a day the
  * duration of a earth rotation on itself. Works for other planets & stars.
  *
- * TODO : 
+ * TODO :
  *  - setters
  *  - eraDayIndex
  */

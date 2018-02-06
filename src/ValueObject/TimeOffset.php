@@ -54,7 +54,7 @@ class TimeOffset
      * method to extract properties.
      *
      * @param DateTimeInterface $date
-     * 
+     *
      * @return static
      */
     public static function buildFromDateTimeInterface(DateTimeInterface $date)
