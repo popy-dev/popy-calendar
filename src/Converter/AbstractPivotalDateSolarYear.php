@@ -19,6 +19,8 @@ use Popy\Calendar\ValueObject\DateFragmentedRepresentationInterface;
  * Abstract implementation of a convertor using a "Era start date" to calculate
  * solar years, days & time from a timestamp. The calculation works fine, but
  * the abstraction isn't nice.
+ *
+ * @deprecated
  */
 abstract class AbstractPivotalDateSolarYear implements ConverterInterface
 {
@@ -246,7 +248,7 @@ abstract class AbstractPivotalDateSolarYear implements ConverterInterface
      *
      * @return TimeOffset
      */
-    protected function getOffsetFor(DateTimeRepresentationInterface $input, $timestamp)
+    protected function getOffsetFor(DateRepresentationInterface $input, $timestamp)
     {
         $offset = $input->getOffset();
 

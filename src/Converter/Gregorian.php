@@ -8,6 +8,9 @@ use Popy\Calendar\Converter\TimeConverter\DuoDecimalTime;
 use Popy\Calendar\ValueObject\DateRepresentation\Standard;
 use Popy\Calendar\Converter\DatePartsConverter\StandardMonthes;
 
+/**
+ * @deprecated
+ */
 class Gregorian extends AbstractPivotalDateSolarYear
 {
     /**

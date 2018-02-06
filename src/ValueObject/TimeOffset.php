@@ -38,9 +38,9 @@ class TimeOffset
     /**
      * Class constructor.
      *
-     * @param integer $value        Offset value.
-     * @param boolean $dst          Day saving time status.
-     * @param string  $abbreviation Offset abbreviation.
+     * @param integer|null $value        Offset value.
+     * @param boolean|null $dst          Day saving time status.
+     * @param string|null  $abbreviation Offset abbreviation.
      */
     public function __construct($value, $dst, $abbreviation)
     {
