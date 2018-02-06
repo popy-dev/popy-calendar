@@ -12,9 +12,9 @@ interface SymbolParserInterface
      * Parse input symbol roken.
      *
      * @param FormatToken           $token
-     * @param FormatParserInterface $formater
+     * @param FormatParserInterface $parser
      *
      * @return DateLexerInterface|null
      */
-    public function parseSymbol(FormatToken $token, FormatParserInterface $formater);
+    public function parseSymbol(FormatToken $token, FormatParserInterface $parser);
 }
