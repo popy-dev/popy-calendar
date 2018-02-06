@@ -10,23 +10,30 @@ trait DateSolarTrait
     /**
      * Year
      *
-     * @var integer
+     * @var integer|null
      */
     protected $year;
 
     /**
      * Is leap year
      *
-     * @var boolean
+     * @var boolean|null
      */
     protected $leapYear;
 
     /**
      * Day Index
      *
-     * @var integer
+     * @var integer|null
      */
     protected $dayIndex;
+
+    /**
+     * Day Index
+     *
+     * @var integer|null
+     */
+    protected $eraDayIndex;
 
     /**
      * @inheritDoc
@@ -50,5 +57,37 @@ trait DateSolarTrait
     public function getDayIndex()
     {
         return $this->dayIndex;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getEraDayIndex()
+    {
+        return $this->eraDayIndex;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function withYear($year, $isLeap)
+    {
+        $res = clone $this;
+        $res->year = $year;
+        $res->leapYear = $isLeap;
+
+        return $res;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function withDayIndex($dayIndex, $eraDayIndex)
+    {
+        $res = clone $this;
+        $res->dayIndex = $dayIndex;
+        $res->eraDayIndex = $eraDayIndex;
+        
+        return $res;
     }
 }

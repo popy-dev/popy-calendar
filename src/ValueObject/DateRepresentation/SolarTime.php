@@ -12,18 +12,4 @@ class SolarTime extends AbstractDate implements DateTimeRepresentationInterface,
 {
     use DateTimeTrait;
     use DateSolarTrait;
-    
-    /**
-     * Class constructor.
-     *
-     * @param integer $year
-     * @param boolean $leapYear
-     * @param integer $dayIndex
-     */
-    public function __construct($year, $leapYear, $dayIndex)
-    {
-        $this->year     = $year;
-        $this->leapYear = $leapYear;
-        $this->dayIndex = $dayIndex;
-    }
 }

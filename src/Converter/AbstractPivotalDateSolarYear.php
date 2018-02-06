@@ -33,6 +33,11 @@ abstract class AbstractPivotalDateSolarYear implements ConverterInterface
     const FIRST_YEAR = 1;
 
     /**
+     * Non leap year length.
+     */
+    const DAYS_PER_YEAR = 365;
+
+    /**
      * Leap year calculator.
      *
      * @var LeapYearCalculatorInterface
@@ -75,12 +80,13 @@ abstract class AbstractPivotalDateSolarYear implements ConverterInterface
      * @param integer           $year         Era solar year.
      * @param boolean           $isLeapYear   Is a leap year.
      * @param integer           $dayIndex     Day index.
+     * @param integer           $eraDayIndex  Era day index.
      *
      * @return DateSolarRepresentationInterface
      */
-    protected function buildDateRepresentation(DateTimeInterface $input, $year, $isLeapYear, $dayIndex)
+    protected function buildDateRepresentation(DateTimeInterface $input, $year, $isLeapYear, $dayIndex, $eraDayIndex)
     {
-        return new SolarTime($year, $isLeapYear, $dayIndex);
+        return new SolarTime();
     }
 
     /**
@@ -104,14 +110,14 @@ abstract class AbstractPivotalDateSolarYear implements ConverterInterface
 
         // Will exit once the negative year will be found
         while ($dayIndex < 0) {
-            $dayCount = 365 + $this->calculator->isLeapYear($year - 1);
+            $dayCount = static::DAYS_PER_YEAR + $this->calculator->isLeapYear($year - 1);
 
             $dayIndex += $dayCount;
             $year--;
         }
 
         while (true) {
-            $dayCount = 365 + $this->calculator->isLeapYear($year);
+            $dayCount = static::DAYS_PER_YEAR + $this->calculator->isLeapYear($year);
 
             if ($dayIndex < $dayCount) {
                 // $year and dayIndex found !
@@ -122,12 +128,16 @@ abstract class AbstractPivotalDateSolarYear implements ConverterInterface
             $year++;
         }
 
+        $leap = $this->calculator->isLeapYear($year);
+
         $res = $this->buildDateRepresentation(
                 $input,
                 $year,
-                $this->calculator->isLeapYear($year),
+                $leap,
                 $dayIndex
             )
+            ->withYear($year, $leap)
+            ->withDayIndex($dayIndex, $eraDayIndex)
             ->withUnixTime($unixTime)
             ->withUnixMicroTime($unixMicrotime)
             ->withOffset($offset)
