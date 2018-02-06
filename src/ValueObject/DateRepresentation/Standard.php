@@ -9,8 +9,7 @@ use Popy\Calendar\ValueObject\DateFragmentedRepresentationInterface;
 /**
  * "Standard" time representation (like Gregorian calendar)
  */
-class Standard extends AbstractDate implements DateTimeRepresentationInterface, DateSolarRepresentationInterface, DateFragmentedRepresentationInterface
-{
+class Standard extends AbstractDate implements DateTimeRepresentationInterface,DateSolarRepresentationInterface, DateFragmentedRepresentationInterface {
     use DateTimeTrait;
     use DateSolarTrait;
     use DateFragmentedTrait;

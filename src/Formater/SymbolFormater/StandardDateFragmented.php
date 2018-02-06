@@ -30,7 +30,7 @@ class StandardDateFragmented implements SymbolFormaterInterface
      */
     public function __construct(LocalisationInterface $locale)
     {
-        $this->locale = $locale:
+        $this->locale = $locale;
     }
 
     /**
@@ -54,12 +54,12 @@ class StandardDateFragmented implements SymbolFormaterInterface
 
         if ($token->is('m')) {
             // m   Numeric representation of a month, with leading zeros
-            return sprintf('%02d', $input->getDateParts()->get(0));
+            return sprintf('%02d', $input->getDateParts()->get(0) + 1);
         }
 
         if ($token->is('n')) {
             // n   Numeric representation of a month, without leading zeros
-            return $input->getDateParts()->get(0);
+            return $input->getDateParts()->get(0) + 1;
         }
 
         if ($token->is('t')) {
@@ -69,12 +69,12 @@ class StandardDateFragmented implements SymbolFormaterInterface
 
         if ($token->is('d')) {
             // d   Day of the month, 2 digits with leading zeros
-            return sprintf('%02d', $input->getDateParts()->get(1));
+            return sprintf('%02d', $input->getDateParts()->get(1) + 1);
         }
 
         if ($token->is('j')) {
             // j   Day of the month without leading zeros
-            return $input->getDateParts()->get(1);
+            return $input->getDateParts()->get(1) + 1;
         }
 
         if ($token->is('l')) {

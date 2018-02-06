@@ -59,10 +59,13 @@ class Chain implements SymbolFormaterInterface
     /**
      * @inheritDoc
      */
-    public function formatSymbol(DateRepresentationInterface $input, FormatToken $token, FormaterInterface $formater)
-    {
-        foreach ($this->formaters as $formater) {
-            if (null !== $res->formatSymbol($input, $token, $formater)) {
+    public function formatSymbol(
+        DateRepresentationInterface $input,
+        FormatToken $token,
+        FormaterInterface $formater
+    ) {
+        foreach ($this->formaters as $f) {
+            if (null !== $res = $f->formatSymbol($input, $token, $formater)) {
                 return $res;
             }
         }

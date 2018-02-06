@@ -10,8 +10,6 @@ use Popy\Calendar\ValueObject\DateSolarRepresentationInterface;
 
 /**
  * Standard format, handling DateSolarRepresentationInterface.
- *
- * o format isn't properly handled for now
  */
 class StandardDateSolar implements SymbolFormaterInterface
 {
@@ -28,9 +26,8 @@ class StandardDateSolar implements SymbolFormaterInterface
             return sprintf('%02d', $input->getYear() % 100);
         }
 
-        if ($token->is('Y') || $token->is('o')) {
+        if ($token->is('Y')) {
             // Y   A full numeric representation of a year, 4 digits
-            // o   ISO-8601 week-numbering year. This has the same value as Y, except that if the ISO week number (W) belongs to the previous or next year, that year is used instead.
             return sprintf('%04d', $input->getYear());
         }
 

@@ -24,7 +24,7 @@ class StandardDateTime implements SymbolFormaterInterface
             return;
         }
 
-        if ($token->is('a', 'A')) {
+        if ($token->isOne('a', 'A')) {
             // a   Lowercase Ante meridiem and Post meridiem   am or pm
             // A   Uppercase Ante meridiem and Post meridiem   AM or PM
             return $token->is('a') ? 'am' : 'AM';
@@ -35,13 +35,13 @@ class StandardDateTime implements SymbolFormaterInterface
             return sprintf('%03d', intval($input->getTime()->getRatio() / 1000));
         }
 
-        if ($token->is('g', 'G')) {
+        if ($token->isOne('g', 'G')) {
             // g   12-hour format of an hour without leading zeros 1 through 12
             // G   24-hour format of an hour without leading zeros 0 through 23
             return $input->getTime()->get(0);
         }
 
-        if ($token->is('h', 'H')) {
+        if ($token->isOne('h', 'H')) {
             // h   12-hour format of an hour with leading zeros    01 through 12
             // H   24-hour format of an hour with leading zeros    00 through 23
             return sprintf('%02d', $input->getTime()->get(0));

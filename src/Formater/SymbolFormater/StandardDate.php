@@ -37,7 +37,7 @@ class StandardDate implements SymbolFormaterInterface
             return (int)$input->getOffset()->isDst();
         }
 
-        if ($token->is('O', 'P')) {
+        if ($token->isOne('O', 'P')) {
             // O   Difference to Greenwich time (GMT) in hours
             // P   Difference to Greenwich time (GMT) with colon
             $f = '%s%02d%02d';
