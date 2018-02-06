@@ -21,6 +21,7 @@ class GregorianDateFactory implements UnixTimeConverterInterface
         $res = $res
             ->withUnixTime($conversion->getFrom()->getUnixTime())
             ->withUnixMicroTime($conversion->getFrom()->getUnixMicroTime())
+            ->withTimezone($conversion->getFrom()->getTimezone())
         ;
         $conversion->setTo($res);
     }
