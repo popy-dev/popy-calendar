@@ -62,21 +62,21 @@ abstract class AbstractFragmentedDuration
     }
 
     /**
-     * Get all sequencial non-null fragments (which are actually exploitable to
-     * determine time)
+     * Count all sequencial non-null fragments (which are actually exploitable
+     * to determine time)
      *
-     * @return array<integer>
+     * @return integer
      */
-    public function getAllMeaningfull()
+    public function countMeaningfull()
     {
-        $res = [];
+        $res = 0;
 
         foreach ($this->fragments as $index => $value) {
             if (null === $value) {
                 break;
             }
 
-            $res[] = $this->get($index);
+            $res++;
         }
 
         return $res;

@@ -31,6 +31,20 @@ class Time extends AbstractFragmentedDuration
     protected $halved = [];
 
     /**
+     * Class constructor.
+     *
+     * @param array        $fragments
+     * @param array        $sizes
+     * @param integer|null $ratio
+     */
+    public function __construct(array $fragments = [], array $sizes = [], $ratio = null)
+    {
+        parent::__construct($fragments, $sizes);
+
+        $this->ratio = $ratio;
+    }
+
+    /**
      * Get time fragment FIXED VALUE, checking if it has been halved or not.
      *
      * @param integer $i
