@@ -71,7 +71,7 @@ class Time implements UnixTimeConverterInterface
      */
     public function toUnixTime(Conversion $conversion)
     {
-        $input = $conversion->getTo() ?: $conversion->getFrom();
+        $input = $conversion->getTo();
 
         if (!$input instanceof DateTimeRepresentationInterface) {
             return;

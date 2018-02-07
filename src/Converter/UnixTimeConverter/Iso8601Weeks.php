@@ -1,36 +1,35 @@
 <?php
 
-namespace Popy\Calendar\Converter\DatePartsConverter;
+namespace Popy\Calendar\Converter\UnixTimeConverter;
 
-use InvalidArgumentException;
-use Popy\Calendar\ValueObject\DateParts;
+use Popy\Calendar\Converter\Conversion;
+use Popy\Calendar\Converter\UnixTimeConverterInterface;
 use Popy\Calendar\Converter\LeapYearCalculatorInterface;
-use Popy\Calendar\Converter\DatePartsConverterInterface;
 use Popy\Calendar\ValueObject\DateSolarRepresentationInterface;
 use Popy\Calendar\ValueObject\DateFragmentedRepresentationInterface;
 
 /**
  * Implementation of the standard (gregorian like) month calculation.
  */
-class Iso8601Weeks implements DatePartsConverterInterface
+class Iso8601Weeks implements UnixTimeConverterInterface
 {
-    protected $converter;
-
-    public function __construct(DatePartsConverterInterface $converter, LeapYearCalculatorInterface $calculator)
+    public function __construct(LeapYearCalculatorInterface $calculator)
     {
-        $this->converter = $converter;
         $this->calculator = $calculator;
     }
 
     /**
      * @inheritDoc
      */
-    public function fromDayIndex(DateFragmentedRepresentationInterface $input, $dayIndex)
+    public function fromUnixTime(Conversion $conversion)
     {
-        $res = $this->converter->fromDayIndex($input, $dayIndex);
+        $input = $conversion->getTo();
 
-        if (!$input instanceof DateSolarRepresentationInterface) {
-            return $res;
+        if (
+            !$input instanceof DateFragmentedRepresentationInterface
+            || !$input instanceof DateSolarRepresentationInterface
+        ) {
+            return;
         }
 
         $year = $input->getYear();
@@ -56,28 +55,35 @@ class Iso8601Weeks implements DatePartsConverterInterface
             $weekIndex = intval($thursdayIndex / 7);
         }
 
-
-        return $res->withTransversals([
+        $dateParts = $input->getDateParts()->withTransversals([
             $year,
             $weekIndex,
             $dayOfWeek
         ]);
+
+
+        $conversion->setTo($input->withDateParts($dateParts));
     }
 
     /**
      * @inheritDoc
      */
-    public function toDayIndex(DateFragmentedRepresentationInterface $input, DateParts $parts)
+    public function toUnixTime(Conversion $conversion)
     {
-        return $this->converter->toDayIndex($input, $parts);
+        // Could do the reverse calculation to get index & year. Meh.
+        return;
+
+        $input = $conversion->getTo();
+
+        if (
+            !$input instanceof DateFragmentedRepresentationInterface
+            || !$input instanceof DateSolarRepresentationInterface
+        ) {
+            return;
+        }
+
+        if (null !== $input->getDayIndex()) {
+            return ;
+        }
     }
-
-
-    protected function getDayOfWeekFromIndex($index)
-    {
-        $index += 3;
-
-        return $index % 7;
-    }
-
 }

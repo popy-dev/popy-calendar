@@ -127,7 +127,7 @@ class DateSolar implements UnixTimeConverterInterface
      */
     public function toUnixTime(Conversion $conversion)
     {
-        $input = $conversion->getTo() ?: $conversion->getFrom();
+        $input = $conversion->getTo();
 
         if (!$input instanceof DateSolarRepresentationInterface) {
             return;

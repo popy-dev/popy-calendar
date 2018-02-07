@@ -21,7 +21,7 @@ trait DateFragmentedTrait
      */
     public function getDateParts()
     {
-        return $this->dateParts;
+        return $this->dateParts ?: new DateParts();
     }
 
     /**
