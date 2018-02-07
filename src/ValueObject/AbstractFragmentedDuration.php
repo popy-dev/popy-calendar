@@ -12,13 +12,22 @@ abstract class AbstractFragmentedDuration
     protected $fragments = [];
 
     /**
+     * Fragment sizes.
+     *
+     * @var array<integer|null>
+     */
+    protected $sizes = [];
+
+    /**
      * Class constructor.
      *
      * @param array $fragments
+     * @param arra  $sizes
      */
-    public function __construct(array $fragments = [])
+    public function __construct(array $fragments = [], array $sizes = [])
     {
-        $this->setFragments($fragments);
+        $this->fragments = $this->fillArrayInput($fragments);
+        $this->sizes = $this->fillArrayInput($sizes);
     }
 
     /**
@@ -42,7 +51,14 @@ abstract class AbstractFragmentedDuration
      */
     public function all()
     {
-        return $this->fragments;
+        $res = [];
+        $len = count($this->fragments);
+
+        for ($index=0; $index < $len; $index++) { 
+            $res[] = $this->get($index);
+        }
+
+        return $res;
     }
 
     /**
@@ -55,12 +71,12 @@ abstract class AbstractFragmentedDuration
     {
         $res = [];
 
-        foreach ($this->fragments as $value) {
+        foreach ($this->fragments as $index => $value) {
             if (null === $value) {
                 break;
             }
 
-            $res[] = $value;
+            $res[] = $this->get($index);
         }
 
         return $res;
@@ -76,11 +92,7 @@ abstract class AbstractFragmentedDuration
     {
         $res = clone $this;
 
-        for ($i=count($res->fragments); $i < $index; $i++) {
-            $res->fragments[$i] = null;
-        }
-
-        $res->fragments[$index] = $value;
+        $res->fragments = $this->insertInList($res->fragments, $index, $value);
 
         return $this;
     }
@@ -96,28 +108,104 @@ abstract class AbstractFragmentedDuration
     {
         $res = clone $this;
 
-        $res->setFragments($fragments);
+        $res->fragments = $res->fillArrayInput($fragments);
 
         return $res;
     }
 
     /**
-     * Set fragments, adding null fragments if needed.
+     * Get time fragment size.
      *
-     * @param array<integer|null> $fragments
+     * @param integer $i
+     *
+     * @return integer|null
      */
-    protected function setFragments(array $fragments)
+    public function getSize($i)
     {
-        if (empty($fragments)) {
-            $this->fragments = [];
+        if (isset($this->sizes[$i])) {
+            return $this->sizes[$i];
+        }
+    }
 
-            return;
+    /**
+     * Get all fragment sizes.
+     *
+     * @return array<integer|null>
+     */
+    public function allSizes()
+    {
+        return $this->sizes;
+    }
+
+    /**
+     * Set time fragment size, adding null values if needed.
+     *
+     * @param integer      $index
+     * @param integer|null $value
+     */
+    public function withSize($index, $value)
+    {
+        $res = clone $this;
+
+        $res->sizes = $this->insertInList($res->sizes, $index, $value);
+
+        return $res;
+    }
+
+    /**
+     * Set all sizes, adding null values if needed.
+     *
+     * @param array<integer|null> $sizes
+     *
+     * @return static a new instance.
+     */
+    public function withSizes(array $sizes)
+    {
+        $res = clone $this;
+
+        $res->sizes = $res->fillArrayInput($sizes);
+
+        return $res;
+    }
+
+    /**
+     * Insrt a value in a list, inserting null values if needed to keep a
+     * conscutive indexing.
+     *
+     * @param array        $values Actual values.
+     * @param integer      $index  New value index.
+     * @param integer|null $value  New value.
+     *
+     * @return array new value list.
+     */
+    public function insertInList(array $values, $index, $value)
+    {
+        for ($i=count($values); $i < $index; $i++) {
+            $values[$i] = null;
         }
 
-        $this->fragments = array_fill(0, max(array_keys($fragments)), null);
+        $values[$index] = $value;
 
-        foreach ($fragments as $index => $value) {
-            $this->fragments[$index] = $value;
+        return $values;
+    }
+
+    /**
+     * Set fragments sizes, adding null sizes if needed.
+     *
+     * @param array<integer|null> $sizes
+     */
+    protected function fillArrayInput(array $input)
+    {
+        if (empty($input)) {
+            return [];
         }
+
+        $res = array_fill(0, max(array_keys($input)), null);
+
+        foreach ($input as $index => $value) {
+            $res[$index] = $value;
+        }
+
+        return $res;
     }
 }

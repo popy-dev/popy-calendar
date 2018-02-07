@@ -23,6 +23,38 @@ class Time extends AbstractFragmentedDuration
     protected $ratio;
 
     /**
+     * Has the fragment been halved (AM would translate in false, PM in true).
+     * Each fragment can have one.
+     *
+     * @var array<boolean|null>
+     */
+    protected $halved = [];
+
+    /**
+     * Get time fragment FIXED VALUE, checking if it has been halved or not.
+     *
+     * @param integer $i
+     *
+     * @return integer|null
+     */
+    public function get($i)
+    {
+        if (!isset($this->fragments[$i])) {
+            return;
+        }
+
+        if (
+            !isset($this->halved[$i])   // not halved
+            || !$this->fragments[$i]    // not halved
+            || !isset($this->sizes[$i]) // no solvable
+        ) {
+            return $this->fragments[$i];
+        }
+
+        return $this->fragments[$i] + floor($this->sizes[$i] / 2);
+    }
+
+    /**
      * Gets ratio.
      *
      * @return integer|null
@@ -43,6 +75,61 @@ class Time extends AbstractFragmentedDuration
     {
         $res = clone $this;
         $res->ratio = $ratio;
+
+        return $res;
+    }
+
+    /**
+     * Checks if a fragment was halved
+     *
+     * @param integer $i
+     *
+     * @return boolean|null
+     */
+    public function isHalved($i)
+    {
+        if (isset($this->halved[$i])) {
+            return $this->halved[$i];
+        }
+    }
+
+    /**
+     * Get all halved.
+     *
+     * @return array<boolean|null>
+     */
+    public function allHalved()
+    {
+        return $this->halved;
+    }
+
+    /**
+     * Set time fragment "halved", adding null values if needed.
+     *
+     * @param integer      $index
+     * @param boolean|null $value
+     */
+    public function withHalved($index, $value)
+    {
+        $res = clone $this;
+
+        $res->halved = $this->insertInList($res->halved, $index, $value);
+
+        return $res;
+    }
+
+    /**
+     * Set all halved, adding null values if needed.
+     *
+     * @param array<bool|null> $halved
+     *
+     * @return static a new instance.
+     */
+    public function withHalveds(array $halved)
+    {
+        $res = clone $this;
+
+        $this->halved = $this->fillArrayInput($halved);
 
         return $res;
     }
