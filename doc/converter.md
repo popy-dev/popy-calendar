@@ -36,6 +36,7 @@ use Popy\Calendar\Converter\TimeConverter;
 $converter = new AgnosticConverter();
 $converter->addConverters(
     new UnixTimeConverter\GregorianDateFactory(),
+    new UnixTimeConverter\Date(),
     new UnixTimeConverter\TimeOffset(),
     new UnixTimeConverter\DateSolar(
         new LeapYearCalculator\Modern(),

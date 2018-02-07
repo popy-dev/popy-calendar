@@ -6,18 +6,26 @@ use Popy\Calendar\Converter\Conversion;
 use Popy\Calendar\Converter\UnixTimeConverterInterface;
 use Popy\Calendar\ValueObject\DateRepresentation\Standard;
 
-/**
- * Instanciates a Gregorian date representation to initialize a Conversion->to
- * property. Has to be (one of) the first element in a chain.
- */
-class GregorianDateFactory implements UnixTimeConverterInterface
+class Date implements UnixTimeConverterInterface
 {
     /**
      * @inheritDoc
      */
     public function fromUnixTime(Conversion $conversion)
     {
-        $conversion->setTo(new Standard());
+        if (null === $res = $conversion->getTo()) {
+            return;
+        }
+
+        $from = $conversion->getFrom();
+
+        $res = $res
+            ->withUnixTime($from->getUnixTime())
+            ->withUnixMicroTime($from->getUnixMicroTime())
+            ->withTimezone($from->getTimezone())
+        ;
+
+        $conversion->setTo($res);
     }
 
     /**

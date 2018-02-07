@@ -5,6 +5,13 @@ This repository holds interfaces defining a Calendar, whose purpose is to
 manipulate (format, parse) php dates, and a few utilities and very basic
 implementations.
 
+Installation
+------------
+
+```bash
+composer require popy/calendar
+```
+
 Usage
 -----
 
@@ -66,3 +73,8 @@ var_dump($formater->parse('2017-05-01'));
 
 ?>
 ```
+
+Other components
+----------------
+
+* [Converter](doc/converter.md)
