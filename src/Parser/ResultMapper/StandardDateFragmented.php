@@ -22,12 +22,16 @@ class StandardDateFragmented implements ResultMapperInterface
             return;
         }
 
-        $dateParts = $date->getDateParts() ?: new DateParts();
-
-        $dateParts
+        $dateParts = $date
+            ->getDateParts()
             ->withFragments([
                 $this->determineMonth($parts),
                 $this->determineDay($parts),
+            ])
+            ->withTransversals([
+                $parts->get('o') === null ? null : (int)$parts->get('o'),
+                $parts->get('W') === null ? null : (int)$parts->get('W'),
+                $this->determineDayOfWeek($parts),
             ])
         ;
 
@@ -69,7 +73,7 @@ class StandardDateFragmented implements ResultMapperInterface
     }
 
     /**
-     * Determine day of week (0 indexed)
+     * Determine day of week (0 indexed, starts by monday)
      *
      * @param DateLexerResult $parts
      * 
@@ -77,45 +81,20 @@ class StandardDateFragmented implements ResultMapperInterface
      */
     protected function determineDayOfWeek(DateLexerResult $parts)
     {
-        // w   Numeric representation of the day of the week   0 (for Sunday) through 6 (for Saturday)
         // D   A textual representation of a day, three letters
         // l (lowercase 'L')   A full textual representation of the day of the week
-        if (null !== $w = $parts->getFirst('w', 'D', 'l')) {
+        if (null !== $w = $parts->getFirst('D', 'l')) {
             return (int)$w;
         }
 
         // N   ISO-8601 numeric representation of the day of the week (added in PHP 5.1.0) 1 (for Monday) through 7 (for Sunday)
-        if (null !== $N = $parts->get('N')) {
-            return (int)$N - 1;
-        }
-    }
-
-    /**
-     * Determine year.
-     *
-     * @param DateLexerResult $parts
-     *
-     * @return integer|null
-     */
-    protected function determineDayIndex(DateLexerResult $parts)
-    {
-        // z   The day of the year (starting from 0)
-        // X   Day individual name
-        if (null !== $z = $parts->getFirst('z', 'X')) {
-            return (int)$z;
+        if (null !== $w = $parts->get('N')) {
+            return (int)$w - 1;
         }
 
-        // W   ISO-8601 week number of year, weeks starting on Monday
-        $w = $parts->get('W');
-        if (null !== $w && null !== $dow = $this->determineDayOfWeek($parts)) {
-            return $parts->get('W') * 10 + $dow;
-        }
-
-        if (
-            (null !== $m = $this->determineMonth($parts))
-            && null !== $d = $this->determineDay($parts)
-        ) {
-            return $m * 30 + $d;
+        // w   Numeric representation of the day of the week   0 (for Sunday) through 6 (for Saturday)
+        if (null !== $w = $parts->get('w')) {
+            return ((int)$w + 6) % 7;
         }
     }
 }

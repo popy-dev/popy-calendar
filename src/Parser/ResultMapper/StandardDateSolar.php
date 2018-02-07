@@ -17,11 +17,11 @@ class StandardDateSolar implements ResultMapperInterface
      */
     public function map(DateLexerResult $parts, DateRepresentationInterface $date = null)
     {
-        if (!$data instanceof DateSolarRepresentationInterface) {
+        if (!$date instanceof DateSolarRepresentationInterface) {
             return;
         }
 
-        return $data
+        return $date
             ->withYear($this->determineYear($parts), $parts->get('L'))
             ->withDayIndex($this->determineDayIndex($parts), null)
         ;
@@ -36,7 +36,8 @@ class StandardDateSolar implements ResultMapperInterface
      */
     protected function determineYear(DateLexerResult $parts)
     {
-        return $parts->getFirst('Y', 'o', 'y');
+        // Assumes 'y' is properly handled in lexer
+        return $parts->getFirst('Y', 'y');
     }
 
     /**
@@ -49,8 +50,7 @@ class StandardDateSolar implements ResultMapperInterface
     protected function determineDayIndex(DateLexerResult $parts)
     {
         // z   The day of the year (starting from 0)
-        // X   Day individual name
-        if (null !== $z = $parts->getFirst('z', 'X')) {
+        if (null !== $z = $parts->get('z')) {
             return (int)$z;
         }
     }

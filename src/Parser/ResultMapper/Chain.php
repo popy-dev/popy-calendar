@@ -22,7 +22,7 @@ class Chain implements ResultMapperInterface
      */
     public function __construct($mappers = [])
     {
-        $this->addMapper($mappers);
+        $this->addMappers($mappers);
     }
     
     /**
