@@ -4,6 +4,8 @@ namespace Popy\Calendar\Converter;
 
 /**
  * Leap year calculator.
+ *
+ * Todo : provide another method calculating the number of leaps occured sinceyear
  */
 interface LeapYearCalculatorInterface
 {
