@@ -45,10 +45,13 @@ class DuoDecimalTime implements TimeConverterInterface
      */
     public function fromMicroSeconds($input)
     {
-        $res = new Time($this->converter->getTimeFromLowerUnityCount(
-            $input,
+        $res = new Time(
+            $this->converter->getTimeFromLowerUnityCount(
+                $input,
+                static::$ranges
+            ),
             static::$ranges
-        ));
+        );
 
         return $res
             ->withRatio(1000000 * $input / static::MICROSECONDS_IN_DAY)

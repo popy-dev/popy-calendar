@@ -93,7 +93,7 @@ class DateSolar implements UnixTimeConverterInterface
 
         // Calculating global day index. Floor is used to properly handle
         // negative values
-        $eraDayIndex = floor($relativeTime / $this->dayLengthInSeconds);
+        $eraDayIndex = (int)floor($relativeTime / $this->dayLengthInSeconds);
 
         $conversion->setUnixTime(
             $relativeTime

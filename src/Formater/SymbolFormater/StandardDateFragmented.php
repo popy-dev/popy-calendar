@@ -63,8 +63,8 @@ class StandardDateFragmented implements SymbolFormaterInterface
         }
 
         if ($token->is('t')) {
-            // NIY
-            return '0';
+            // t    Number of days in the given month
+            return (int)$input->getDateParts()->getSize(0);
         }
 
         if ($token->is('d')) {
@@ -79,12 +79,12 @@ class StandardDateFragmented implements SymbolFormaterInterface
 
         if ($token->is('l')) {
             // l (lowercase 'L')   A full textual representation of the day of the week
-            return $this->locale->getDayName($this->getIsoDayOfWeek($input) - 1);
+            return $this->locale->getDayName($input->getDateParts()->getTransversal(2));
         }
 
         if ($token->is('D')) {
             // D   A textual representation of a day, three letters
-            return $this->locale->getDayShortName($this->getIsoDayOfWeek($input) - 1);
+            return $this->locale->getDayShortName($input->getDateParts()->getTransversal(2));
         }
 
         if ($token->is('S')) {
@@ -94,23 +94,26 @@ class StandardDateFragmented implements SymbolFormaterInterface
 
         if ($token->is('w')) {
             // w   Numeric representation of the day of the week   0 (for Sunday) through 6 (for Saturday)
-            return $this->getIsoDayOfWeek($input) % 7;
+            return (1 + $input->getDateParts()->getTransversal(2)) % 7;
         }
 
         if ($token->is('N')) {
             // N   ISO-8601 numeric representation of the day of the week (added in PHP 5.1.0) 1 (for Monday) through 7 (for Sunday)
-            return $this->getIsoDayOfWeek($input);
+            return $input->getDateParts()->getTransversal(2) + 1;
         }
 
         if ($token->is('W')) {
             // W   ISO-8601 week number of year, weeks starting on Monday
-            return $this->getIsoYearNumber($input);
+            return sprintf(
+                '%02d',
+                $input->getDateParts()->getTransversal(1) + 1
+            );
         }
 
         if ($token->is('o')) {
             // Y   A full numeric representation of a year, 4 digits
             // o   ISO-8601 week-numbering year. This has the same value as Y, except that if the ISO week number (W) belongs to the previous or next year, that year is used instead.
-            return sprintf('%04d', $this->getIsoYearNumber($input));
+            return sprintf('%04d', $input->getDateParts()->getTransversal(0));
         }
     }
 

@@ -27,7 +27,8 @@ class StandardDateTime implements SymbolFormaterInterface
         if ($token->isOne('a', 'A')) {
             // a   Lowercase Ante meridiem and Post meridiem   am or pm
             // A   Uppercase Ante meridiem and Post meridiem   AM or PM
-            return $token->is('a') ? 'am' : 'AM';
+            $res = $input->getTime()->canBeHalved(0) ? 'pm' : 'am';
+            return $token->is('a') ? $res : strtoupper($res);
         }
 
         if ($token->is('B')) {
@@ -35,14 +36,21 @@ class StandardDateTime implements SymbolFormaterInterface
             return sprintf('%03d', intval($input->getTime()->getRatio() / 1000));
         }
 
-        if ($token->isOne('g', 'G')) {
+        if ($token->is('g')) {
             // g   12-hour format of an hour without leading zeros 1 through 12
+            return $input->getTime()->getHalved(0);
+        }
+        if ($token->is('G')) {
             // G   24-hour format of an hour without leading zeros 0 through 23
             return $input->getTime()->get(0);
         }
 
-        if ($token->isOne('h', 'H')) {
+        if ($token->is('h')) {
             // h   12-hour format of an hour with leading zeros    01 through 12
+            return sprintf('%02d', $input->getTime()->getHalved(0));
+        }
+
+        if ($token->is('H')) {
             // H   24-hour format of an hour with leading zeros    00 through 23
             return sprintf('%02d', $input->getTime()->get(0));
         }
@@ -63,7 +71,7 @@ class StandardDateTime implements SymbolFormaterInterface
         }
 
         if ($token->is('µ')) {
-            // v   Milliseconds
+            // Remaining microseconds
             return sprintf('%03d', intval($input->getTime()->get(4)));
         }
     }

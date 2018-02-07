@@ -51,7 +51,47 @@ class Time extends AbstractFragmentedDuration
             return $this->fragments[$i];
         }
 
-        return $this->fragments[$i] + floor($this->sizes[$i] / 2);
+        return $this->fragments[$i] + (int)floor($this->sizes[$i] / 2);
+    }
+
+    /**
+     * Get time fragment minus half of the fragment size, if possible.
+     * eg: would return 2 out of 14 on a 24 long fragment.
+     * 
+     * @param integer $i Fragment index
+     *
+     * @return integer
+     */
+    public function getHalved($i)
+    {
+        if (!isset($this->fragments[$i])) {
+            return;
+        }
+        if (!isset($this->sizes[$i])) {
+            return $this->fragments[$i];
+        }
+
+        $half = (int)floor($this->sizes[$i] / 2);
+
+        return $this->fragments[$i] % $half;
+    }
+
+    public function canBeHalved($i)
+    {
+        if (isset($this->halved[$i])) {
+            return $this->halved[$i];
+        }
+
+        if (
+            !isset($this->fragments[$i])
+            || !isset($this->sizes[$i])
+        ) {
+            return;
+        }
+
+        $half = (int)floor($this->sizes[$i] / 2);
+
+        return $this->fragments[$i] > $half;
     }
 
     /**

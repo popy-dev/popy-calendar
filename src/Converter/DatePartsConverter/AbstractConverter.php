@@ -17,12 +17,13 @@ abstract class AbstractConverter implements DatePartsConverterInterface
     {
         $fs = $this->getAllFragmentSizes($input);
 
-        $res = [];
+        $res = $resultSizes = [];
 
         foreach ($fs as $frag => $sizes) {
             foreach ($sizes as $k => $size) {
                 if ($dayIndex < $size) {
                     $res[] = $k;
+                    $resultSizes[] = $size;
                     continue 2;
                 }
 
@@ -36,7 +37,7 @@ abstract class AbstractConverter implements DatePartsConverterInterface
 
         $res[] = $dayIndex;
 
-        return new DateParts($res);
+        return new DateParts($res, $resultSizes);
     }
 
     /**
