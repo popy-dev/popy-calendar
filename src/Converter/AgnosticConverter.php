@@ -15,34 +15,20 @@ use Popy\Calendar\ValueObject\DateRepresentation\DateTimeInterfaceWrapper;
 class AgnosticConverter implements ConverterInterface
 {
     /**
-     * Sub converters.
+     * Converter.
      *
      * @var UnixTimeConverterInterface
      */
-    protected $converters = [];
+    protected $converter;
 
     /**
-     * Adds a UnixTimeConverterInterface
+     * Class constructor.
      *
      * @param UnixTimeConverterInterface $converter
      */
-    public function addConverter(UnixTimeConverterInterface $converter)
+    public function __construct(UnixTimeConverterInterface $converter)
     {
-        $this->converters[] = $converter;
-
-        return $this;
-    }
-
-    /**
-     * Adds a list of UnixTimeConverterInterface
-     *
-     * @param iterable<UnixTimeConverterInterface> $converters
-     */
-    public function addConverters($converters)
-    {
-        foreach ($converters as $converter) {
-            $this->addConverter($converter);
-        }
+        $this->converter = $converter;
 
         return $this;
     }
@@ -56,9 +42,7 @@ class AgnosticConverter implements ConverterInterface
             new DateTimeInterfaceWrapper($input)
         );
 
-        foreach ($this->converters as $converter) {
-            $converter->fromUnixTime($conversion);
-        }
+        $this->converter->fromUnixTime($conversion);
 
         return $conversion->getTo();
     }
@@ -70,9 +54,7 @@ class AgnosticConverter implements ConverterInterface
     {
         $conversion = new Conversion($input, $input);
 
-        foreach (array_reverse($this->converters) as $converter) {
-            $converter->toUnixTime($conversion);
-        }
+        $this->converter->toUnixTime($conversion);
 
         $timestamp = sprintf(
             '%d.%06d UTC',
