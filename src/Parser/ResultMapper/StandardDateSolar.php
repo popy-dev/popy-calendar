@@ -21,8 +21,6 @@ class StandardDateSolar implements ResultMapperInterface
             return;
         }
 
-        var_dump($parts);
-
         return $date
             ->withYear($this->determineYear($parts), $parts->get('L'))
             ->withDayIndex($this->determineDayIndex($parts), null)
