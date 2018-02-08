@@ -43,7 +43,10 @@ class StandardDateTime implements ResultMapperInterface
 
         // B   Swatch Internet time    000 through 999
         if (null !== $b = $parts->get('B')) {
-            $time = $time->withRatio((int)$b * 1000);
+            // Swatch IS NOT A USABLE RATIO, as it has a fixed offset of 3600s
+            // Which means we can't use it while parsing unless we assume
+            // the day length to be a terran one.
+            //$time = $time->withRatio((int)$b * 1000);
         }
 
         return $date->withTime($time);
