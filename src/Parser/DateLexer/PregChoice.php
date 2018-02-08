@@ -37,7 +37,7 @@ class PregChoice extends AbstractPreg
             );
         }
 
-        $this->symbol = $token->getValue();
+        $this->symbol = $token->getName();
         $this->choices = $choices;
 
         $parts = [];

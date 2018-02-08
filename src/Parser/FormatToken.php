@@ -26,6 +26,14 @@ class FormatToken
     protected $type;
 
     /**
+     * Token alias. Usefull to map new tokens to already existing behaviours in
+     * ResultMappers
+     *
+     * @var string|null
+     */
+    protected $alias;
+
+    /**
      * Class constructor.
      *
      * @param string|null $value Token value.
@@ -45,6 +53,31 @@ class FormatToken
     public function getValue()
     {
         return $this->value;
+    }
+
+    /**
+     * Gets the token name (possibly aliased).
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->alias ?: $this->value;
+    }
+
+    /**
+     * Returns a new instance with the input alias.
+     *
+     * @param string|null $alias
+     *
+     * @return static
+     */
+    public function withAlias($alias)
+    {
+        $res = clone $this;
+        $res->alias = $alias;
+
+        return $res;
     }
 
     /**

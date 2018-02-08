@@ -59,7 +59,7 @@ class PregSimple extends AbstractPreg
                     'You must supply a pattern for a Symbol token'
                 );
             }
-            $this->symbol = $token->getValue();
+            $this->symbol = $token->getName();
             $this->expression = '(' . $pattern . ')';
             return;
         }

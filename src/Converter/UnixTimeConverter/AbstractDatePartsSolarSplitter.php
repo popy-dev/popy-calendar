@@ -2,6 +2,7 @@
 
 namespace Popy\Calendar\Converter\UnixTimeConverter;
 
+use OutOfBoundsException;
 use Popy\Calendar\Converter\Conversion;
 use Popy\Calendar\Converter\UnixTimeConverterInterface;
 use Popy\Calendar\ValueObject\DateSolarRepresentationInterface;

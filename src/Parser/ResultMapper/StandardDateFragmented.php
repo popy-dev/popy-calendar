@@ -49,10 +49,13 @@ class StandardDateFragmented implements ResultMapperInterface
     {
         // m   Numeric representation of a month, with leading zeros   01 through 12
         // n   Numeric representation of a month, without leading zeros
+        if (null !== $m = $parts->getFirst('m', 'n')) {
+            return (int)$m - 1;
+        }
         // F   A full textual representation of a month, such as January or March
         // M   A short textual representation of a month, three letters
-        if (null !== $m = $parts->getFirst('m', 'n', 'F', 'M')) {
-            return (int)$m - 1;
+        if (null !== $m = $parts->getFirst('F', 'M')) {
+            return (int)$m;
         }
     }
 
