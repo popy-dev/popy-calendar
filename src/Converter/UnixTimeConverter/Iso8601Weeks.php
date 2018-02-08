@@ -71,6 +71,12 @@ class Iso8601Weeks implements UnixTimeConverterInterface
         $year = $input->getYear();
         // Assuming the era starting year is 1970, it starts a Thursday.
         $dayOfWeek = ($input->getEraDayIndex() + $this->firstYearDayIndex) % 7;
+
+        // dayOfWeek may be negative is eraDayIndex was negative
+        if ($dayOfWeek < 0) {
+            $dayOfWeek += 7;
+        }
+
         $weekIndex = null;
 
         // Get day yearl-index of the same week thursday
@@ -98,7 +104,6 @@ class Iso8601Weeks implements UnixTimeConverterInterface
             $weekIndex,
             $dayOfWeek
         ]);
-
 
         $conversion->setTo($input->withDateParts($dateParts));
     }
@@ -172,11 +177,17 @@ class Iso8601Weeks implements UnixTimeConverterInterface
     {
         $res = 0;
 
-        // TODO Fix that for years beofre firstYear !
-        for ($i=$this->firstYear; $i < $year; $i++) {
-            $res += 365 + $this->calculator->isLeapYear($i);
+        $sign = $year < $this->firstYear ? -1 : 1;
+
+        for ($i=min($year, $this->firstYear); $i < max($year, $this->firstYear); $i++) {
+            $res += $sign * $this->getYearLength($i);
         }
 
         return $res;
+    }
+
+    protected function getYearLength($year)
+    {
+        return 365 + $this->calculator->isLeapYear($year);
     }
 }

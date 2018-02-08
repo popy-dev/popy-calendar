@@ -85,7 +85,7 @@ class TimeOffset implements UnixTimeConverterInterface
             // Usually, $timestamp += $this->dayLengthInSeconds should be enougth,
             // but for dates before 1900-01-01 timezones fallback to LMT that
             // we are trying to skip.
-            max(0, $timestamp += $this->dayLengthInSeconds)
+            max(0, $timestamp = $this->dayLengthInSeconds)
         );
 
         // DateTimeZone

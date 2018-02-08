@@ -136,8 +136,7 @@ class DateSolar implements UnixTimeConverterInterface
         $year = $input->getYear();
         $dayIndex = $input->getDayIndex();
 
-        // Todo : fix that where first year isn't 1 !
-        $sign = $year < 1 ? -1 : 1;
+        $sign = $year < $this->firstYear ? -1 : 1;
 
         for ($i=min($year, $this->firstYear); $i < max($year, $this->firstYear); $i++) {
             $dayIndex += $sign * $this->getYearLength($i);

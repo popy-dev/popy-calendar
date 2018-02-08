@@ -76,8 +76,6 @@ abstract class AbstractDatePartsSolarSplitter implements UnixTimeConverterInterf
         $dateParts = $input->getDateParts();
         $fragmentSizes = $this->getAllFragmentSizes($input);
 
-        var_dump($input);
-
         foreach ($dateParts->all() as $index => $value) {
             $value = (int)$value;
             if (!isset($fragmentSizes[$index])) {
