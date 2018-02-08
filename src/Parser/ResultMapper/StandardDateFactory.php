@@ -10,7 +10,7 @@ use Popy\Calendar\ValueObject\DateRepresentation\Standard;
 /**
  * Builds a standard gregorian date representation (to initialize a mapper chain)
  */
-class GregorianDateFactory implements ResultMapperInterface
+class StandardDateFactory implements ResultMapperInterface
 {
     /**
      * @inheritDoc

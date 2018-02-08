@@ -6,8 +6,6 @@ use Popy\Calendar\Calendar\ComposedCalendar;
 use Popy\Calendar\Converter\AgnosticConverter;
 use Popy\Calendar\Converter\UnixTimeConverter;
 use Popy\Calendar\Converter\LeapYearCalculator;
-use Popy\Calendar\Converter\DatePartsConverter;
-use Popy\Calendar\Converter\TimeConverter\DuoDecimalTime;
 use Popy\Calendar\Formater\Localisation;
 use Popy\Calendar\Formater\SymbolFormater;
 use Popy\Calendar\Formater\AgnosticFormater;
@@ -32,7 +30,7 @@ class GregorianCalendarFactory
         $locale = new Localisation\NativeHardcoded();
 
         $converter = new AgnosticConverter(new UnixTimeConverter\Chain([
-            new UnixTimeConverter\GregorianDateFactory(),
+            new UnixTimeConverter\StandardDateFactory(),
             new UnixTimeConverter\Date(),
             new UnixTimeConverter\TimeOffset(),
             new UnixTimeConverter\DateSolar($calc, 0),
@@ -58,7 +56,7 @@ class GregorianCalendarFactory
         );
 
         $mappers = new ResultMapper\Chain([
-            new ResultMapper\GregorianDateFactory(),
+            new ResultMapper\StandardDateFactory(),
             new ResultMapper\StandardDate(),
             new ResultMapper\StandardDateFragmented(),
             new ResultMapper\StandardDateSolar(),

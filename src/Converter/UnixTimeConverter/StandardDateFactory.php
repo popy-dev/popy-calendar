@@ -10,7 +10,7 @@ use Popy\Calendar\ValueObject\DateRepresentation\Standard;
  * Instanciates a Gregorian date representation to initialize a Conversion->to
  * property. Has to be (one of) the first element in a chain.
  */
-class GregorianDateFactory implements UnixTimeConverterInterface
+class StandardDateFactory implements UnixTimeConverterInterface
 {
     /**
      * @inheritDoc

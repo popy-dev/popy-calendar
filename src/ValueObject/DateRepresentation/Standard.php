@@ -7,7 +7,10 @@ use Popy\Calendar\ValueObject\DateSolarRepresentationInterface;
 use Popy\Calendar\ValueObject\DateFragmentedRepresentationInterface;
 
 /**
- * "Standard" time representation (like Gregorian calendar)
+ * "Standard" time representation (like Gregorian calendar) :
+ * - is a solar date
+ * - has date parts (monthes) and transversals (weekyear, weekindex, day of week)
+ * - as time (hour, minute, seconds, milliseconds, microseconds)
  */
 class Standard extends AbstractDate implements DateTimeRepresentationInterface, DateSolarRepresentationInterface, DateFragmentedRepresentationInterface
 {

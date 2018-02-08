@@ -4,8 +4,10 @@ namespace Popy\Calendar\Calendar;
 
 use DateTimeZone;
 use DateTimeImmutable;
+use RunetimeException;
 use DateTimeInterface;
 use Popy\Calendar\CalendarInterface;
+use Popy\Calendar\ValueObject\DateRepresentationInterface;
 
 /**
  * Basic GregorianCalendar implementation using native php formating.
@@ -18,6 +20,14 @@ class GregorianCalendar implements CalendarInterface
     public function format(DateTimeInterface $input, $format)
     {
         return $input->format($format);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function formatDateRepresentation(DateRepresentationInterface $input, $format)
+    {
+        throw new RunetimeException('NIY');
     }
 
     /**
