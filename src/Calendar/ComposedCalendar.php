@@ -7,6 +7,7 @@ use DateTimeInterface;
 use Popy\Calendar\CalendarInterface;
 use Popy\Calendar\FormaterInterface;
 use Popy\Calendar\ParserInterface;
+use Popy\Calendar\ValueObject\DateRepresentationInterface;
 
 /**
  * Composition implementation.
@@ -45,6 +46,14 @@ class ComposedCalendar implements CalendarInterface
     public function format(DateTimeInterface $input, $format)
     {
         return $this->formater->format($input, $format);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function formatDateRepresentation(DateRepresentationInterface $input, $format)
+    {
+        return $this->formater->formatDateRepresentation($input, $format);
     }
 
     /**

@@ -21,13 +21,37 @@ class Iso8601Weeks implements UnixTimeConverterInterface
     protected $calculator;
 
     /**
+     * First year number.
+     *
+     * @var integer
+     */
+    protected $firstYear = 1970;
+
+    /**
+     * First day of first year weekday index. 1970 started a thursday.
+     *
+     * @var integer
+     */
+    protected $firstYearDayIndex = 3;
+
+    /**
      * Class constructor.
      *
-     * @param LeapYearCalculatorInterface $calculator Leap year calculator.
+     * @param LeapYearCalculatorInterface $calculator         Leap year calculator.
+     * @param integer|null                $firstYear          First year of era / reference year.
+     * @param integer|null                $firstYearDayIndex  First day of first year weekday index.
      */
-    public function __construct(LeapYearCalculatorInterface $calculator)
+    public function __construct(LeapYearCalculatorInterface $calculator, $firstYear = null, $firstYearDayIndex = null)
     {
         $this->calculator = $calculator;
+
+        if (null !== $firstYear) {
+            $this->firstYear = $firstYear;
+        }
+
+        if (null !== $firstYearDayIndex) {
+            $this->firstYearDayIndex = $firstYearDayIndex;
+        }
     }
 
     /**
@@ -46,7 +70,7 @@ class Iso8601Weeks implements UnixTimeConverterInterface
 
         $year = $input->getYear();
         // Assuming the era starting year is 1970, it starts a Thursday.
-        $dayOfWeek = ($input->getEraDayIndex() + 3) % 7;
+        $dayOfWeek = ($input->getEraDayIndex() + $this->firstYearDayIndex) % 7;
         $weekIndex = null;
 
         // Get day yearl-index of the same week thursday
@@ -111,7 +135,7 @@ class Iso8601Weeks implements UnixTimeConverterInterface
         $startingEraDayIndex = $this->calcEraDayIndexFromYear($year);
 
         // DoW of the first day of year
-        $dow = ($startingEraDayIndex + 3) % 7;
+        $dow = ($startingEraDayIndex + $this->firstYearDayIndex) % 7;
 
         // walk until first thursday
         $eraDayIndex = $startingEraDayIndex + (10 - $dow) % 7;
@@ -148,7 +172,8 @@ class Iso8601Weeks implements UnixTimeConverterInterface
     {
         $res = 0;
 
-        for ($i=1970; $i < $year; $i++) {
+        // TODO Fix that for years beofre firstYear !
+        for ($i=$this->firstYear; $i < $year; $i++) {
             $res += 365 + $this->calculator->isLeapYear($i);
         }
 
