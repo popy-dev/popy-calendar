@@ -55,6 +55,8 @@ class Iso8601Weeks implements UnixTimeConverterInterface
         if ($thursdayIndex >= 365 + $input->isLeapYear()) {
             $year++;
             $weekIndex = 0;
+
+            $thursdayIndex -= 365 + $input->isLeapYear();
         } else {
             if ($thursdayIndex < 0) {
                 $year--;
@@ -122,7 +124,7 @@ class Iso8601Weeks implements UnixTimeConverterInterface
 
         if ($dayIndex < 0) {
             $isLeapYear = $this->calculator->isLeapYear(--$year);
-            $eraDayIndex -= 365 + $isLeapYear;
+            $eraDayIndex += 365 + $isLeapYear;
             $dayIndex = $eraDayIndex - $startingEraDayIndex;
         } else {
             $yl = 365 + $isLeapYear;
@@ -146,7 +148,7 @@ class Iso8601Weeks implements UnixTimeConverterInterface
     {
         $res = 0;
 
-        for ($i=1970; $i <= $year; $i++) { 
+        for ($i=1970; $i < $year; $i++) { 
             $res += 365 + $this->calculator->isLeapYear($i);
         }
 

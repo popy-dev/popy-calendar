@@ -30,7 +30,7 @@ class StandardDateFragmented implements ResultMapperInterface
             ])
             ->withTransversals([
                 $parts->get('o') === null ? null : (int)$parts->get('o'),
-                $parts->get('W') === null ? null : (int)$parts->get('W'),
+                $this->determineWeekIndex($parts),
                 $this->determineDayOfWeek($parts),
             ])
         ;
@@ -96,5 +96,21 @@ class StandardDateFragmented implements ResultMapperInterface
         if (null !== $w = $parts->get('w')) {
             return ((int)$w + 6) % 7;
         }
+    }
+
+    /**
+     * Determine ISO week index from iso week number.
+     *
+     * @param DateLexerResult $parts
+     *
+     * @return integer|null
+     */
+    protected function determineWeekIndex(DateLexerResult $parts)
+    {
+        if (null === $w = $parts->get('W')) {
+            return;
+        }
+
+        return intval($w) - 1;
     }
 }

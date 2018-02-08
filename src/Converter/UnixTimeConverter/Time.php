@@ -123,7 +123,6 @@ class Time implements UnixTimeConverterInterface
             $time = intval($time / $this->ranges[$i]);
         }
 
-
         return new TimeObject($res, $this->ranges, $ratio);
     }
 
@@ -143,7 +142,7 @@ class Time implements UnixTimeConverterInterface
             !$time->countMeaningfull()
             && null !== $ratio = $time->getRatio()
         ) {
-            return $ratio * $microsecPerDay;
+            return $ratio * $this->dayLengthInSeconds;
         } 
 
         $len = count($this->ranges);
