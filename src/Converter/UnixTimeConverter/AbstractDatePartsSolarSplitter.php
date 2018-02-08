@@ -76,14 +76,15 @@ abstract class AbstractDatePartsSolarSplitter implements UnixTimeConverterInterf
         $dateParts = $input->getDateParts();
         $fragmentSizes = $this->getAllFragmentSizes($input);
 
-        foreach ($parts->all() as $index => $value) {
+        foreach ($dateParts->all() as $index => $value) {
+            $value = (int)$value;
             if (!isset($fragmentSizes[$index])) {
                 // No available size means we reached the final fragment
                 $dayIndex += $value;
                 break;
             }
 
-            if (!isset($fragmentSizes[$index][(int)$value])) {
+            if (!isset($fragmentSizes[$index][$value - 1])) {
                 throw new OutOfBoundsException(sprintf(
                     '%s is an index too big for fragment #%s',
                     $value,
@@ -91,10 +92,15 @@ abstract class AbstractDatePartsSolarSplitter implements UnixTimeConverterInterf
                 ));
             }
 
-            $dayIndex += $fragmentSizes[$index][(int)$value];
+            for ($i=0; $i < $value; $i++) { 
+                $dayIndex += $fragmentSizes[$index][$i];
+            }
         }
 
-        $conversion->setTo($input->withDayIndex($dayIndex));
+        $conversion->setTo($input->withDayIndex(
+            $dayIndex,
+            $input->getEraDayIndex()
+        ));
     }
 
     /**

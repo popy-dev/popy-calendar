@@ -42,7 +42,7 @@ class TimeOffset
      * @param boolean|null $dst          Day saving time status.
      * @param string|null  $abbreviation Offset abbreviation.
      */
-    public function __construct($value, $dst, $abbreviation)
+    public function __construct($value = null, $dst = null, $abbreviation = null)
     {
         $this->value        = $value;
         $this->dst          = $dst;

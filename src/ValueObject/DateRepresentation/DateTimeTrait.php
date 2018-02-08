@@ -21,7 +21,7 @@ trait DateTimeTrait
      */
     public function getTime()
     {
-        return $this->time;
+        return $this->time ?: new Time();
     }
 
     /**

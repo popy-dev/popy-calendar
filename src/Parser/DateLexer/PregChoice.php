@@ -42,7 +42,7 @@ class PregChoice extends AbstractPreg
 
         $parts = [];
         foreach ($choices as $part) {
-            $parts[] = '(?:' . preg_quote($part) . ')';
+            $parts[] = '(?:' . preg_quote($part, '/') . ')';
         }
 
         $this->expression = '(' . implode('|', $parts) . ')';
@@ -72,7 +72,7 @@ class PregChoice extends AbstractPreg
             // DO THE MAGIC
             if ($found === null) {
                 $res = preg_grep(
-                    '/^' . preg_quote($match[$offset][0]) . '$/i',
+                    '/^' . preg_quote($match[$offset][0], '/4') . '$/i',
                     $this->choices
                 );
 

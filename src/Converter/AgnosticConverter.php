@@ -58,8 +58,8 @@ class AgnosticConverter implements ConverterInterface
 
         $timestamp = sprintf(
             '%d.%06d UTC',
-            $converter->getUnixTime(),
-            $converter->getUnixMicroTime()
+            $conversion->getUnixTime(),
+            $conversion->getUnixMicroTime()
         );
 
         return DateTimeImmutable::createFromFormat('U.u e', $timestamp)

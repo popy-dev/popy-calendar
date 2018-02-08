@@ -60,7 +60,7 @@ abstract class AbstractDate implements DateRepresentationInterface
      */
     public function getOffset()
     {
-        return $this->offset;
+        return $this->offset ?: new TimeOffset();
     }
 
     /**
@@ -68,7 +68,7 @@ abstract class AbstractDate implements DateRepresentationInterface
      */
     public function getTimezone()
     {
-        return $this->timezone;
+        return $this->timezone ?: new DateTimeZone(date_default_timezone_get());
     }
 
     /**

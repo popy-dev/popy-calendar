@@ -5,6 +5,9 @@ namespace Popy\Calendar\ValueObject\DateRepresentation;
 use DateTimeInterface;
 use Popy\Calendar\ValueObject\TimeOffset;
 
+/**
+ * DateTimeINterface decorator.
+ */
 class DateTimeInterfaceWrapper extends AbstractDate
 {
     /**

@@ -44,7 +44,7 @@ class PregSimple extends AbstractPreg
     public function __construct(FormatToken $token, $pattern = null)
     {
         if ($token->isLitteral()) {
-            $this->expression = preg_quote($token->getValue());
+            $this->expression = preg_quote($token->getValue(), '/');
             return;
         }
 

@@ -54,10 +54,12 @@ class Chain implements ResultMapperInterface
     /**
      * @inheritDoc
      */
-    public function map(DateLexerResult $parts, DateRepresentationInterface $date = null)
+    public function map(DateLexerResult $parts, DateRepresentationInterface $date)
     {
         foreach ($this->mappers as $mapper) {
-            $date = $mapper->map($parts, $date);
+            if (null === $date = $mapper->map($parts, $date)) {
+                return;
+            }
         }
 
         return $date;

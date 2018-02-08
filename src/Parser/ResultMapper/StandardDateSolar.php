@@ -15,7 +15,7 @@ class StandardDateSolar implements ResultMapperInterface
     /**
      * @inheritDoc
      */
-    public function map(DateLexerResult $parts, DateRepresentationInterface $date = null)
+    public function map(DateLexerResult $parts, DateRepresentationInterface $date)
     {
         if (!$date instanceof DateSolarRepresentationInterface) {
             return;

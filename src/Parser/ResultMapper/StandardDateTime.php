@@ -2,7 +2,6 @@
 
 namespace Popy\Calendar\Parser\ResultMapper;
 
-use Popy\Calendar\ValueObject\DateParts;
 use Popy\Calendar\Parser\DateLexerResult;
 use Popy\Calendar\Parser\ResultMapperInterface;
 use Popy\Calendar\ValueObject\DateRepresentationInterface;
@@ -16,7 +15,7 @@ class StandardDateTime implements ResultMapperInterface
     /**
      * @inheritDoc
      */
-    public function map(DateLexerResult $parts, DateRepresentationInterface $date = null)
+    public function map(DateLexerResult $parts, DateRepresentationInterface $date)
     {
         if (!$date instanceof DateTimeRepresentationInterface) {
             return;
@@ -55,7 +54,7 @@ class StandardDateTime implements ResultMapperInterface
         return $value === null ? null : (int)$value;
     }
 
-    protected function determineAmPm(DateParts $parts)
+    protected function determineAmPm(DateLexerResult $parts)
 {
         // a   Lowercase Ante meridiem and Post meridiem   am or pm
         // A   Uppercase Ante meridiem and Post meridiem   AM or PM

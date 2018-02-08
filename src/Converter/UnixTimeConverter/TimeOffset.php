@@ -6,6 +6,7 @@ use DateTimeImmutable;
 use Popy\Calendar\Converter\Conversion;
 use Popy\Calendar\ValueObject\TimeOffset as TimeOffsetValue;
 use Popy\Calendar\Converter\UnixTimeConverterInterface;
+use Popy\Calendar\ValueObject\DateRepresentationInterface;
 
 /**
  * Determines dates offset and applies it to unixTime.

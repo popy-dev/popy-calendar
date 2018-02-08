@@ -16,9 +16,9 @@ class StandardDateFragmented implements ResultMapperInterface
     /**
      * @inheritDoc
      */
-    public function map(DateLexerResult $parts, DateRepresentationInterface $date = null)
+    public function map(DateLexerResult $parts, DateRepresentationInterface $date)
     {
-        if (!$data instanceof DateFragmentedRepresentationInterface) {
+        if (!$date instanceof DateFragmentedRepresentationInterface) {
             return;
         }
 

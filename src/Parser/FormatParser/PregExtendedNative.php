@@ -9,7 +9,7 @@ use Popy\Calendar\Parser\FormatParserInterface;
 use Popy\Calendar\Parser\SymbolParserInterface;
 use Popy\Calendar\Parser\DateLexer\PregSimple;
 use Popy\Calendar\Parser\DateLexer\PregCollection;
-use Popy\Calendar\Parser\SymbolParser\NativeFormatPregMatch;
+use Popy\Calendar\Parser\SymbolParser\PregNative;
 
 /**
  * Preg based implementation of the native DateTimeInterface format, with an
@@ -31,7 +31,7 @@ class PregExtendedNative implements FormatParserInterface
     public function __construct(FormatLexerInterface $lexer = null, SymbolParserInterface $symbolParser = null)
     {
         $this->lexer = $lexer ?: new MbString();
-        $this->symbolParser = $symbolParser ?: new NativeFormatPregMatch();
+        $this->symbolParser = $symbolParser ?: new PregNative();
     }
 
     /**

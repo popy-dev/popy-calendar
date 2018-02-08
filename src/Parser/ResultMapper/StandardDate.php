@@ -16,15 +16,11 @@ class StandardDate implements ResultMapperInterface
     /**
      * @inheritDoc
      */
-    public function map(DateLexerResult $parts, DateRepresentationInterface $date = null)
+    public function map(DateLexerResult $parts, DateRepresentationInterface $date)
     {
-        if (null === $date) {
-            return;
-        }
+        $offset = $this->determineOffset($parts, $date->getOffset());
 
-        $offset = $this->determineOffset($parts, $date->getTimeOffset());
-
-        return $data
+        return $date
             // SI Units
             // U   Seconds since the Unix Epoch (January 1 1970 00:00:00 GMT)
             // u   Microseconds
