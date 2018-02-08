@@ -89,5 +89,4 @@ class SimpleWeeks implements UnixTimeConverterInterface
 
         $conversion->setTo($input);
     }
-
 }

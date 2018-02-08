@@ -27,7 +27,7 @@ class GregorianCalendar implements CalendarInterface
      */
     public function formatDateRepresentation(DateRepresentationInterface $input, $format)
     {
-        throw new RunetimeException('NIY');
+        throw new RunetimeException('Not implemented');
     }
 
     /**

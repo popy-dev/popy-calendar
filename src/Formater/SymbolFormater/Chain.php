@@ -37,7 +37,12 @@ class Chain implements SymbolFormaterInterface
      */
     public function addFormater(SymbolFormaterInterface $formater)
     {
-        $this->formaters[] = $formater;
+        if ($formater instanceof self) {
+            // Reducing recursivity
+            $this->addFormaters($formater->formaters);
+        } else {
+            $this->formaters[] = $formater;
+        }
 
         return $this;
     }

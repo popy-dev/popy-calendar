@@ -6,6 +6,7 @@ use DateTimeZone;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Popy\Calendar\CalendarInterface;
+use Popy\Calendar\ValueObject\DateRepresentationInterface;
 
 /**
  * Simple implementation of the Warhammer 40k Imperial calendar.
@@ -44,6 +45,14 @@ class MankindImperialCalendar implements CalendarInterface
             $year,
             $millenium
         );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function formatDateRepresentation(DateRepresentationInterface $input, $format)
+    {
+        throw new RunetimeException('Not implemented');
     }
 
     /**

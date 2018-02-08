@@ -13,6 +13,7 @@ use Popy\Calendar\Parser\AgnosticParser;
 use Popy\Calendar\Parser\ResultMapper;
 use Popy\Calendar\Parser\FormatLexer;
 use Popy\Calendar\Parser\FormatParser;
+use Popy\Calendar\Parser\SymbolParser;
 
 class ConfigurableFactory
 {
@@ -73,35 +74,21 @@ class ConfigurableFactory
         $options['leap'] = $this->buildLeapCalculator($options);
         $options['locale'] = $this->buildLocale($options);
 
-        $options['converter'] = new AgnosticConverter(new UnixTimeConverter\Chain([
-            new UnixTimeConverter\StandardDateFactory(),
-            new UnixTimeConverter\Date(),
-            new UnixTimeConverter\TimeOffset(),
-            $this->buildSolar($options),
-            $this->buildMonthes($options),
-            $this->buildWeek($options),
-            $this->buildTime($options),
-        ]));
+        $options['converter'] = $this->buildConverter($options);
 
         $options['symbol_formater'] = $this->buildSymbolFormater($options);
 
         $options['lexer'] = $this->buildLexer($options);
 
-        $options['formater'] = new AgnosticFormater(
-            $options['lexer'],
-            $options['converter'],
-            $options['symbol_formater']
-        );
+        $options['formater'] = $this->buildFormater($options);
 
         $options['mapper'] = $this->buildMapper($options);
 
+        $options['symbol_parser'] = $this->buildSymbolParser($options);
+
         $options['format_parser'] = $this->buildFormatParser($options);
 
-        $options['parser'] = new AgnosticParser(
-            $options['format_parser'],
-            $options['mapper'],
-            $options['converter']
-        );
+        $options['parser'] = $this->buildParser($options);
 
         return new ComposedCalendar($options['formater'], $options['parser']);
     }
@@ -139,6 +126,19 @@ class ConfigurableFactory
         }
 
         return new $locale();
+    }
+
+    public function buildConverter(array &$options)
+    {
+        return new AgnosticConverter(new UnixTimeConverter\Chain([
+            new UnixTimeConverter\StandardDateFactory(),
+            new UnixTimeConverter\Date(),
+            new UnixTimeConverter\TimeOffset(),
+            $this->buildSolar($options),
+            $this->buildMonthes($options),
+            $this->buildWeek($options),
+            $this->buildTime($options),
+        ]));
     }
 
     protected function buildSolar(array &$options)
@@ -202,7 +202,7 @@ class ConfigurableFactory
         }
 
         if ($week === UnixTimeConverter\SimpleWeeks::class) {
-            return new $week($options['leap'], $this->getOptionValue($options, 'week_length'));
+            return new $week($this->getOptionValue($options, 'week_length'));
         }
 
         return new UnixTimeConverter\Iso8601Weeks(
@@ -229,6 +229,15 @@ class ConfigurableFactory
         return new FormatLexer\MbString();
     }
 
+    protected function buildFormater(array &$options)
+    {
+        return new AgnosticFormater(
+            $options['lexer'],
+            $options['converter'],
+            $options['symbol_formater']
+        );
+    }
+
     protected function buildMapper(array &$options)
     {
         return new ResultMapper\Chain([
@@ -240,9 +249,26 @@ class ConfigurableFactory
         ]);
     }
 
+    protected function buildSymbolParser(array &$options)
+    {
+        return new SymbolParser\PregNative($options['locale']);
+    }
+
     protected function buildFormatParser(array &$options)
     {
-        return new FormatParser\PregExtendedNative();
+        return new FormatParser\PregExtendedNative(
+            $options['lexer'],
+            $options['symbol_parser']
+        );
+    }
+
+    protected function buildParser(array &$options)
+    {
+        return new AgnosticParser(
+            $options['format_parser'],
+            $options['mapper'],
+            $options['converter']
+        );
     }
 
     protected function getOptionValue(array $options, $name, $default = null)

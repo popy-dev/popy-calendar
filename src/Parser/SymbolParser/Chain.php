@@ -39,7 +39,12 @@ class Chain implements SymbolParserInterface
      */
     public function addParser(SymbolParserInterface $parser)
     {
-        $this->parsers[] = $parser;
+        if ($parser instanceof self) {
+            // Reducing recursivity
+            $this->addParsers($parser->parsers);
+        } else {
+            $this->parsers[] = $parser;
+        }
     
         return $this;
     }

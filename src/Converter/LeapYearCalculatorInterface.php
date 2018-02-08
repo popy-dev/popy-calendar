@@ -38,7 +38,7 @@ interface LeapYearCalculatorInterface
      * Gets year & dayIndex (in that year) from an eraDayIndex
      *
      * @param integer $eraDayindex
-     * 
+     *
      * @return array [$year, $dayIndex]
      */
     public function getYearAndDayIndexFromErayDayIndex($eraDayIndex);
