@@ -28,16 +28,16 @@ class GregorianCalendarFactory
      */
     public function build()
     {
-        $calc = new LeapYearCalculator\Modern();
+        $calc = new LeapYearCalculator\Modern(365, 1970);
         $locale = new Localisation\NativeHardcoded();
 
         $converter = new AgnosticConverter(new UnixTimeConverter\Chain([
             new UnixTimeConverter\GregorianDateFactory(),
             new UnixTimeConverter\Date(),
             new UnixTimeConverter\TimeOffset(),
-            new UnixTimeConverter\DateSolar($calc, 0, 1970),
+            new UnixTimeConverter\DateSolar($calc, 0),
             new UnixTimeConverter\GregorianCalendarMonthes($calc),
-            new UnixTimeConverter\Iso8601Weeks($calc, 1970, 3),
+            new UnixTimeConverter\Iso8601Weeks($calc, 3),
             new UnixTimeConverter\Time(),
         ]));
 

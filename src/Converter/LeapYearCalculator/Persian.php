@@ -2,14 +2,12 @@
 
 namespace Popy\Calendar\Converter\LeapYearCalculator;
 
-use Popy\Calendar\Converter\LeapYearCalculatorInterface;
-
 /**
  * Persian / Solar Hijri leap year calculator.
  *
  * @link https://en.wikipedia.org/wiki/Solar_Hijri_calendar#Solar_Hijri_algorithmic_calendar
  */
-class Persian implements LeapYearCalculatorInterface
+class Persian extends AbstractCalculator
 {
     /**
      * @inheritDoc

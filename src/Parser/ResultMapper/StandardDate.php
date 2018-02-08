@@ -37,7 +37,15 @@ class StandardDate implements ResultMapperInterface
         ;
     }
 
-    // Todo : get original offset ?
+    /**
+     * Determine date's offset value/dst/abbrevaition from lexer result,
+     * overriding only if a value is found.
+     *
+     * @param DateLexerResult $parts  Lexer result.
+     * @param TimeOffset      $offset Current date offset.
+     *
+     * @return TimeOffset
+     */
     protected function determineOffset(DateLexerResult $parts, TimeOffset $offset)
     {
         // Z   Timezone offset in seconds.

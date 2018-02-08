@@ -2,12 +2,10 @@
 
 namespace Popy\Calendar\Converter\LeapYearCalculator;
 
-use Popy\Calendar\Converter\LeapYearCalculatorInterface;
-
 /**
  * Von Madler implementation (because why not being wrong in a funny way).
  */
-class VonMadler implements LeapYearCalculatorInterface
+class VonMadler extends AbstractCalculator
 {
     /**
      * @inheritDoc

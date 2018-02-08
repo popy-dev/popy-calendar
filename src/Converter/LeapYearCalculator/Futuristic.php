@@ -2,13 +2,11 @@
 
 namespace Popy\RepublicanCalendar\LeapYearCalculator;
 
-use Popy\Calendar\Converter\LeapYearCalculatorInterface;
-
 /**
  * Futuristic leap day implementation, more precise than the modern one,
  * but not officially used.
  */
-class Futuristic implements LeapYearCalculatorInterface
+class Futuristic extends AbstractCalculator
 {
     /**
      * @inheritDoc

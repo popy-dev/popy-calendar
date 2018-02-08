@@ -4,8 +4,6 @@ namespace Popy\Calendar\Converter;
 
 /**
  * Leap year calculator.
- *
- * Todo : provide another method calculating the number of leaps occured sinceyear
  */
 interface LeapYearCalculatorInterface
 {
@@ -17,4 +15,31 @@ interface LeapYearCalculatorInterface
      * @return boolean
      */
     public function isLeapYear($year);
+
+    /**
+     * Determines year length, in days.
+     *
+     * @param integer $year
+     *
+     * @return integer
+     */
+    public function getYearLength($year);
+
+    /**
+     * Get year's first day index (since the start of the era).
+     *
+     * @param integer $year
+     *
+     * @return integer
+     */
+    public function getYearEraDayIndex($year);
+
+    /**
+     * Gets year & dayIndex (in that year) from an eraDayIndex
+     *
+     * @param integer $eraDayindex
+     * 
+     * @return array [$year, $dayIndex]
+     */
+    public function getYearAndDayIndexFromErayDayIndex($eraDayIndex);
 }

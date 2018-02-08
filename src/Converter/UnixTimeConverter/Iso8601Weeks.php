@@ -21,13 +21,6 @@ class Iso8601Weeks implements UnixTimeConverterInterface
     protected $calculator;
 
     /**
-     * First year number.
-     *
-     * @var integer
-     */
-    protected $firstYear = 1970;
-
-    /**
      * First day of first year weekday index. 1970 started a thursday.
      *
      * @var integer
@@ -38,16 +31,11 @@ class Iso8601Weeks implements UnixTimeConverterInterface
      * Class constructor.
      *
      * @param LeapYearCalculatorInterface $calculator         Leap year calculator.
-     * @param integer|null                $firstYear          First year of era / reference year.
      * @param integer|null                $firstYearDayIndex  First day of first year weekday index.
      */
-    public function __construct(LeapYearCalculatorInterface $calculator, $firstYear = null, $firstYearDayIndex = null)
+    public function __construct(LeapYearCalculatorInterface $calculator, $firstYearDayIndex = null)
     {
         $this->calculator = $calculator;
-
-        if (null !== $firstYear) {
-            $this->firstYear = $firstYear;
-        }
 
         if (null !== $firstYearDayIndex) {
             $this->firstYearDayIndex = $firstYearDayIndex;
@@ -82,16 +70,16 @@ class Iso8601Weeks implements UnixTimeConverterInterface
         // Get day yearl-index of the same week thursday
         $thursdayIndex = $input->getDayIndex() + 3 - $dayOfWeek;
 
-        if ($thursdayIndex >= 365 + $input->isLeapYear()) {
+        if ($thursdayIndex >= $this->calculator->getYearLength($year)) {
             $year++;
             $weekIndex = 0;
 
-            $thursdayIndex -= 365 + $input->isLeapYear();
+            $thursdayIndex -= $this->calculator->getYearLength($year);
         } else {
             if ($thursdayIndex < 0) {
                 $year--;
                 $thursdayIndex =
-                    365 + $this->calculator->isLeapYear($year)
+                    $this->calculator->getYearLength($year)
                     + $thursdayIndex
                 ;
             }
@@ -135,9 +123,7 @@ class Iso8601Weeks implements UnixTimeConverterInterface
             return;
         }
 
-        $isLeapYear = $this->calculator->isLeapYear($year);
-
-        $startingEraDayIndex = $this->calcEraDayIndexFromYear($year);
+        $startingEraDayIndex = $this->calculator->getYearEraDayIndex($year);
 
         // DoW of the first day of year
         $dow = ($startingEraDayIndex + $this->firstYearDayIndex) % 7;
@@ -152,18 +138,20 @@ class Iso8601Weeks implements UnixTimeConverterInterface
         $dayIndex = $eraDayIndex - $startingEraDayIndex;
 
         if ($dayIndex < 0) {
-            $isLeapYear = $this->calculator->isLeapYear(--$year);
-            $eraDayIndex += 365 + $isLeapYear;
+            $year--;
+            $eraDayIndex += $this->calculator->getYearLength($year);
             $dayIndex = $eraDayIndex - $startingEraDayIndex;
         } else {
-            $yl = 365 + $isLeapYear;
+            $yl = $this->calculator->getYearLength($year);
 
             if ($dayIndex >= $yl) {
-                $isLeapYear = $this->calculator->isLeapYear(++$year);
+                $year++;
                 $dayIndex -= $yl;
                 $eraDayIndex += $yl;
             }
         }
+
+        $isLeapYear = $this->calculator->isLeapYear($year);
 
         $input = $input
             ->withYear($year, $isLeapYear)
@@ -171,23 +159,5 @@ class Iso8601Weeks implements UnixTimeConverterInterface
         ;
 
         $conversion->setTo($input);
-    }
-
-    protected function calcEraDayIndexFromYear($year)
-    {
-        $res = 0;
-
-        $sign = $year < $this->firstYear ? -1 : 1;
-
-        for ($i=min($year, $this->firstYear); $i < max($year, $this->firstYear); $i++) {
-            $res += $sign * $this->getYearLength($i);
-        }
-
-        return $res;
-    }
-
-    protected function getYearLength($year)
-    {
-        return 365 + $this->calculator->isLeapYear($year);
     }
 }

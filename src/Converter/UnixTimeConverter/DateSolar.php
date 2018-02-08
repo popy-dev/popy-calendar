@@ -10,8 +10,8 @@ use Popy\Calendar\ValueObject\DateSolarRepresentationInterface;
 /**
  * Handles DateSolarRepresentationInterface.
  *
- * The eraDayIndex is calculated using an "eraStart" reference date, then the
- * year is calculated from the $firstYear property.
+ * The eraDayIndex is calculated using an "eraStart" reference date. Year, year
+ * length and leap days calculations are delegated to a LeapYearCalculator.
  */
 class DateSolar implements UnixTimeConverterInterface
 {
@@ -21,20 +21,6 @@ class DateSolar implements UnixTimeConverterInterface
      * @var integer
      */
     protected $eraStart;
-
-    /**
-     * First year number.
-     *
-     * @var integer
-     */
-    protected $firstYear = 1;
-
-    /**
-     * Regular year duration, in days.
-     *
-     * @var integer
-     */
-    protected $yearLengthInDays = 365;
 
     /**
      * Day length in seconds.
@@ -55,22 +41,12 @@ class DateSolar implements UnixTimeConverterInterface
      *
      * @param LeapYearCalculatorInterface $calculator         Leap year calculator.
      * @param integer                     $eraStart           Era start unix time.
-     * @param integer|null                $firstYear          First year number.
-     * @param integer|null                $yearLengthInDays   Regular year duration, in days.
      * @param integer|null                $dayLengthInSeconds Day length in seconds.
      */
-    public function __construct(LeapYearCalculatorInterface $calculator, $eraStart, $firstYear = null, $yearLengthInDays = null, $dayLengthInSeconds = null)
+    public function __construct(LeapYearCalculatorInterface $calculator, $eraStart, $dayLengthInSeconds = null)
     {
         $this->calculator = $calculator;
         $this->eraStart   = $eraStart;
-
-        if (null !== $firstYear) {
-            $this->firstYear = $firstYear;
-        }
-
-        if (null !== $yearLengthInDays) {
-            $this->yearLengthInDays = $yearLengthInDays;
-        }
 
         if (null !== $dayLengthInSeconds) {
             $this->dayLengthInSeconds = $dayLengthInSeconds;
@@ -100,19 +76,9 @@ class DateSolar implements UnixTimeConverterInterface
             - $eraDayIndex * $this->dayLengthInSeconds
         );
 
-        $dayIndex = $eraDayIndex;
-        $year = $this->firstYear;
-
-        // Handling negative years
-        while ($dayIndex < 0) {
-            $dayIndex += $this->getYearLength(--$year);
-        }
-
-        // Positive years
-        while ($dayIndex >= $dayCount = $this->getYearLength($year)) {
-            $dayIndex -= $dayCount;
-            $year++;
-        }
+        list($year, $dayIndex) = $this->calculator
+            ->getYearAndDayIndexFromErayDayIndex($eraDayIndex)
+        ;
 
         $res = $res
             ->withYear($year, $this->calculator->isLeapYear($year))
@@ -134,22 +100,13 @@ class DateSolar implements UnixTimeConverterInterface
         }
 
         $year = $input->getYear();
-        $dayIndex = $input->getDayIndex();
-
-        $sign = $year < $this->firstYear ? -1 : 1;
-
-        for ($i=min($year, $this->firstYear); $i < max($year, $this->firstYear); $i++) {
-            $dayIndex += $sign * $this->getYearLength($i);
-        }
+        $eraDayIndex = $input->getDayIndex()
+            + $this->calculator->getYearEraDayIndex($year)
+        ;
 
         $conversion->setUnixTime(
             $conversion->getUnixTime() + $this->eraStart
-            + $dayIndex * $this->dayLengthInSeconds
+            + $eraDayIndex * $this->dayLengthInSeconds
         );
-    }
-
-    protected function getYearLength($year)
-    {
-        return $this->yearLengthInDays + $this->calculator->isLeapYear($year);
     }
 }
