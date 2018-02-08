@@ -71,7 +71,7 @@ class Time extends AbstractFragmentedDuration
     /**
      * Get time fragment minus half of the fragment size, if possible.
      * eg: would return 2 out of 14 on a 24 long fragment.
-     * 
+     *
      * @param integer $i Fragment index
      *
      * @return integer

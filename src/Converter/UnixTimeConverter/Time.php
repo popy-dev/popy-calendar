@@ -143,7 +143,7 @@ class Time implements UnixTimeConverterInterface
             && null !== $ratio = $time->getRatio()
         ) {
             return $ratio * $this->dayLengthInSeconds;
-        } 
+        }
 
         $len = count($this->ranges);
         $res = 0;

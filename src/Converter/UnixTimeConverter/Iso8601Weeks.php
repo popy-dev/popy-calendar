@@ -148,7 +148,7 @@ class Iso8601Weeks implements UnixTimeConverterInterface
     {
         $res = 0;
 
-        for ($i=1970; $i < $year; $i++) { 
+        for ($i=1970; $i < $year; $i++) {
             $res += 365 + $this->calculator->isLeapYear($i);
         }
 

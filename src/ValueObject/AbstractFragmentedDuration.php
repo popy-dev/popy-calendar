@@ -54,7 +54,7 @@ abstract class AbstractFragmentedDuration
         $res = [];
         $len = count($this->fragments);
 
-        for ($index=0; $index < $len; $index++) { 
+        for ($index=0; $index < $len; $index++) {
             $res[] = $this->get($index);
         }
 

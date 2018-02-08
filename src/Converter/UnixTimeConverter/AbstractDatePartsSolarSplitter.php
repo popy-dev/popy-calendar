@@ -92,7 +92,7 @@ abstract class AbstractDatePartsSolarSplitter implements UnixTimeConverterInterf
                 ));
             }
 
-            for ($i=0; $i < $value; $i++) { 
+            for ($i=0; $i < $value; $i++) {
                 $dayIndex += $fragmentSizes[$index][$i];
             }
         }

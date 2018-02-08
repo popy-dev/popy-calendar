@@ -60,7 +60,7 @@ class StandardDateFragmented implements ResultMapperInterface
      * Determine day (0 indexed).
      *
      * @param DateLexerResult $parts
-     * 
+     *
      * @return integer|null
      */
     protected function determineDay(DateLexerResult $parts)
@@ -76,7 +76,7 @@ class StandardDateFragmented implements ResultMapperInterface
      * Determine day of week (0 indexed, starts by monday)
      *
      * @param DateLexerResult $parts
-     * 
+     *
      * @return integer|null
      */
     protected function determineDayOfWeek(DateLexerResult $parts)

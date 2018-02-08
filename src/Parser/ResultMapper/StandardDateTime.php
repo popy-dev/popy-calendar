@@ -55,7 +55,7 @@ class StandardDateTime implements ResultMapperInterface
     }
 
     protected function determineAmPm(DateLexerResult $parts)
-{
+    {
         // a   Lowercase Ante meridiem and Post meridiem   am or pm
         // A   Uppercase Ante meridiem and Post meridiem   AM or PM
         if (null === $str = $parts->getFirst('a', 'A')) {
