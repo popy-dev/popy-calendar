@@ -45,6 +45,9 @@ $mars = $factory->build([
      *
      * This configuration will give 22 monthes of 30 days, with a complementary
      * month of 8/9 days.
+     *
+     * Other systems, like the one from Robert G. Aitken, would require a
+     * specific (yet simple) implementation of the month calculation.
      */
     'month' => 'equal_length',
     'month_length' => 30,
