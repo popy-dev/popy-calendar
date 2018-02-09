@@ -10,6 +10,8 @@ For instance, mars :
 ```php
 <?php
 
+require './vendor/autoload.php';
+
 use Popy\Calendar\Factory\ConfigurableFactory;
 
 $factory = new ConfigurableFactory();
