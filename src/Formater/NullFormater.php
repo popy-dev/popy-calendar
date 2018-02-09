@@ -23,4 +23,20 @@ class NullFormater implements FormaterInterface
     {
         return '';
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function formatUnixTime($input, $format)
+    {
+        return '';
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function formatMicrotime($input, $format)
+    {
+        return '';
+    }
 }

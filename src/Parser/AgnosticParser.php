@@ -3,9 +3,10 @@
 namespace Popy\Calendar\Parser;
 
 use DateTimeZone;
+use DateTimeImmutable;
 use Popy\Calendar\ParserInterface;
 use Popy\Calendar\ConverterInterface;
-use Popy\Calendar\ValueObject\DateRepresentation\DateTimeZoneWrapper;
+use Popy\Calendar\ValueObject\DateRepresentation\Date;
 
 class AgnosticParser implements ParserInterface
 {
@@ -28,13 +29,27 @@ class AgnosticParser implements ParserInterface
      */
     public function parse($input, $format, DateTimeZone $timezone = null)
     {
+        // Parsing
         $date = $this->parseToDateRepresentation($input, $format, $timezone);
+
+        // Converting back if needed/possible
+        if (null !== $date && null === $date->getUnixTime()) {
+            $date = $this->converter->from($date);
+        }
 
         if (null === $date) {
             return;
         }
 
-        return $this->converter->toDateTimeInterface($date);
+        $timestamp = sprintf(
+            '%d.%06d UTC',
+            $date->getUnixTime(),
+            $date->getUnixMicroTime()
+        );
+
+        return DateTimeImmutable::createFromFormat('U.u e', $timestamp)
+            ->setTimezone($date->getTimezone())
+        ;
     }
 
     /**
@@ -50,7 +65,7 @@ class AgnosticParser implements ParserInterface
             return;
         }
 
-        $date = new DateTimeZoneWrapper($timezone);
+        $date = Date::buildFromTimezone($timezone);
 
         if (null === $date = $this->mapper->map($parts, $date)) {
             return;

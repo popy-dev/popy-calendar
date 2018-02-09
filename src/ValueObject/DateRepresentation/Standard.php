@@ -12,7 +12,7 @@ use Popy\Calendar\ValueObject\DateFragmentedRepresentationInterface;
  * - has date parts (monthes) and transversals (weekyear, weekindex, day of week)
  * - as time (hour, minute, seconds, milliseconds, microseconds)
  */
-class Standard extends AbstractDate implements DateTimeRepresentationInterface, DateSolarRepresentationInterface, DateFragmentedRepresentationInterface
+class Standard extends Date implements DateTimeRepresentationInterface, DateSolarRepresentationInterface, DateFragmentedRepresentationInterface
 {
     use DateTimeTrait;
     use DateSolarTrait;

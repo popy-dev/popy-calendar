@@ -8,7 +8,7 @@ use Popy\Calendar\ValueObject\DateSolarRepresentationInterface;
 /**
  * Minimal implementatuon.
  */
-class SolarTime extends AbstractDate implements DateTimeRepresentationInterface, DateSolarRepresentationInterface
+class SolarTime extends Date implements DateTimeRepresentationInterface, DateSolarRepresentationInterface
 {
     use DateTimeTrait;
     use DateSolarTrait;

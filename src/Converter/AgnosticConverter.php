@@ -6,7 +6,7 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use Popy\Calendar\ConverterInterface;
 use Popy\Calendar\ValueObject\DateRepresentationInterface;
-use Popy\Calendar\ValueObject\DateRepresentation\DateTimeInterfaceWrapper;
+use Popy\Calendar\ValueObject\DateRepresentation\Date;
 
 /**
  * Agnostique date converter : relies on a list of UnixTimeConverterInterface.
@@ -36,11 +36,9 @@ class AgnosticConverter implements ConverterInterface
     /**
      * @inheritDoc
      */
-    public function fromDateTimeInterface(DateTimeInterface $input)
+    public function to(DateRepresentationInterface $input)
     {
-        $conversion = new Conversion(
-            new DateTimeInterfaceWrapper($input)
-        );
+        $conversion = new Conversion($input);
 
         $this->converter->fromUnixTime($conversion);
 
@@ -50,20 +48,12 @@ class AgnosticConverter implements ConverterInterface
     /**
      * @inheritDoc
      */
-    public function toDateTimeInterface(DateRepresentationInterface $input)
+    public function from(DateRepresentationInterface $input)
     {
         $conversion = new Conversion($input, $input);
 
         $this->converter->toUnixTime($conversion);
 
-        $timestamp = sprintf(
-            '%d.%06d UTC',
-            $conversion->getUnixTime(),
-            $conversion->getUnixMicroTime()
-        );
-
-        return DateTimeImmutable::createFromFormat('U.u e', $timestamp)
-            ->setTimezone($input->getTimezone())
-        ;
+        return Date::fromConversion($conversion);
     }
 }

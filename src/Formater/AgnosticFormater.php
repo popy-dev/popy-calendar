@@ -7,6 +7,7 @@ use Popy\Calendar\FormaterInterface;
 use Popy\Calendar\ConverterInterface;
 use Popy\Calendar\Parser\FormatLexerInterface;
 use Popy\Calendar\ValueObject\DateRepresentationInterface;
+use Popy\Calendar\ValueObject\DateRepresentation\Date;
 
 /**
  * Agnostic formater implementation.
@@ -53,9 +54,12 @@ class AgnosticFormater implements FormaterInterface
      */
     public function format(DateTimeInterface $input, $format)
     {
-        if (null === $date = $this->converter->fromDateTimeInterface($input)) {
+        $date = Date::buildFromDateTimeInterface($input);
+
+        if (null === $date = $this->converter->to($date)) {
             return;
         }
+
         return $this->formatDateRepresentation($date, $format);
     }
 
