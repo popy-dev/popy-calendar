@@ -41,4 +41,12 @@ class GregorianCalendar implements CalendarInterface
 
         return DateTimeImmutable::createFromFormat($format, $input) ?: null;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function parseToDateRepresentation($input, $format, DateTimeZone $timezone = null)
+    {
+        throw new RunetimeException('Not implemented');
+    }
 }

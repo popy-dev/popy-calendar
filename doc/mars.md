@@ -1,5 +1,5 @@
-Mars time
-=========
+PHP Calendar Library : Mars time
+================================
 
 Using this library, it is possible to build any planetary-star related calendar, which will work
 out-of box at the exception of the native locale which does not have enougth month names (but it's

@@ -99,5 +99,5 @@ var_dump($formater->parse('2017-05-01'));
 Other components
 ----------------
 
-* [Converter](doc/converter.md) (outdated)
-* Factory (coming soon)
+* [Factory](doc/factory.md)
+* [A Mars calendar ?](doc/mars.md)

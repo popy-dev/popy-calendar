@@ -83,4 +83,12 @@ class MankindImperialCalendar implements CalendarInterface
 
         return $res->modify('+' . $seconds . 'seconds');
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function parseToDateRepresentation($input, $format, DateTimeZone $timezone = null)
+    {
+        throw new RunetimeException('Not implemented');
+    }
 }

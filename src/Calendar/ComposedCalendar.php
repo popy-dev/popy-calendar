@@ -63,4 +63,12 @@ class ComposedCalendar implements CalendarInterface
     {
         return $this->parser->parse($input, $format, $timezone);
     }
+    
+    /**
+     * @inheritDoc
+     */
+    public function parseToDateRepresentation($input, $format, DateTimeZone $timezone = null)
+    {
+        return $this->parser->parseToDateRepresentation($input, $format, $timezone);
+    }
 }
