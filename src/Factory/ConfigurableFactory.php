@@ -252,7 +252,13 @@ class ConfigurableFactory
 
     protected function buildSymbolParser(array &$options)
     {
-        return new SymbolParser\PregNative($options['locale']);
+        return new SymbolParser\Chain([
+            new SymbolParser\PregNativeDate(),
+            new SymbolParser\PregNativeRecursive(),
+            new SymbolParser\PregNativeDateSolar(),
+            new SymbolParser\PregNativeDateFragmented($options['locale']),
+            new SymbolParser\PregNativeDateTime(),
+        ]);
     }
 
     protected function buildFormatParser(array &$options)
