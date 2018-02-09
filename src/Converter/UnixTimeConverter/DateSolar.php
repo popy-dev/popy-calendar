@@ -64,17 +64,38 @@ class DateSolar implements UnixTimeConverterInterface
 
         $res = $conversion->getTo();
 
-        // Relative time from era start.
-        $relativeTime = $conversion->getUnixTime() - $this->eraStart;
+        if (is_integer($this->dayLengthInSeconds) || !function_exists('bc_sub')) {
+            // bc not needed/not available
 
-        // Calculating global day index. Floor is used to properly handle
-        // negative values
-        $eraDayIndex = (int)floor($relativeTime / $this->dayLengthInSeconds);
+            // Relative time from era start.
+            $relativeTime = $conversion->getUnixTime() - $this->eraStart;
 
-        $conversion->setUnixTime(
-            $relativeTime
-            - $eraDayIndex * $this->dayLengthInSeconds
-        );
+            // Calculating global day index. Floor is used to properly handle
+            // negative values
+            $eraDayIndex = (int)floor($relativeTime / $this->dayLengthInSeconds);
+
+            $conversion->setUnixTime(
+                $relativeTime
+                - $eraDayIndex * $this->dayLengthInSeconds
+            );
+        } else {
+            // Using bc math if available for non int dayLengthInSeconds in
+            // order to stay as precise as possible.
+
+            // Relative time from era start.
+            $relativeTime = bcsub($conversion->getUnixTime(), $this->eraStart);
+
+            // Calculating global day index. Floor is used to properly handle
+            // negative values
+            $eraDayIndex = (int)floor(
+                bcdiv($relativeTime, $this->dayLengthInSeconds)
+            );
+
+            $conversion->setUnixTime(bcsub(
+                $relativeTime,
+                bcmul($eraDayIndex * $this->dayLengthInSeconds)
+            ));
+        }
 
         list($year, $dayIndex) = $this->calculator
             ->getYearAndDayIndexFromErayDayIndex($eraDayIndex)

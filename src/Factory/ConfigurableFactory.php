@@ -33,6 +33,7 @@ class ConfigurableFactory
         'persian' => LeapYearCalculator\Persian::class,
         'hijri'   => LeapYearCalculator\Persian::class,
         'von_madler' => LeapYearCalculator\VonMadler::class,
+        'float' => LeapYearCalculator\FloatBased::class,
     ];
 
     /**
