@@ -24,7 +24,14 @@ class Time implements UnixTimeConverterInterface
      *
      * @var array<int>
      */
-    public $ranges = [24, 60, 60, 1000, 1000];
+    protected $ranges = [24, 60, 60, 1000, 1000];
+
+    /**
+     * Day length in microseconds.
+     *
+     * @var integer
+     */
+    protected $dayLengthInMicroSeconds;
 
     /**
      * Class constructor.
@@ -41,6 +48,8 @@ class Time implements UnixTimeConverterInterface
         if (null !== $dayLengthInSeconds) {
             $this->dayLengthInSeconds = $dayLengthInSeconds;
         }
+
+        $this->dayLengthInMicroSeconds = $this->dayLengthInSeconds * 1000000;
     }
 
 
@@ -83,14 +92,12 @@ class Time implements UnixTimeConverterInterface
             return;
         }
 
-        $microsecPerDay = $this->dayLengthInSeconds * 1000000;
-
         $time = $input->getTime()->withSizes($this->ranges);
 
         $microsec = $this->convertTimeToMicroseconds($time);
 
         $conversion
-            ->withTime($time)
+            ->setTo($input->withTime($time))
             ->setUnixTime($conversion->getUnixTime() + intval($microsec / 1000000))
             ->setUnixMicroTime($microsec % 1000000)
         ;
@@ -110,10 +117,12 @@ class Time implements UnixTimeConverterInterface
         $ratio = intval($time / $this->dayLengthInSeconds);
 
         // If using a different time format, apply ratio
-        $microsecPerDay = $this->dayLengthInSeconds * 1000000;
         $timeScale = array_product($this->ranges);
-        if ($microsecPerDay !== $timeScale) {
-            $time = intval(($time * $timeScale) / $microsecPerDay);
+
+        if ($this->dayLengthInMicroSeconds !== $timeScale) {
+            $time = intval(
+                ($time * $timeScale) / $this->dayLengthInMicroSeconds
+            );
         }
 
         $len = count($this->ranges);
@@ -136,8 +145,6 @@ class Time implements UnixTimeConverterInterface
      */
     public function convertTimeToMicroseconds(TimeObject $time)
     {
-        $microsecPerDay = $this->dayLengthInSeconds * 1000000;
-
         // IF time had no meaningfull informations, fallback to a day ratio.
         if (
             !$time->countMeaningfull()
@@ -154,8 +161,9 @@ class Time implements UnixTimeConverterInterface
         }
 
         // If using a different time format, apply ratio
-        if ($microsecPerDay !== $timeScale = array_product($this->ranges)) {
-            return intval(($res * $microsecPerDay) / $timeScale);
+        $timeScale = array_product($this->ranges);
+        if ($this->dayLengthInMicroSeconds !== $timeScale) {
+            return intval(($res * $this->dayLengthInMicroSeconds) / $timeScale);
         }
 
         return $res;
