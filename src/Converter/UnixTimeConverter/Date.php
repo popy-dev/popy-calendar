@@ -33,5 +33,16 @@ class Date implements UnixTimeConverterInterface
      */
     public function toUnixTime(Conversion $conversion)
     {
+        $input = $conversion->getTo();
+
+        if (null === $input->getUnixTime()) {
+            $input = $input->withUnixTime($conversion->getUnixTime());
+        }
+
+        if (null === $input->getUnixMicrotime()) {
+            $input = $input->withUnixMicroTime($conversion->getUnixMicrotime());
+        }
+
+        $conversion->setTo($input);
     }
 }
