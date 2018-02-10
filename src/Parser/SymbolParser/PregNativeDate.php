@@ -8,7 +8,8 @@ use Popy\Calendar\Parser\FormatParserInterface;
 use Popy\Calendar\Parser\DateLexer\PregSimple;
 
 /**
- * Implementation of the native DateTime formats using preg lexers.
+ * Implementation of the native DateTime timestamp/timezones formats using preg
+ * lexers.
  */
 class PregNativeDate implements SymbolParserInterface
 {

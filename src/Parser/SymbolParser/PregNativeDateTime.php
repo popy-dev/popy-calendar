@@ -9,7 +9,7 @@ use Popy\Calendar\Parser\DateLexer\PregSimple;
 use Popy\Calendar\Parser\DateLexer\PregChoice;
 
 /**
- * Implementation of the native DateTime formats using preg lexers.
+ * Implementation of the native DateTime time formats using preg lexers.
  */
 class PregNativeDateTime implements SymbolParserInterface
 {

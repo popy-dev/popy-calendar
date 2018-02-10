@@ -8,7 +8,7 @@ use Popy\Calendar\ValueObject\DateRepresentationInterface;
 use Popy\Calendar\ValueObject\DateRepresentation\Standard;
 
 /**
- * Builds a standard gregorian date representation (to initialize a mapper chain)
+ * Builds a standard date representation (to initialize a mapper chain).
  */
 class StandardDateFactory implements ResultMapperInterface
 {

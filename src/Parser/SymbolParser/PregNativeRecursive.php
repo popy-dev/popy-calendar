@@ -7,7 +7,7 @@ use Popy\Calendar\Parser\SymbolParserInterface;
 use Popy\Calendar\Parser\FormatParserInterface;
 
 /**
- * Implementation of the native DateTime formats using preg lexers.
+ * Implementation of the native DateTime recursive formats using preg lexers.
  */
 class PregNativeRecursive implements SymbolParserInterface
 {

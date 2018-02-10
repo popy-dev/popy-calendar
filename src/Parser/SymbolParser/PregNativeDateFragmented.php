@@ -11,7 +11,7 @@ use Popy\Calendar\Formater\LocalisationInterface;
 use Popy\Calendar\Formater\Localisation\NativeHardcoded;
 
 /**
- * Implementation of the native DateTime formats using preg lexers.
+ * Implementation of the native DateTime month/days formats using preg lexers.
  */
 class PregNativeDateFragmented implements SymbolParserInterface
 {

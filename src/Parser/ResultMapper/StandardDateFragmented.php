@@ -9,7 +9,8 @@ use Popy\Calendar\ValueObject\DateRepresentationInterface;
 use Popy\Calendar\ValueObject\DateFragmentedRepresentationInterface;
 
 /**
- * Maps standard format symbols to DateFragmentedRepresentationInterface fields.
+ * Maps standard format month/day/week symbols to
+ * DateFragmentedRepresentationInterface fields.
  */
 class StandardDateFragmented implements ResultMapperInterface
 {

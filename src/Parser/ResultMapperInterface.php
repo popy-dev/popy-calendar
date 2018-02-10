@@ -4,6 +4,9 @@ namespace Popy\Calendar\Parser;
 
 use Popy\Calendar\ValueObject\DateRepresentationInterface;
 
+/**
+ * Maps date lexer results into a date representation.
+ */
 interface ResultMapperInterface
 {
     /**

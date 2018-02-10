@@ -8,7 +8,7 @@ use Popy\Calendar\ValueObject\DateRepresentationInterface;
 use Popy\Calendar\ValueObject\DateSolarRepresentationInterface;
 
 /**
- * Maps standard format symbols to DateSolarRepresentationInterface fields.
+ * Maps standard format year symbols to DateSolarRepresentationInterface fields.
  */
 class StandardDateSolar implements ResultMapperInterface
 {

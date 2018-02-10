@@ -8,7 +8,7 @@ use Popy\Calendar\ValueObject\DateRepresentationInterface;
 use Popy\Calendar\ValueObject\DateTimeRepresentationInterface;
 
 /**
- * Maps standard format symbols to DateTimeRepresentationInterface fields.
+ * Maps standard format time symbols to DateTimeRepresentationInterface fields.
  */
 class StandardDateTime implements ResultMapperInterface
 {

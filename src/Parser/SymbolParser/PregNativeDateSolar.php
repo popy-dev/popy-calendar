@@ -8,7 +8,7 @@ use Popy\Calendar\Parser\FormatParserInterface;
 use Popy\Calendar\Parser\DateLexer\PregSimple;
 
 /**
- * Implementation of the native DateTime formats using preg lexers.
+ * Implementation of the native DateTime year formats using preg lexers.
  */
 class PregNativeDateSolar implements SymbolParserInterface
 {

@@ -8,6 +8,9 @@ use Popy\Calendar\ParserInterface;
 use Popy\Calendar\ConverterInterface;
 use Popy\Calendar\ValueObject\DateRepresentation\Date;
 
+/**
+ * Agnostic composable parser implementation.
+ */
 class AgnosticParser implements ParserInterface
 {
     /**

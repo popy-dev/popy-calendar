@@ -6,6 +6,9 @@ use Popy\Calendar\Parser\DateLexerResult;
 use Popy\Calendar\Parser\ResultMapperInterface;
 use Popy\Calendar\ValueObject\DateRepresentationInterface;
 
+/**
+ * Chain implementation.
+ */
 class Chain implements ResultMapperInterface
 {
     /**
@@ -32,6 +35,10 @@ class Chain implements ResultMapperInterface
      */
     public function addMapper(ResultMapperInterface $mapper)
     {
+        if ($mapper instanceof self) {
+            return $this->addMappers($mapper->mappers);
+        }
+
         $this->mappers[] = $mapper;
     
         return $this;
