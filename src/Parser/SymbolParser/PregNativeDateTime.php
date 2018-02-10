@@ -22,7 +22,7 @@ class PregNativeDateTime implements SymbolParserInterface
         if ($token->isOne('a', 'A')) {
             // a   Lowercase Ante meridiem and Post meridiem   am or pm
             // A   Uppercase Ante meridiem and Post meridiem   AM or PM
-            return new PregSimple($token, '[apAP][mM]');
+            return new PregChoice($token, ['am', 'pm']);
         }
 
         if ($token->is('B')) {

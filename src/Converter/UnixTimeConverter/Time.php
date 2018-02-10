@@ -85,11 +85,12 @@ class Time implements UnixTimeConverterInterface
 
         $microsecPerDay = $this->dayLengthInSeconds * 1000000;
 
-        $time = $input->getTime();
+        $time = $input->getTime()->withSizes($this->ranges);
 
         $microsec = $this->convertTimeToMicroseconds($time);
 
         $conversion
+            ->withTime($time)
             ->setUnixTime($conversion->getUnixTime() + intval($microsec / 1000000))
             ->setUnixMicroTime($microsec % 1000000)
         ;

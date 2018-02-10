@@ -59,7 +59,7 @@ class Time extends AbstractFragmentedDuration
 
         if (
             !isset($this->halved[$i])   // not halved
-            || !$this->fragments[$i]    // not halved
+            || !$this->fragments[$i]    // not set
             || !isset($this->sizes[$i]) // no solvable
         ) {
             return $this->fragments[$i];

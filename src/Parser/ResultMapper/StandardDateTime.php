@@ -61,9 +61,8 @@ class StandardDateTime implements ResultMapperInterface
     {
         // a   Lowercase Ante meridiem and Post meridiem   am or pm
         // A   Uppercase Ante meridiem and Post meridiem   AM or PM
-        if (null === $str = $parts->getFirst('a', 'A')) {
-            return;
+        if (null !== $a = $parts->getFirst('a', 'A')) {
+            return (bool)$a;
         }
-        return strtolower($str) === 'pm';
     }
 }

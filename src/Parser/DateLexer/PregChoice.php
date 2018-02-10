@@ -72,7 +72,7 @@ class PregChoice extends AbstractPreg
             // DO THE MAGIC
             if ($found === null) {
                 $res = preg_grep(
-                    '/^' . preg_quote($match[$offset][0], '/4') . '$/i',
+                    '/^' . preg_quote($match[$offset][0], '/') . '$/i',
                     $this->choices
                 );
 
