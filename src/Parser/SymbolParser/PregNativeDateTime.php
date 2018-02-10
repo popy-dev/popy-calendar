@@ -18,7 +18,6 @@ class PregNativeDateTime implements SymbolParserInterface
      */
     public function parseSymbol(FormatToken $token, FormatParserInterface $parser)
     {
-        // Todo : Make it a PregChoice
         if ($token->isOne('a', 'A')) {
             // a   Lowercase Ante meridiem and Post meridiem   am or pm
             // A   Uppercase Ante meridiem and Post meridiem   AM or PM
