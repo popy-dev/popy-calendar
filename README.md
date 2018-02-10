@@ -31,6 +31,21 @@ var_dump(
 ?>
 ```
 
+Output :
+
+```
+2018-02-10
+object(DateTimeImmutable)#2 (3) {
+  ["date"]=>
+  string(26) "2000-01-01 21:28:31.000000"
+  ["timezone_type"]=>
+  int(3)
+  ["timezone"]=>
+  string(13) "Europe/Berlin"
+}
+
+```
+
 What's the point ?
 ------------------
 
@@ -74,6 +89,13 @@ echo $formater->format(new DateTime());
 ?>
 ```
 
+Output :
+
+```
+2018-02-10
+
+```
+
 Preset Parser
 ---------------
 
@@ -95,6 +117,21 @@ var_dump($formater->parse('2017-05-01'));
 
 ?>
 ```
+
+Output :
+
+```
+object(DateTimeImmutable)#2 (3) {
+  ["date"]=>
+  string(26) "2017-05-01 21:28:31.000000"
+  ["timezone_type"]=>
+  int(3)
+  ["timezone"]=>
+  string(13) "Europe/Berlin"
+}
+
+```
+
 
 Other components
 ----------------

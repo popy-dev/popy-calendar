@@ -82,3 +82,10 @@ echo $mars->format(new DateTime(), "Y-m-d H:i:s\n");
 
 ?>
 ```
+
+Output :
+
+```
+0001-01-01 23:21:28
+0077-14-28 12:09:16
+```
