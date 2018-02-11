@@ -43,6 +43,8 @@ class PregNativeDateSolar implements SymbolParserInterface
             $lexer->setCallback(function (PregSimple $lexer, $value) use ($converter) {
                 return $converter->from($value);
             });
+
+            return $lexer;
         }
 
         if ($token->isOne('Y')) {

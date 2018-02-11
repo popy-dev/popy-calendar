@@ -51,7 +51,7 @@ class StandardDateSolar implements SymbolFormaterInterface
 
         if ($token->is('L')) {
             // L   Whether it's a leap year
-            return (string)$input->isLeapYear();
+            return (string)(int)$input->isLeapYear();
         }
 
         if ($token->is('z')) {
