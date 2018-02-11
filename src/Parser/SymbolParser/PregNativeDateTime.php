@@ -32,7 +32,7 @@ class PregNativeDateTime implements SymbolParserInterface
         if ($token->isOne('g', 'G')) {
             // g   12-hour format of an hour without leading zeros 1 through 12
             // G   24-hour format of an hour without leading zeros 0 through 23
-            return new PregSimple($token, '\d\d');
+            return new PregSimple($token, '\d?\d');
         }
 
         if ($token->isOne('h', 'H')) {

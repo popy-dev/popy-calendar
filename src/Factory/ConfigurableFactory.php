@@ -241,7 +241,7 @@ class ConfigurableFactory
         if ($number === NumberConverter\TwoDigitsYear::class) {
             return new $number(
                 $this->getOptionValue($options, 'number_converter_year', 2000),
-                $this->getOptionValue($options, 'number_converter_late_fifty', true),
+                $this->getOptionValue($options, 'number_converter_late_fifty', true)
             );
         }
 
