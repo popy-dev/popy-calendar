@@ -8,6 +8,7 @@ use Popy\Calendar\Converter\UnixTimeConverter;
 use Popy\Calendar\Converter\LeapYearCalculator;
 use Popy\Calendar\Formater\Localisation;
 use Popy\Calendar\Formater\SymbolFormater;
+use Popy\Calendar\Formater\NumberConverter;
 use Popy\Calendar\Formater\AgnosticFormater;
 use Popy\Calendar\Parser\AgnosticParser;
 use Popy\Calendar\Parser\ResultMapper;
@@ -66,6 +67,16 @@ class ConfigurableFactory
     ];
 
     /**
+     * Available values for option "number"
+     *
+     * @var array<string>
+     */
+    protected static $number = [
+        'two_digits' => NumberConverter\TwoDigitsYear::class,
+        'roman' => NumberConverter\Roman::class,
+    ];
+
+    /**
      * Builds a gregorian calendar.
      *
      * @return ComposedCalendar
@@ -76,6 +87,8 @@ class ConfigurableFactory
         $options['locale'] = $this->buildLocale($options);
 
         $options['converter'] = $this->buildConverter($options);
+
+        $options['number_converter'] = $this->buildNumberConverter($options);
 
         $options['symbol_formater'] = $this->buildSymbolFormater($options);
 
@@ -212,13 +225,36 @@ class ConfigurableFactory
         );
     }
 
+    protected function buildNumberConverter(array &$options)
+    {
+        $number = $this->getOptionValueChoice(
+            $options,
+            'number',
+            static::$number,
+            'two_digits'
+        );
+
+        if (is_object($number)) {
+            return $number;
+        }
+
+        if ($number === NumberConverter\TwoDigitsYear::class) {
+            return new $number(
+                $this->getOptionValue($options, 'number_converter_year', 2000),
+                $this->getOptionValue($options, 'number_converter_late_fifty', true),
+            );
+        }
+
+        return new $number();
+    }
+
     protected function buildSymbolFormater(array &$options)
     {
         return new SymbolFormater\Chain([
             new SymbolFormater\Litteral(),
             new SymbolFormater\StandardDate(),
             new SymbolFormater\StandardDateFragmented($options['locale']),
-            new SymbolFormater\StandardDateSolar(),
+            new SymbolFormater\StandardDateSolar($options['number_converter']),
             new SymbolFormater\StandardDateTime(),
             new SymbolFormater\StandardRecursive(),
             new SymbolFormater\Litteral(true),
@@ -255,7 +291,7 @@ class ConfigurableFactory
         return new SymbolParser\Chain([
             new SymbolParser\PregNativeDate(),
             new SymbolParser\PregNativeRecursive(),
-            new SymbolParser\PregNativeDateSolar(),
+            new SymbolParser\PregNativeDateSolar($options['number_converter']),
             new SymbolParser\PregNativeDateFragmented($options['locale']),
             new SymbolParser\PregNativeDateTime(),
         ]);

@@ -1,11 +1,13 @@
 <?php
 
-namespace Popy\Calendar\Formater\Utility;
+namespace Popy\Calendar\Formater\NumberConverter;
+
+use Popy\Calendar\Formater\NumberConverterInterface;
 
 /**
  * Roman units converter.
  */
-class RomanConverter
+class RomanConverter implements NumberConverterInterface
 {
     protected static $table = [
         'M'  => 1000,
@@ -24,13 +26,9 @@ class RomanConverter
     ];
 
     /**
-     * Converts an integer to its roman version.
-     *
-     * @param integer $input
-     *
-     * @return string
+     * @inheritDoc
      */
-    public function decimalToRoman($input)
+    public function to($input)
     {
         if ($input < 0) {
             return '-' . $this->decimalToRoman(-$input);
@@ -49,13 +47,9 @@ class RomanConverter
     }
 
     /**
-     * Converts a roman number to a decimal one.
-     *
-     * @param string $input
-     *
-     * @return integer
+     * @inheritDoc
      */
-    public function romanToDecimal($input)
+    public function from($input)
     {
         $res = $i = 0;
         $len = strlen($input);

@@ -5,6 +5,7 @@ namespace Popy\Calendar\Formater\SymbolFormater;
 use Popy\Calendar\FormaterInterface;
 use Popy\Calendar\Parser\FormatToken;
 use Popy\Calendar\Formater\SymbolFormaterInterface;
+use Popy\Calendar\Formater\NumberConverterInterface;
 use Popy\Calendar\ValueObject\DateRepresentationInterface;
 use Popy\Calendar\ValueObject\DateSolarRepresentationInterface;
 
@@ -13,6 +14,23 @@ use Popy\Calendar\ValueObject\DateSolarRepresentationInterface;
  */
 class StandardDateSolar implements SymbolFormaterInterface
 {
+    /**
+     * Number converter.
+     *
+     * @var NumberConverterInterface
+     */
+    protected $converter;
+
+    /**
+     * Class constructor.
+     *
+     * @param NumberConverterInterface $converter Number converter.]
+     */
+    public function __construct(NumberConverterInterface $converter)
+    {
+        $this->converter = $converter;
+    }
+
     /**
      * @inheritDoc
      */
@@ -23,7 +41,7 @@ class StandardDateSolar implements SymbolFormaterInterface
         }
         if ($token->is('y')) {
             // y   A two digit representation of a year
-            return sprintf('%02d', $input->getYear() % 100);
+            return $this->converter->to($input->getYear());
         }
 
         if ($token->is('Y')) {

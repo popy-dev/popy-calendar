@@ -6,6 +6,7 @@ use Popy\Calendar\Parser\FormatToken;
 use Popy\Calendar\Parser\SymbolParserInterface;
 use Popy\Calendar\Parser\FormatParserInterface;
 use Popy\Calendar\Parser\DateLexer\PregSimple;
+use Popy\Calendar\Formater\NumberConverterInterface;
 
 /**
  * Implementation of the native DateTime year formats using preg lexers.
@@ -13,13 +14,35 @@ use Popy\Calendar\Parser\DateLexer\PregSimple;
 class PregNativeDateSolar implements SymbolParserInterface
 {
     /**
+     * Number converter.
+     *
+     * @var NumberConverterInterface
+     */
+    protected $converter;
+
+    /**
+     * Class constructor.
+     *
+     * @param NumberConverterInterface $converter Number converter.]
+     */
+    public function __construct(NumberConverterInterface $converter)
+    {
+        $this->converter = $converter;
+    }
+
+    /**
      * @inheritDoc
      */
     public function parseSymbol(FormatToken $token, FormatParserInterface $parser)
     {
         if ($token->is('y')) {
+            $converter = $this->converter;
+            
             // y   A two digit representation of a year
-            return new PregSimple($token, '\d\d');
+            $lexer = new PregSimple($token, '\d\d');
+            $lexer->setCallback(function (PregSimple $lexer, $value) use ($converter) {
+                return $converter->from($value);
+            });
         }
 
         if ($token->isOne('Y')) {
