@@ -12,7 +12,8 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "Popy\\Calendar\\": "src/"
+            "Popy\\Calendar\\": "src/",
+            "Popy\\Calendar\\Tests\\": "tests/"
         }
     }
 }
