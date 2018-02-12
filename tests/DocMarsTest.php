@@ -4,9 +4,12 @@ use PHPUnit\Framework\TestCase;
 
 use Popy\Calendar\Factory\ConfigurableFactory;
 
-class TestDocMars extends TestCase
+class DocMarsTest extends TestCase
 {
-    public function setup()
+    protected $factory;
+    protected $mars;
+
+    public function setUp()
     {
         $this->factory = new ConfigurableFactory();
         $this->mars = $this->factory->build([
@@ -26,7 +29,6 @@ class TestDocMars extends TestCase
 
     public function testMarsTime()
     {
-
         $this->assertEquals(
             $this->mars->format(
                 new DateTime('1873-12-30 00:00:00'),
