@@ -15,7 +15,7 @@ class PresetParser
      * @var ParserInterface
      */
     protected $parser;
-    
+
     /**
      * Preset format.
      *
@@ -42,7 +42,7 @@ class PresetParser
      *
      * @return DateTimeInterface
      */
-    public function format($input)
+    public function parse($input)
     {
         return $this->parser->parse($input, $this->format);
     }

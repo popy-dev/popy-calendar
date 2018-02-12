@@ -6,6 +6,10 @@
         {
             "name": "Popy",
             "email": "popy.dev@gmail.com"
+        },
+        {
+            "name": "Lewis Cowles",
+            "email": "lewiscowles@me.com"
         }
     ],
     "minimum-stability": "stable",
