@@ -65,7 +65,23 @@ class Time extends AbstractFragmentedDuration
             return $this->fragments[$i];
         }
 
-        return $this->fragments[$i] + (int)floor($this->sizes[$i] / 2);
+        $half = (int)floor($this->sizes[$i] / 2);
+
+        $value = $this->fragments[$i];
+
+        // Special case for g & h formats handling : if value is the same
+        // as the half, which is not a possible value due to division,
+        // ti means it is 0
+        if ($value === $half) {
+            $value = 0;
+        }
+
+        if ($this->halved[$i]) {
+            $value += $half;
+        }
+
+        return $value;
+
     }
 
     /**

@@ -40,18 +40,24 @@ class StandardDateTime implements SymbolFormaterInterface
             return sprintf('%03d', intval($input->getTime()->getRatio() / 1000));
         }
 
-        if ($token->is('g')) {
+        if ($token->isOne('g', 'h')) {
             // g   12-hour format of an hour without leading zeros 1 through 12
-            return $input->getTime()->getHalved(0);
+            // h   12-hour format of an hour with leading zeros    01 through 12
+            $res = $input->getTime()->getHalved(0);
+            if (!$res) {
+                $res = (integer)floor($input->getTime()->getSize(0) / 2);
+            }
+
+            if ($token->is('h')) {
+                return sprintf('%02d', $res);
+            }
+
+            return (string)$res;
         }
+
         if ($token->is('G')) {
             // G   24-hour format of an hour without leading zeros 0 through 23
             return $input->getTime()->get(0);
-        }
-
-        if ($token->is('h')) {
-            // h   12-hour format of an hour with leading zeros    01 through 12
-            return sprintf('%02d', $input->getTime()->getHalved(0));
         }
 
         if ($token->is('H')) {
