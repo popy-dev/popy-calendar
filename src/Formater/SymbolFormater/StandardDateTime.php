@@ -33,11 +33,7 @@ class StandardDateTime implements SymbolFormaterInterface
 
         if ($token->is('B')) {
             // B   Swatch Internet time    000 through 999
-            $swatch = 1000 * ($input->getUnixTime() + 3600) / 86400;
-            return sprintf('%03d', $swatch % 1000);
-
-            // Naïve implementation. swatch has a fixed time offset.
-            return sprintf('%03d', intval($input->getTime()->getRatio() / 1000));
+            return sprintf('%03d', $input->getTime()->getTransversal(0));
         }
 
         if ($token->isOne('g', 'h')) {

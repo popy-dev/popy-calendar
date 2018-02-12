@@ -19,6 +19,13 @@ abstract class AbstractFragmentedDuration
     protected $sizes = [];
 
     /**
+     * Transversal/parrallel units.
+     *
+     * @var array<integer|null>
+     */
+    protected $transversals = [];
+
+    /**
      * Class constructor.
      *
      * @param array $fragments
@@ -187,6 +194,61 @@ abstract class AbstractFragmentedDuration
         $values[$index] = $value;
 
         return $values;
+    }
+
+    /**
+     * Get transversal unit.
+     *
+     * @param integer $i
+     *
+     * @return integer|null
+     */
+    public function getTransversal($i)
+    {
+        if (isset($this->transversals[$i])) {
+            return $this->transversals[$i];
+        }
+    }
+
+    /**
+     * Get all transversal units.
+     *
+     * @return array<integer|null>
+     */
+    public function allTransversals()
+    {
+        return $this->transversals;
+    }
+
+    /**
+     * Set transversal unit, adding null values if needed.
+     *
+     * @param integer      $index
+     * @param integer|null $value
+     */
+    public function withTransversal($index, $value)
+    {
+        $res = clone $this;
+
+        $res->transversals = $this->insertInList($res->transversals, $index, $value);
+
+        return $res;
+    }
+
+    /**
+     * Set all transversal units, adding null values if needed.
+     *
+     * @param array<integer|null> $transversals
+     *
+     * @return static a new instance.
+     */
+    public function withTransversals(array $transversals)
+    {
+        $res = clone $this;
+
+        $res->transversals = $res->fillArrayInput($transversals);
+
+        return $res;
     }
 
     /**

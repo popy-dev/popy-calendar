@@ -65,10 +65,16 @@ class GregorianComposedImplementationTest extends PHPUnit_Framework_TestCase
         // Testing noon special case
         yield ['2005-01-01 12:00:00 UTC', 'Y-m-d ha:i:s', '2005-01-01 12pm:00:00'];
         yield ['2005-01-01 12:00:00 UTC', 'Y-m-d ga:i:s', '2005-01-01 12pm:00:00'];
-
         // testing uppercase AM/PM
         yield ['2005-01-01 17:30:10 UTC', 'Y-m-d gA:i:s', '2005-01-01 5PM:30:10'];
         yield ['2005-01-01 05:30:10 UTC', 'Y-m-d hA:i:s', '2005-01-01 05AM:30:10'];
+        // Testing swatch time
+        yield ['2005-01-01 0:00:00 +01:00', 'Y-m-d B', '2005-01-01 000'];
+        yield ['2005-01-01 0:01:27 +01:00', 'Y-m-d B', '2005-01-01 001'];
+        yield ['2005-01-01 12:00:00 +01:00', 'Y-m-d B', '2005-01-01 500'];
+        // testing with different time zone
+        yield ['2005-01-01 11:57:36 UTC', 'Y-m-d B', '2005-01-01 540'];
+        yield ['2005-01-01 00:00:00 -11:00', 'Y-m-d B', '2005-01-01 500'];
     }
 
     /**

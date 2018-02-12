@@ -8,7 +8,17 @@ use Popy\Calendar\Converter\UnixTimeConverterInterface;
 use Popy\Calendar\ValueObject\DateTimeRepresentationInterface;
 
 /**
- * Hanldles DateTimeRepresentationInterface's time.
+ * Time of the day representation.
+ *
+ * Fragment units are, usually, named as, and used as :
+ * 0 => hours (format symbols ghGH)
+ * 1 => minutes (format symbol i)
+ * 2 => seconds (format symbol s)
+ * 3 => milliseconds (format symbol v)
+ * 4 => microseconds (format symbol µ)
+ *
+ * Transversal units are, usually, named as and used as :
+ * 0 => Internet swatch time (format symbol B).
  */
 class Time implements UnixTimeConverterInterface
 {
@@ -70,6 +80,13 @@ class Time implements UnixTimeConverterInterface
         ;
 
         $time = $this->convertMicrosecondsToTime($microSec);
+
+        // Swatch time calculation. It's a fixed earth-day ratio, starting at a
+        // fixed +01:00 time offset.
+        $time = $time->withTransversal(
+            0,
+            intval(1000 * ($input->getUnixTime() + 3600) / 86400) % 1000
+        );
 
         // Removing the consumed seconds
         $unixTime -= $unixTime % $this->dayLengthInSeconds;
@@ -145,12 +162,20 @@ class Time implements UnixTimeConverterInterface
      */
     public function convertTimeToMicroseconds(TimeObject $time)
     {
+        $meaningfull = $time->countMeaningfull() > 0;
+
         // IF time had no meaningfull informations, fallback to a day ratio.
-        if (
-            !$time->countMeaningfull()
-            && null !== $ratio = $time->getRatio()
-        ) {
+        if (!$meaningfull && null !== $ratio = $time->getRatio()) {
             return $ratio * $this->dayLengthInSeconds;
+        }
+
+        // IF time had no meaningfull informations, use internel swatch time.
+        // May not work properly on non-earth systems. Whatever, who uses this
+        // anyway ? ANd who will use this on other planets ?
+        if (!$meaningfull && null !== $swatch = $time->getTransversal(0)) {
+            return $swatch * 1000 * 86400
+                - 3600 * 1000000 // minus fixed time offset
+            ;
         }
 
         $len = count($this->ranges);
