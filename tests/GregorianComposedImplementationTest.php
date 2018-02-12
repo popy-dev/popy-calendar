@@ -84,6 +84,12 @@ class GregorianComposedImplementationTest extends PHPUnit_Framework_TestCase
         yield ['2005-01-01 11:57:36 UTC', 'Y-m-d B', '2005-01-01 540'];
         yield ['2005-01-01 00:00:00 -11:00', 'Y-m-d B', '2005-01-01 500'];
 
+        // testing mili/micro seconds
+        yield ['2005-01-01 00:00:00 UTC', 'Y-m-d H:i:s.u', '2005-01-01 00:00:00.000000'];
+        yield ['2005-01-01 00:00:00.123456 UTC', 'Y-m-d H:i:s.u', '2005-01-01 00:00:00.123456'];
+        yield ['2005-01-01 00:00:00.123000 UTC', 'Y-m-d H:i:s.v', '2005-01-01 00:00:00.123'];
+        yield ['2005-01-01 00:00:00.123456 UTC', 'Y-m-d H:i:s.vµ', '2005-01-01 00:00:00.123456'];
+
         // testing recursive formats
         yield ['2005-01-01 11:57:36 +01:00', 'c', '2005-01-01T11:57:36+01:00'];
         yield ['2005-01-01 11:57:36 +01:00', 'r', 'Sat, 01 Jan 2005 11:57:36 +0100'];
@@ -107,6 +113,9 @@ class GregorianComposedImplementationTest extends PHPUnit_Framework_TestCase
         yield ['2005-06-01 00:00:00 Europe/Berlin', 'Y-m-d H:i:s Z', '2005-06-01 00:00:00 7200'];
         yield ['2005-06-01 00:00:00 Europe/Berlin', 'Y-m-d H:i:s O', '2005-06-01 00:00:00 +0200'];
         yield ['2005-06-01 00:00:00 Europe/Berlin', 'Y-m-d H:i:s P', '2005-06-01 00:00:00 +02:00'];
+
+        // Testing some symbol escaping :
+        yield ['2005-01-01 00:00:00.123456 UTC', 'Y-m-d H:i:s.vµ \\Y-\\m-\\d \\H:\\i:\\s.\\v\\µ', '2005-01-01 00:00:00.123456 Y-m-d H:i:s.vµ'];
 
     }
 

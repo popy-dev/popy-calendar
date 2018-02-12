@@ -144,7 +144,7 @@ class Date implements DateRepresentationInterface
         $res = new static();
 
         $res->unixTime = $datetime->getTimestamp();
-        $res->unixMicrotime = (int)$datetime->format('u');
+        $res->unixMicroTime = (int)$datetime->format('u');
         $res->timezone = $datetime->getTimezone();
         $res->offset = TimeOffset::buildFromDateTimeInterface($datetime);
 
