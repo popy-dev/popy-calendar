@@ -144,7 +144,7 @@ class PregNativeDateFragmented implements SymbolParserInterface
     protected function buildSuffixesLexer(FormatToken $token)
     {
         $choices = [];
-        $i = 1;
+        $i = 0;
         $repetitions = 0;
 
         while (null !== $label = $this->locale->getNumberOrdinalSuffix($i++)) {
