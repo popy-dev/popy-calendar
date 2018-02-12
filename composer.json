@@ -6,10 +6,18 @@
         {
             "name": "Popy",
             "email": "popy.dev@gmail.com"
+        },
+        {
+            "name": "Lewis Cowles",
+            "email": "lewiscowles@me.com"
         }
     ],
     "minimum-stability": "stable",
     "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^5.7",
+        "hamcrest/hamcrest-php": "^2.0"
+    },
     "autoload": {
         "psr-4": {
             "Popy\\Calendar\\": "src/"
