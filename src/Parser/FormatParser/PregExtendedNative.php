@@ -37,7 +37,7 @@ class PregExtendedNative implements FormatParserInterface
     /**
      * @inheritDoc
      */
-    public function parseFormat($format)
+    public function parseFormat($format, $isRecursiveCall = false)
     {
         $tokens = $this->lexer->tokenizeFormat($format);
 
@@ -47,12 +47,19 @@ class PregExtendedNative implements FormatParserInterface
 
         foreach ($tokens as $token) {
             if ($token->is('|')) {
-                $dateParser->register($eofLexer);
+                if (!$isRecursiveCall) {
+                    $dateParser->register($eofLexer);
+                }
                 $dateParser->close();
                 continue;
             }
 
             $lexer = null;
+
+            if ($isRecursiveCall && $token->isType(FormatToken::TYPE_EOF)) {
+                // Don't include EOF in recursive calls.
+                break;
+            }
 
             if (
                 $token->isSymbol()

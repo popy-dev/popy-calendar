@@ -65,6 +65,7 @@ class AgnosticParser implements ParserInterface
         }
 
         if (null === $parts = $lexer->tokenizeDate($input)) {
+            var_dump($lexer);
             return;
         }
 

@@ -24,7 +24,7 @@ class StandardRecursive implements SymbolFormatterInterface
 
         if ($token->is('r')) {
             // r   » RFC 2822 formatted date   Example: Thu, 21 Dec 2000 16:01:07 +0200
-            return $formatter->formatDateRepresentation($input, 'D, d M Y H:i:s P');
+            return $formatter->formatDateRepresentation($input, 'D, d M Y H:i:s O');
         }
     }
 }

@@ -34,7 +34,7 @@ class Basic implements FormatParserInterface
     /**
      * @inheritDoc
      */
-    public function parseFormat($format)
+    public function parseFormat($format, $isRecursiveCall = false)
     {
         $tokens = $this->lexer->tokenizeFormat($format);
 

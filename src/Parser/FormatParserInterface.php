@@ -11,9 +11,10 @@ interface FormatParserInterface
     /**
      * Parse input format.
      *
-     * @param string $format
+     * @param string  $format
+     * @param boolean $isRecursiveCall
      *
      * @return DateLexerInterface
      */
-    public function parseFormat($format);
+    public function parseFormat($format, $isRecursiveCall = false);
 }

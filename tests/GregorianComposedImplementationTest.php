@@ -75,6 +75,19 @@ class GregorianComposedImplementationTest extends PHPUnit_Framework_TestCase
         // testing with different time zone
         yield ['2005-01-01 11:57:36 UTC', 'Y-m-d B', '2005-01-01 540'];
         yield ['2005-01-01 00:00:00 -11:00', 'Y-m-d B', '2005-01-01 500'];
+
+        // testing recursive formats
+        yield ['2005-01-01 11:57:36 +01:00', 'c', '2005-01-01T11:57:36+01:00'];
+        yield ['2005-01-01 11:57:36 +01:00', 'r', 'Sat, 01 Jan 2005 11:57:36 +0100'];
+        // not alone
+        yield ['2005-01-01 11:57:36 +01:00', '\\YY c \\YY', 'Y2005 2005-01-01T11:57:36+01:00 Y2005'];
+        yield ['2005-01-01 11:57:36 +01:00', '\\YY r \\YY', 'Y2005 Sat, 01 Jan 2005 11:57:36 +0100 Y2005'];
+
+
+        // Testing timestamp 0
+        yield ['1970-01-01 00:00:00 Europe/Berlin', 'U e', '-3600 Europe/Berlin'];
+        yield ['1970-01-01 00:00:00 Europe/Berlin', 'U T', '-3600 CET'];
+
     }
 
     /**
