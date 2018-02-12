@@ -10,17 +10,19 @@ use Popy\Calendar\PresetParser;
 
 class TestReadme extends TestCase
 {
+    public function setup() {
+        $this->calendar = new GregorianCalendar();
+    }
+
     public function testUseGregorianCalendarFormat() {
-        $calendar = new GregorianCalendar();
         $this->assertEquals(
-            $calendar->format(new DateTime(), 'Y-m-d'),
+            $this->calendar->format(new DateTime(), 'Y-m-d'),
             date('Y-m-d')
         );
     }
 
     public function testUseGregorianCalendarParse() {
-        $calendar = new GregorianCalendar();
-        $parseResult = $calendar->parse('2000-01-01', 'Y-m-d');
+        $parseResult = $this->calendar->parse('2000-01-01', 'Y-m-d');
         $this->assertEquals(
             $parseResult->format('Y-m-d'),
             '2000-01-01'
@@ -29,7 +31,7 @@ class TestReadme extends TestCase
 
     public function testPresetFormatter() {
       $formater = new PresetFormater(
-          new GregorianCalendar(),
+          $this->calendar,
           'Y-m-d'
       );
       $this->assertEquals(
@@ -39,7 +41,7 @@ class TestReadme extends TestCase
     }
 
     public function testPresetParser() {
-        $parser = new PresetParser(new GregorianCalendar(), 'Y-m-d');
+        $parser = new PresetParser($this->calendar, 'Y-m-d');
         $parseResult = $parser->parse('2017-05-01');
         $this->assertEquals(
             $parseResult->format('Y-m-d'),
