@@ -1,10 +1,10 @@
 <?php
 
-namespace Popy\Calendar\Formater\SymbolFormater;
+namespace Popy\Calendar\Formatter\SymbolFormatter;
 
-use Popy\Calendar\FormaterInterface;
+use Popy\Calendar\FormatterInterface;
 use Popy\Calendar\Parser\FormatToken;
-use Popy\Calendar\Formater\SymbolFormaterInterface;
+use Popy\Calendar\Formatter\SymbolFormatterInterface;
 use Popy\Calendar\ValueObject\DateRepresentationInterface;
 use Popy\Calendar\ValueObject\DateTimeRepresentationInterface;
 
@@ -13,12 +13,12 @@ use Popy\Calendar\ValueObject\DateTimeRepresentationInterface;
  *
  * Not (yet) handling half-time format, so every time is shown as AM.
  */
-class StandardDateTime implements SymbolFormaterInterface
+class StandardDateTime implements SymbolFormatterInterface
 {
     /**
      * @inheritDoc
      */
-    public function formatSymbol(DateRepresentationInterface $input, FormatToken $token, FormaterInterface $formater)
+    public function formatSymbol(DateRepresentationInterface $input, FormatToken $token, FormatterInterface $formatter)
     {
         if (!$input instanceof DateTimeRepresentationInterface) {
             return;

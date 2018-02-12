@@ -1,21 +1,21 @@
 <?php
 
-namespace Popy\Calendar\Formater\SymbolFormater;
+namespace Popy\Calendar\Formatter\SymbolFormatter;
 
-use Popy\Calendar\FormaterInterface;
+use Popy\Calendar\FormatterInterface;
 use Popy\Calendar\Parser\FormatToken;
-use Popy\Calendar\Formater\SymbolFormaterInterface;
+use Popy\Calendar\Formatter\SymbolFormatterInterface;
 use Popy\Calendar\ValueObject\DateRepresentationInterface;
 
 /**
  * Standard format, handling DateRepresentationInterface.
  */
-class StandardDate implements SymbolFormaterInterface
+class StandardDate implements SymbolFormatterInterface
 {
     /**
      * @inheritDoc
      */
-    public function formatSymbol(DateRepresentationInterface $input, FormatToken $token, FormaterInterface $formater)
+    public function formatSymbol(DateRepresentationInterface $input, FormatToken $token, FormatterInterface $formatter)
     {
         if ($token->is('U')) {
             // U   Seconds since the Unix Epoch (January 1 1970 00:00:00 GMT)

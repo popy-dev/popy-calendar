@@ -1,6 +1,6 @@
 <?php
 
-namespace Popy\Calendar\Formater;
+namespace Popy\Calendar\Formatter;
 
 /**
  * Number converters : convert an integer to/from another number format/system.

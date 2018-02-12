@@ -5,16 +5,16 @@ namespace Popy\Calendar;
 use DateTimeInterface;
 
 /**
- * Utility/Helper class : Stores a preset date formatting to be used as a quick formater.
+ * Utility/Helper class : Stores a preset date formatting to be used as a quick formatter.
  */
-class PresetFormater
+class PresetFormatter
 {
     /**
-     * Formater.
+     * Formatter.
      *
-     * @var Formater
+     * @var Formatter
      */
-    protected $formater;
+    protected $formatter;
     
     /**
      * Preset format.
@@ -26,12 +26,12 @@ class PresetFormater
     /**
      * Class constructor.
      *
-     * @param FormaterInterface $Formater Formater
+     * @param FormatterInterface $Formatter Formatter
      * @param string            $format   Date format
      */
-    public function __construct(FormaterInterface $formater, $format)
+    public function __construct(FormatterInterface $formatter, $format)
     {
-        $this->formater = $formater;
+        $this->formatter = $formatter;
         $this->format   = $format;
     }
 
@@ -44,6 +44,6 @@ class PresetFormater
      */
     public function format(DateTimeInterface $input)
     {
-        return $this->formater->format($input, $this->format);
+        return $this->formatter->format($input, $this->format);
     }
 }

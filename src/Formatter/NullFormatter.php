@@ -1,12 +1,12 @@
 <?php
 
-namespace Popy\Calendar\Formater;
+namespace Popy\Calendar\Formatter;
 
 use DateTimeInterface;
-use Popy\Calendar\FormaterInterface;
+use Popy\Calendar\FormatterInterface;
 use Popy\Calendar\ValueObject\DateRepresentationInterface;
 
-class NullFormater implements FormaterInterface
+class NullFormatter implements FormatterInterface
 {
     /**
      * @inheritDoc

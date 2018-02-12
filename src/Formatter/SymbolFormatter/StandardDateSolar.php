@@ -1,18 +1,18 @@
 <?php
 
-namespace Popy\Calendar\Formater\SymbolFormater;
+namespace Popy\Calendar\Formatter\SymbolFormatter;
 
-use Popy\Calendar\FormaterInterface;
+use Popy\Calendar\FormatterInterface;
 use Popy\Calendar\Parser\FormatToken;
-use Popy\Calendar\Formater\SymbolFormaterInterface;
-use Popy\Calendar\Formater\NumberConverterInterface;
+use Popy\Calendar\Formatter\SymbolFormatterInterface;
+use Popy\Calendar\Formatter\NumberConverterInterface;
 use Popy\Calendar\ValueObject\DateRepresentationInterface;
 use Popy\Calendar\ValueObject\DateSolarRepresentationInterface;
 
 /**
  * Standard format, handling DateSolarRepresentationInterface.
  */
-class StandardDateSolar implements SymbolFormaterInterface
+class StandardDateSolar implements SymbolFormatterInterface
 {
     /**
      * Number converter.
@@ -34,7 +34,7 @@ class StandardDateSolar implements SymbolFormaterInterface
     /**
      * @inheritDoc
      */
-    public function formatSymbol(DateRepresentationInterface $input, FormatToken $token, FormaterInterface $formater)
+    public function formatSymbol(DateRepresentationInterface $input, FormatToken $token, FormatterInterface $formatter)
     {
         if (!$input instanceof DateSolarRepresentationInterface) {
             return;

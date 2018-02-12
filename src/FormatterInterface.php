@@ -6,12 +6,12 @@ use DateTimeInterface;
 use Popy\Calendar\ValueObject\DateRepresentationInterface;
 
 /**
- * A Formater is responsible of formatting an input Date in a string
+ * A Formatter is responsible of formatting an input Date in a string
  * representation, based on an input format.
  *
- * The Formater MAY support some name localization.
+ * The Formatter MAY support some name localization.
  */
-interface FormaterInterface
+interface FormatterInterface
 {
     /**
      * Format a date into a string.

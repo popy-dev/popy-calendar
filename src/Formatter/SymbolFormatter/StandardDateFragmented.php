@@ -1,11 +1,11 @@
 <?php
 
-namespace Popy\Calendar\Formater\SymbolFormater;
+namespace Popy\Calendar\Formatter\SymbolFormatter;
 
-use Popy\Calendar\FormaterInterface;
+use Popy\Calendar\FormatterInterface;
 use Popy\Calendar\Parser\FormatToken;
-use Popy\Calendar\Formater\LocalisationInterface;
-use Popy\Calendar\Formater\SymbolFormaterInterface;
+use Popy\Calendar\Formatter\LocalisationInterface;
+use Popy\Calendar\Formatter\SymbolFormatterInterface;
 use Popy\Calendar\ValueObject\DateRepresentationInterface;
 use Popy\Calendar\ValueObject\DateFragmentedRepresentationInterface;
 
@@ -14,7 +14,7 @@ use Popy\Calendar\ValueObject\DateFragmentedRepresentationInterface;
  *
  * Weeks and day names assume a gregorian calendar structure.
  */
-class StandardDateFragmented implements SymbolFormaterInterface
+class StandardDateFragmented implements SymbolFormatterInterface
 {
     /**
      * Locale (used for day & month names)
@@ -36,7 +36,7 @@ class StandardDateFragmented implements SymbolFormaterInterface
     /**
      * @inheritDoc
      */
-    public function formatSymbol(DateRepresentationInterface $input, FormatToken $token, FormaterInterface $formater)
+    public function formatSymbol(DateRepresentationInterface $input, FormatToken $token, FormatterInterface $formatter)
     {
         if (!$input instanceof DateFragmentedRepresentationInterface) {
             return;

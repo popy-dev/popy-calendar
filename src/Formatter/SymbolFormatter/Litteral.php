@@ -1,19 +1,19 @@
 <?php
 
-namespace Popy\Calendar\Formater\SymbolFormater;
+namespace Popy\Calendar\Formatter\SymbolFormatter;
 
-use Popy\Calendar\FormaterInterface;
+use Popy\Calendar\FormatterInterface;
 use Popy\Calendar\Parser\FormatToken;
-use Popy\Calendar\Formater\SymbolFormaterInterface;
+use Popy\Calendar\Formatter\SymbolFormatterInterface;
 use Popy\Calendar\ValueObject\DateRepresentationInterface;
 
 /**
  * Handles Litteral tokens.
  */
-class Litteral implements SymbolFormaterInterface
+class Litteral implements SymbolFormatterInterface
 {
     /**
-     * Will consider symbols (not handled by previous formaters) as litterals
+     * Will consider symbols (not handled by previous formatters) as litterals
      *
      * @var boolean
      */
@@ -32,7 +32,7 @@ class Litteral implements SymbolFormaterInterface
     /**
      * @inheritDoc
      */
-    public function formatSymbol(DateRepresentationInterface $input, FormatToken $token, FormaterInterface $formater)
+    public function formatSymbol(DateRepresentationInterface $input, FormatToken $token, FormatterInterface $formatter)
     {
         if (
             $token->isLitteral()

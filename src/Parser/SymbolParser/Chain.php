@@ -7,8 +7,8 @@ use Popy\Calendar\Parser\SymbolParserInterface;
 use Popy\Calendar\Parser\FormatParserInterface;
 use Popy\Calendar\Parser\DateLexer\PregSimple;
 use Popy\Calendar\Parser\DateLexer\PregChoice;
-use Popy\Calendar\Formater\LocalisationInterface;
-use Popy\Calendar\Formater\Localisation\NativeHardcoded;
+use Popy\Calendar\Formatter\LocalisationInterface;
+use Popy\Calendar\Formatter\Localisation\NativeHardcoded;
 
 /**
  * Chain implementation, stopping at the first result

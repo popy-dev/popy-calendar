@@ -3,7 +3,7 @@
 use PHPUnit\Framework\TestCase;
 
 use Popy\Calendar\PresetParser;
-use Popy\Calendar\PresetFormater;
+use Popy\Calendar\PresetFormatter;
 use Popy\Calendar\Calendar\GregorianCalendar;
 
 class ReadmeTest extends TestCase
@@ -31,13 +31,13 @@ class ReadmeTest extends TestCase
     }
 
     public function testPresetFormatter() {
-        $formater = new PresetFormater(
+        $formatter = new PresetFormatter(
             $this->calendar,
             'Y-m-d'
         );
 
         $this->assertEquals(
-            $formater->format(new DateTime()),
+            $formatter->format(new DateTime()),
             date('Y-m-d')
         );
     }

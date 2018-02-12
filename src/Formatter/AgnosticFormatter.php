@@ -1,18 +1,18 @@
 <?php
 
-namespace Popy\Calendar\Formater;
+namespace Popy\Calendar\Formatter;
 
 use DateTimeInterface;
-use Popy\Calendar\FormaterInterface;
+use Popy\Calendar\FormatterInterface;
 use Popy\Calendar\ConverterInterface;
 use Popy\Calendar\Parser\FormatLexerInterface;
 use Popy\Calendar\ValueObject\DateRepresentationInterface;
 use Popy\Calendar\ValueObject\DateRepresentation\Date;
 
 /**
- * Agnostic formater implementation.
+ * Agnostic formatter implementation.
  */
-class AgnosticFormater implements FormaterInterface
+class AgnosticFormatter implements FormatterInterface
 {
     /**
      * Format lexer
@@ -29,24 +29,24 @@ class AgnosticFormater implements FormaterInterface
     protected $converter;
 
     /**
-     * Symbol Formater
+     * Symbol Formatter
      *
-     * @var SymbolFormaterInterface
+     * @var SymbolFormatterInterface
      */
-    protected $formater;
+    protected $formatter;
 
     /**
      * Class constructor.
      *
      * @param FormatLexerInterface    $lexer     Format lexer.
      * @param ConverterInterface      $converter Date converter.
-     * @param SymbolFormaterInterface $formater  Symbol formater.
+     * @param SymbolFormatterInterface $formatter  Symbol formatter.
      */
-    public function __construct(FormatLexerInterface $lexer, ConverterInterface $converter, SymbolFormaterInterface $formater)
+    public function __construct(FormatLexerInterface $lexer, ConverterInterface $converter, SymbolFormatterInterface $formatter)
     {
         $this->lexer     = $lexer;
         $this->converter = $converter;
-        $this->formater  = $formater;
+        $this->formatter  = $formatter;
     }
 
     /**
@@ -72,7 +72,7 @@ class AgnosticFormater implements FormaterInterface
         $tokens = $this->lexer->tokenizeFormat($format);
 
         foreach ($tokens as $token) {
-            $res .= $this->formater->formatSymbol($input, $token, $this);
+            $res .= $this->formatter->formatSymbol($input, $token, $this);
         }
 
         return $res;

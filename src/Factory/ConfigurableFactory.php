@@ -6,10 +6,10 @@ use Popy\Calendar\Calendar\ComposedCalendar;
 use Popy\Calendar\Converter\AgnosticConverter;
 use Popy\Calendar\Converter\UnixTimeConverter;
 use Popy\Calendar\Converter\LeapYearCalculator;
-use Popy\Calendar\Formater\Localisation;
-use Popy\Calendar\Formater\SymbolFormater;
-use Popy\Calendar\Formater\NumberConverter;
-use Popy\Calendar\Formater\AgnosticFormater;
+use Popy\Calendar\Formatter\Localisation;
+use Popy\Calendar\Formatter\SymbolFormatter;
+use Popy\Calendar\Formatter\NumberConverter;
+use Popy\Calendar\Formatter\AgnosticFormatter;
 use Popy\Calendar\Parser\AgnosticParser;
 use Popy\Calendar\Parser\ResultMapper;
 use Popy\Calendar\Parser\FormatLexer;
@@ -90,11 +90,11 @@ class ConfigurableFactory
 
         $options['number_converter'] = $this->buildNumberConverter($options);
 
-        $options['symbol_formater'] = $this->buildSymbolFormater($options);
+        $options['symbol_formatter'] = $this->buildSymbolFormatter($options);
 
         $options['lexer'] = $this->buildLexer($options);
 
-        $options['formater'] = $this->buildFormater($options);
+        $options['formatter'] = $this->buildFormatter($options);
 
         $options['mapper'] = $this->buildMapper($options);
 
@@ -104,7 +104,7 @@ class ConfigurableFactory
 
         $options['parser'] = $this->buildParser($options);
 
-        return new ComposedCalendar($options['formater'], $options['parser']);
+        return new ComposedCalendar($options['formatter'], $options['parser']);
     }
 
     protected function buildLeapCalculator(array &$options)
@@ -248,16 +248,16 @@ class ConfigurableFactory
         return new $number();
     }
 
-    protected function buildSymbolFormater(array &$options)
+    protected function buildSymbolFormatter(array &$options)
     {
-        return new SymbolFormater\Chain([
-            new SymbolFormater\Litteral(),
-            new SymbolFormater\StandardDate(),
-            new SymbolFormater\StandardDateFragmented($options['locale']),
-            new SymbolFormater\StandardDateSolar($options['number_converter']),
-            new SymbolFormater\StandardDateTime(),
-            new SymbolFormater\StandardRecursive(),
-            new SymbolFormater\Litteral(true),
+        return new SymbolFormatter\Chain([
+            new SymbolFormatter\Litteral(),
+            new SymbolFormatter\StandardDate(),
+            new SymbolFormatter\StandardDateFragmented($options['locale']),
+            new SymbolFormatter\StandardDateSolar($options['number_converter']),
+            new SymbolFormatter\StandardDateTime(),
+            new SymbolFormatter\StandardRecursive(),
+            new SymbolFormatter\Litteral(true),
         ]);
     }
 
@@ -266,12 +266,12 @@ class ConfigurableFactory
         return new FormatLexer\MbString();
     }
 
-    protected function buildFormater(array &$options)
+    protected function buildFormatter(array &$options)
     {
-        return new AgnosticFormater(
+        return new AgnosticFormatter(
             $options['lexer'],
             $options['converter'],
-            $options['symbol_formater']
+            $options['symbol_formatter']
         );
     }
 

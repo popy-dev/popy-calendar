@@ -1,6 +1,6 @@
 <?php
 
-namespace Popy\Calendar\Formater;
+namespace Popy\Calendar\Formatter;
 
 interface LocalisationInterface
 {

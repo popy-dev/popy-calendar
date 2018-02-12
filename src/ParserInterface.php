@@ -10,8 +10,8 @@ use Popy\Calendar\ValueObject\DateRepresentationInterface;
  * A Parser is responsible to parse an input string, according to a format, in
  * order to build a Date matching the input representation as close as possible.
  *
- * If the Parser is related to a Formater, its format SHOULD be the same as the
- * related Formater.
+ * If the Parser is related to a Formatter, its format SHOULD be the same as the
+ * related Formatter.
  *
  * The Parser MAY support some name localization.
  */

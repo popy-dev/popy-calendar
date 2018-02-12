@@ -1,8 +1,8 @@
 <?php
 
-namespace Popy\Calendar\Formater\NumberConverter;
+namespace Popy\Calendar\Formatter\NumberConverter;
 
-use Popy\Calendar\Formater\NumberConverterInterface;
+use Popy\Calendar\Formatter\NumberConverterInterface;
 
 /**
  * Converts a number (typically a year) to a 2 digits representation, and back

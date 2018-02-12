@@ -5,7 +5,7 @@ namespace Popy\Calendar\Calendar;
 use DateTimeZone;
 use DateTimeInterface;
 use Popy\Calendar\CalendarInterface;
-use Popy\Calendar\FormaterInterface;
+use Popy\Calendar\FormatterInterface;
 use Popy\Calendar\ParserInterface;
 use Popy\Calendar\ValueObject\DateRepresentationInterface;
 
@@ -15,11 +15,11 @@ use Popy\Calendar\ValueObject\DateRepresentationInterface;
 class ComposedCalendar implements CalendarInterface
 {
     /**
-     * Formater
+     * Formatter
      *
-     * @var FormaterInterface
+     * @var FormatterInterface
      */
-    protected $formater;
+    protected $formatter;
 
     /**
      * Parser
@@ -31,12 +31,12 @@ class ComposedCalendar implements CalendarInterface
     /**
      * Class constructor.
      *
-     * @param FormaterInterface $formater
+     * @param FormatterInterface $formatter
      * @param ParserInterface   $parser
      */
-    public function __construct(FormaterInterface $formater, ParserInterface $parser)
+    public function __construct(FormatterInterface $formatter, ParserInterface $parser)
     {
-        $this->formater = $formater;
+        $this->formatter = $formatter;
         $this->parser   = $parser;
     }
 
@@ -45,7 +45,7 @@ class ComposedCalendar implements CalendarInterface
      */
     public function format(DateTimeInterface $input, $format)
     {
-        return $this->formater->format($input, $format);
+        return $this->formatter->format($input, $format);
     }
 
     /**
@@ -53,7 +53,7 @@ class ComposedCalendar implements CalendarInterface
      */
     public function formatDateRepresentation(DateRepresentationInterface $input, $format)
     {
-        return $this->formater->formatDateRepresentation($input, $format);
+        return $this->formatter->formatDateRepresentation($input, $format);
     }
 
     /**

@@ -6,7 +6,7 @@ use Popy\Calendar\Parser\FormatToken;
 use Popy\Calendar\Parser\SymbolParserInterface;
 use Popy\Calendar\Parser\FormatParserInterface;
 use Popy\Calendar\Parser\DateLexer\PregSimple;
-use Popy\Calendar\Formater\NumberConverterInterface;
+use Popy\Calendar\Formatter\NumberConverterInterface;
 
 /**
  * Implementation of the native DateTime year formats using preg lexers.

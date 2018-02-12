@@ -1,8 +1,8 @@
 <?php
 
-namespace Popy\Calendar\Formater\NumberConverter;
+namespace Popy\Calendar\Formatter\NumberConverter;
 
-use Popy\Calendar\Formater\NumberConverterInterface;
+use Popy\Calendar\Formatter\NumberConverterInterface;
 
 /**
  * Roman units converter.

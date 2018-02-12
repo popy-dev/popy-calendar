@@ -1,8 +1,8 @@
 <?php
 
-namespace Popy\Calendar\Formater\Localisation;
+namespace Popy\Calendar\Formatter\Localisation;
 
-use Popy\Calendar\Formater\LocalisationInterface;
+use Popy\Calendar\Formatter\LocalisationInterface;
 
 /**
  * Hardcoded native english names, to mimic the DateTimeInterface::format
