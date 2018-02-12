@@ -14,6 +14,9 @@
     ],
     "minimum-stability": "stable",
     "require": {},
+    "require-dev": {
+        "phpunit/php-unit": "5.*"
+    },
     "autoload": {
         "psr-4": {
             "Popy\\Calendar\\": "src/",
