@@ -32,7 +32,7 @@ class GregorianComposedImplementationTest extends PHPUnit_Framework_TestCase
         // Basic date fields
         yield ['2015-06-02 00:00:00 UTC', 'Y-m-d', '2015-06-02'];
         yield ['2015-06-02 00:00:00 UTC', 'y-n-j', '15-6-2'];
-        // Default configuration MUST convert back this properly
+        // Default configuration should convert back this properly
         yield ['1975-06-02 00:00:00 UTC', 'y-n-j', '75-6-2'];
 
         yield ['2005-01-01 00:00:00 UTC', 'jS F Y', '1st January 2005'];
@@ -49,14 +49,26 @@ class GregorianComposedImplementationTest extends PHPUnit_Framework_TestCase
         yield ['2005-01-01 00:00:00 UTC', 'o W N/l H:i:s', '2004 53 6/Saturday 00:00:00'];
 
         // Time
+        // Basic test
         yield ['2005-01-01 17:30:10 UTC', 'Y-m-d H:i:s', '2005-01-01 17:30:10'];
+        // Testing 0 padding
         yield ['2005-01-01 05:30:10 UTC', 'Y-m-d H:i:s', '2005-01-01 05:30:10'];
+        // Testing without 0 padding
         yield ['2005-01-01 05:30:10 UTC', 'Y-m-d G:i:s', '2005-01-01 5:30:10'];
+        // Testing 12hour format with 0 padding ...
         yield ['2005-01-01 17:30:10 UTC', 'Y-m-d ha:i:s', '2005-01-01 05pm:30:10'];
+        /// ... and without
         yield ['2005-01-01 17:30:10 UTC', 'Y-m-d ga:i:s', '2005-01-01 5pm:30:10'];
-        // 
+        // Testing midnight special case
         yield ['2005-01-01 00:00:00 UTC', 'Y-m-d ha:i:s', '2005-01-01 12am:00:00'];
         yield ['2005-01-01 00:00:00 UTC', 'Y-m-d ga:i:s', '2005-01-01 12am:00:00'];
+        // Testing noon special case
+        yield ['2005-01-01 12:00:00 UTC', 'Y-m-d ha:i:s', '2005-01-01 12pm:00:00'];
+        yield ['2005-01-01 12:00:00 UTC', 'Y-m-d ga:i:s', '2005-01-01 12pm:00:00'];
+
+        // testing uppercase AM/PM
+        yield ['2005-01-01 17:30:10 UTC', 'Y-m-d gA:i:s', '2005-01-01 5PM:30:10'];
+        yield ['2005-01-01 05:30:10 UTC', 'Y-m-d hA:i:s', '2005-01-01 05AM:30:10'];
     }
 
     /**

@@ -70,9 +70,9 @@ class PregChoice extends AbstractPreg
             $found = array_search($match[$offset][0], $this->choices);
 
             // DO THE MAGIC
-            if ($found === null) {
+            if ($found === false) {
                 $res = preg_grep(
-                    '/^' . preg_quote($match[$offset][0], '/') . '$/',
+                    '/^' . preg_quote($match[$offset][0], '/') . '$/i',
                     $this->choices
                 );
 

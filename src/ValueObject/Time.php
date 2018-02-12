@@ -121,7 +121,7 @@ class Time extends AbstractFragmentedDuration
 
         $half = (int)floor($this->sizes[$i] / 2);
 
-        return $this->fragments[$i] > $half;
+        return $this->fragments[$i] >= $half;
     }
 
     /**
