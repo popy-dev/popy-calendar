@@ -15,7 +15,7 @@
     "minimum-stability": "stable",
     "require": {},
     "require-dev": {
-        "phpunit/php-unit": "5.*"
+        "phpunit/phpunit": "^5.7"
     },
     "autoload": {
         "psr-4": {

@@ -5,6 +5,8 @@ This repository holds interfaces defining a Calendar, whose purpose is to
 manipulate (format, parse) php dates, and a few utilities and very basic
 implementations.
 
+[![Build Status](https://api.travis-ci.org/popy-dev/popy-calendar.svg?branch=master)](https://travis-ci.org/popy-dev/popy-calendar)
+
 Installation
 ------------
 
