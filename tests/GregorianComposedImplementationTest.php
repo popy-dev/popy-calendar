@@ -39,14 +39,22 @@ class GregorianComposedImplementationTest extends PHPUnit_Framework_TestCase
         yield ['2005-02-02 00:00:00 UTC', 'jS F Y', '2nd February 2005'];
         yield ['2005-03-03 00:00:00 UTC', 'jS F Y', '3rd March 2005'];
         yield ['2005-04-04 00:00:00 UTC', 'jS F Y', '4th April 2005'];
+        yield ['2005-05-05 00:00:00 UTC', 'jS M Y', '5th May 2005'];
+        yield ['2005-06-06 00:00:00 UTC', 'jS M Y', '6th Jun 2005'];
+        yield ['2005-07-07 00:00:00 UTC', 'jS M Y', '7th Jul 2005'];
+        yield ['2005-08-08 00:00:00 UTC', 'jS M Y', '8th Aug 2005'];
 
-        // Leap years
+        // Leap years and day count
         yield ['1900-02-01 00:00:00 UTC', 'L t', '0 28', true];
         yield ['2000-02-01 00:00:00 UTC', 'L t', '1 29', true];
 
         // ISO 8601 tests
         yield ['2003-01-01 00:00:00 UTC', 'o W N/l H:i:s', '2003 01 3/Wednesday 00:00:00'];
         yield ['2005-01-01 00:00:00 UTC', 'o W N/l H:i:s', '2004 53 6/Saturday 00:00:00'];
+        // Same with non iso day indexes
+        yield ['2003-01-01 00:00:00 UTC', 'o W w H:i:s', '2003 01 3 00:00:00'];
+        yield ['2005-01-01 00:00:00 UTC', 'o W w H:i:s', '2004 53 6 00:00:00'];
+        yield ['2005-01-02 00:00:00 UTC', 'o W w H:i:s', '2004 53 0 00:00:00'];
 
         // Time
         // Basic test
@@ -83,10 +91,22 @@ class GregorianComposedImplementationTest extends PHPUnit_Framework_TestCase
         yield ['2005-01-01 11:57:36 +01:00', '\\YY c \\YY', 'Y2005 2005-01-01T11:57:36+01:00 Y2005'];
         yield ['2005-01-01 11:57:36 +01:00', '\\YY r \\YY', 'Y2005 Sat, 01 Jan 2005 11:57:36 +0100 Y2005'];
 
+        // Day of the year test
+        yield ['2005-01-01 00:00:00 UTC', 'Y z', '2005 0'];
+        yield ['2005-03-02 00:00:00 UTC', 'Y z', '2005 60'];
 
-        // Testing timestamp 0
-        yield ['1970-01-01 00:00:00 Europe/Berlin', 'U e', '-3600 Europe/Berlin'];
-        yield ['1970-01-01 00:00:00 Europe/Berlin', 'U T', '-3600 CET'];
+        // Timezones / offsets
+        yield ['2005-01-01 00:00:00 Europe/Berlin', 'Y-m-d H:i:s e', '2005-01-01 00:00:00 Europe/Berlin'];
+        yield ['2005-01-01 00:00:00 Europe/Berlin', 'Y-m-d H:i:s T I', '2005-01-01 00:00:00 CET 0'];
+        yield ['2005-01-01 00:00:00 Europe/Berlin', 'Y-m-d H:i:s Z', '2005-01-01 00:00:00 3600'];
+        yield ['2005-01-01 00:00:00 Europe/Berlin', 'Y-m-d H:i:s O', '2005-01-01 00:00:00 +0100'];
+        yield ['2005-01-01 00:00:00 Europe/Berlin', 'Y-m-d H:i:s P', '2005-01-01 00:00:00 +01:00'];
+
+        // now with DST
+        yield ['2005-06-01 00:00:00 Europe/Berlin', 'Y-m-d H:i:s T I', '2005-06-01 00:00:00 CEST 1'];
+        yield ['2005-06-01 00:00:00 Europe/Berlin', 'Y-m-d H:i:s Z', '2005-06-01 00:00:00 7200'];
+        yield ['2005-06-01 00:00:00 Europe/Berlin', 'Y-m-d H:i:s O', '2005-06-01 00:00:00 +0200'];
+        yield ['2005-06-01 00:00:00 Europe/Berlin', 'Y-m-d H:i:s P', '2005-06-01 00:00:00 +02:00'];
 
     }
 

@@ -73,10 +73,12 @@ class StandardDate implements ResultMapperInterface
             $offset = $offset->withValue($value);
         }
 
+        // I (capital i) Whether or not the date is in daylight saving time
         if (null !== $t = $parts->get('I')) {
             $offset = $offset->withDst($t);
         }
         
+        // T   Timezone abbreviation   Examples: EST, MDT ...
         if (null !== $t = $parts->get('T')) {
             $offset = $offset->withAbbreviation($t);
         }
@@ -97,10 +99,9 @@ class StandardDate implements ResultMapperInterface
     protected function determineTimezone(DateLexerResult $parts, TimeOffset $offset, DateTimeZone $inputTz)
     {
         // e   Timezone identifier (added in PHP 5.1.0)    Examples: UTC, GMT, Atlantic/Azores
-        // T   Timezone abbreviation   Examples: EST, MDT ...
         // O   Difference to Greenwich time (GMT) in hours Example: +0200
         // P   Difference to Greenwich time (GMT) with colon between hours and minutes (added in PHP 5.1.3)    Example: +02:00
-        if (null !== $tz = $parts->getFirst('e', 'T', 'O', 'P')) {
+        if (null !== $tz = $parts->getFirst('e', 'O', 'P')) {
             return new DateTimeZone($tz);
         }
 

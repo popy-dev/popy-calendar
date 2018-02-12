@@ -147,13 +147,9 @@ class TimeOffset
      */
     public function buildTimeZone()
     {
-        if (null !== $this->abbreviation) {
-            return new DateTimeZone($this->abbreviation);
-        }
-
         if (null !== $this->value) {
             $sign = $this->value < 0 ? '-' : '+';
-            $value = intval(abs($value) / 60);
+            $value = intval(abs($this->value) / 60);
 
             return new DateTimeZone(sprintf(
                 '%s%02d:%02d',

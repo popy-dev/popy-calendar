@@ -2,6 +2,7 @@
 
 namespace Popy\Calendar\Converter\UnixTimeConverter;
 
+use DateTimeZone;
 use DateTimeImmutable;
 use Popy\Calendar\Converter\Conversion;
 use Popy\Calendar\ValueObject\TimeOffset as TimeOffsetValue;
@@ -47,32 +48,30 @@ class TimeOffset implements UnixTimeConverterInterface
 
         $unixTime = $conversion->getUnixTime();
 
-        $offset = $this->getOffsetFor(
-            $conversion->getTo() ?: $conversion->getFrom(),
-            $unixTime
-        );
+        $input = $this->getOffsetFor($input, $unixTime);
 
         $conversion
-            ->setUnixTime($unixTime - $offset->getValue())
-            ->setTo($input->withOffset($offset))
+            ->setUnixTime($unixTime - $input->getOffset()->getValue())
+            ->setTo($input)
         ;
     }
 
     /**
      * Search for the offset that have (or might) have been used for the input
-     * date representation.
+     * date representation, and updates input date.
      *
      * @param DateRepresentationInterface $input
      * @param integer                     $timestamp Calculated offsetted timestamp
      *
-     * @return TimeOffset
+     * @return DateRepresentationInterface
      */
     protected function getOffsetFor(DateRepresentationInterface $input, $timestamp)
     {
+        $input = $this->extractAbbreviation($input);
         $offset = $input->getOffset();
 
         if (null !== $offset->getValue()) {
-            return $offset;
+            return $input;
         }
 
         // Looking for timezone offset matching the incomplete timestamp.
@@ -114,10 +113,67 @@ class TimeOffset implements UnixTimeConverterInterface
             return $offset;
         }
 
-        return new TimeOffsetValue(
+        return $input->withOffset(new TimeOffsetValue(
             $previous['offset'],
             $previous['isdst'],
             $previous['abbr']
-        );
+        ));
+    }
+
+    /**
+     * Extract informations from timezone abbreviation.
+     *
+     * @param DateRepresentationInterface $input
+     *
+     * @return DateRepresentationInterface
+     */
+    protected function extractAbbreviation(DateRepresentationInterface $input)
+    {
+        $offset = $input->getOffset();
+
+        if (null === $abbr = $offset->getAbbreviation()) {
+            return $input;
+        }
+
+        $abbr = strtolower($abbr);
+        $list = DateTimeZone::listAbbreviations();
+
+        if (!isset($list[$abbr]) || empty($list[$abbr])) {
+            return $input;
+        }
+
+        $list = $list[$abbr];
+
+        $criterias = [
+            'offset' => $offset->getValue(),
+            'timezone_id' => $input->getTimezone()->getName(),
+            'dst' => $offset->isDst(),
+        ];
+
+        foreach ($criterias as $key => $value) {
+            if (null === $value) {
+                continue;
+            }
+            $previous = $list;
+
+            $list = array_filter($list, function ($infos) use ($key, $value) {
+                return $value === $infos[$key];
+            });
+
+            if (empty($list)) {
+                $list = $previous;
+            }
+        }
+
+        $infos = reset($list);
+
+        if (null === $offset->getValue()) {
+            $offset = $offset->withValue($infos['offset']);
+        }
+
+        return $input
+            ->withOffset($offset->withDst($infos['dst']))
+            ->withTimezone(new DateTimeZone($infos['timezone_id']))
+        ;
     }
 }
