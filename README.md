@@ -139,4 +139,5 @@ Other components
 ----------------
 
 * [Factory](doc/factory.md)
+* [Y10k & RFC 2550](doc/y10k.md)
 * [A Mars calendar ?](doc/mars.md)

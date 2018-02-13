@@ -45,6 +45,7 @@ class RFC2550Test extends PHPUnit_Framework_TestCase
         yield [-10000, '*Z89999'];
         yield [-99999, '*Z00000'];
         yield [-100000, '*Y899999'];
+        yield ['-1000000000000000000000000000000', '!Z8999999999999999999999999999999'];
     }
 
     /**
