@@ -23,7 +23,7 @@ class ConfigurableFactory
      *
      * @var array<string>
      */
-    protected static $leap = [
+    protected $leap = [
         'noleap' => LeapYearCalculator\NoLeap::class,
         'none'   => LeapYearCalculator\NoLeap::class,
         'julian' => LeapYearCalculator\Caesar::class,
@@ -42,7 +42,7 @@ class ConfigurableFactory
      *
      * @var array<string>
      */
-    protected static $locale = [
+    protected $locale = [
         'native' => Localisation\NativeHardcoded::class,
     ];
 
@@ -51,7 +51,7 @@ class ConfigurableFactory
      *
      * @var array<string>
      */
-    protected static $month = [
+    protected $month = [
         'gregorian' => UnixTimeConverter\GregorianCalendarMonthes::class,
         'equal_length' => UnixTimeConverter\EqualLengthMonthes::class,
     ];
@@ -61,7 +61,7 @@ class ConfigurableFactory
      *
      * @var array<string>
      */
-    protected static $week = [
+    protected $week = [
         'iso' => UnixTimeConverter\Iso8601Weeks::class,
         'simple' => UnixTimeConverter\SimpleWeeks::class,
     ];
@@ -71,7 +71,7 @@ class ConfigurableFactory
      *
      * @var array<string>
      */
-    protected static $number = [
+    protected $number = [
         'two_digits' => NumberConverter\TwoDigitsYear::class,
         'roman' => NumberConverter\Roman::class,
         'rfc2550' => NumberConverter\RFC2550::class,
@@ -82,7 +82,7 @@ class ConfigurableFactory
      *
      * @var array<string>
      */
-    protected static $additional_symbol_parser = [
+    protected $additional_symbol_parser = [
         'none'    => false,
         'rfc2550' => SymbolParser\PregNativeRFC2550::class,
     ];
@@ -125,7 +125,7 @@ class ConfigurableFactory
         $leap = $this->getOptionValueChoice(
             $options,
             'leap',
-            static::$leap,
+            $this->leap,
             'modern'
         );
 
@@ -144,7 +144,7 @@ class ConfigurableFactory
         $locale = $this->getOptionValueChoice(
             $options,
             'locale',
-            static::$locale,
+            $this->locale,
             'native'
         );
 
@@ -182,7 +182,7 @@ class ConfigurableFactory
         $month = $this->getOptionValueChoice(
             $options,
             'month',
-            static::$month,
+            $this->month,
             'gregorian'
         );
 
@@ -220,7 +220,7 @@ class ConfigurableFactory
         $week = $this->getOptionValueChoice(
             $options,
             'week',
-            static::$week,
+            $this->week,
             'iso'
         );
 
@@ -243,7 +243,7 @@ class ConfigurableFactory
         $number = $this->getOptionValueChoice(
             $options,
             'number',
-            static::$number,
+            $this->number,
             'two_digits'
         );
 
@@ -304,7 +304,7 @@ class ConfigurableFactory
         $parser = $this->getOptionValueChoice(
             $options,
             'additional_symbol_parser',
-            static::$additional_symbol_parser,
+            $this->additional_symbol_parser,
             'none'
         );
 
