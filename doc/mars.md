@@ -76,6 +76,14 @@ $mars = $factory->build([
 echo $mars->format(new DateTime('1873-12-30 00:00:00'), "Y-m-d H:i:s\n");
 
 /**
+ * According to http://jtauber.github.io/mars-clock/, the MSD of this date
+ * is 51232 sols after 1873-12-29 00:00:00 UTC, which is our era start.
+ * That means the internal eraDayIndex should be 51232 aswell, year should be
+ * ceil(51232/668.5921) = 77, and day index should be (51232 mod 668.5921) = 419
+ */
+echo $mars->format(new DateTime('2018-02-12 12:00:00 UTC'), "Y z\n");
+
+/**
  * Will output the current date.
  */
 echo $mars->format(new DateTime(), "Y-m-d H:i:s\n");
@@ -87,5 +95,6 @@ Output :
 
 ```
 0001-01-01 23:21:28
-0077-14-28 12:09:16
+0077 419
+0077-14-30 23:20:59
 ```

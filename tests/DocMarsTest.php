@@ -36,5 +36,19 @@ class DocMarsTest extends TestCase
             ),
             '0001-01-01 23:21:28'
         );
+
+        /**
+         * According to http://jtauber.github.io/mars-clock/, the MSD of this date
+         * is 51232 sols after 1873-12-29 00:00:00 UTC, which is our era start.
+         * That means the internal eraDayIndex should be 51232 aswell, year should be
+         * ceil(51232/668.5921) = 77, and day index should be (51232 mod 668.5921) = 419
+         */
+        $this->assertEquals(
+            $this->mars->format(
+                new DateTime('2018-02-13 00:00:00 UTC'),
+                "Y z"
+            ),
+            '0077 419'
+        );
     }
 }
