@@ -64,7 +64,7 @@ class PregNativeDateFragmented implements SymbolParserInterface
 
         if ($token->is('t')) {
             // t   Number of days in the given month
-            return new PregSimple($token, '\d\d');
+            return new PregSimple($token, '\d\d?');
         }
 
         if ($token->is('d')) {

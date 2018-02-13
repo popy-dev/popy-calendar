@@ -1,7 +1,8 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
+namespace Popy\Calendar\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Popy\Calendar\Factory\ConfigurableFactory;
 
 class DocY10KTest extends TestCase

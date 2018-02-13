@@ -44,7 +44,7 @@ class EqualLengthMonthes extends AbstractDatePartsSolarSplitter
         $days = $this->calculator->getYearLength($input->getYear());
         $monthes = array_fill(
             0,
-            intval($days / $this->length) + 1,
+            intval($days / $this->length),
             $this->length
         );
         $monthes[] = $days % $this->length;

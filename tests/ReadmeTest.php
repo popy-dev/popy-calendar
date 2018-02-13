@@ -1,7 +1,9 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
+namespace Popy\Calendar\Tests;
 
+use DateTime;
+use PHPUnit\Framework\TestCase;
 use Popy\Calendar\PresetParser;
 use Popy\Calendar\PresetFormatter;
 use Popy\Calendar\Calendar\GregorianCalendar;
