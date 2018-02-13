@@ -7,7 +7,7 @@ use Popy\Calendar\Formatter\NumberConverterInterface;
 /**
  * Roman units converter.
  */
-class RomanConverter implements NumberConverterInterface
+class Roman implements NumberConverterInterface
 {
     protected static $table = [
         'M'  => 1000,
