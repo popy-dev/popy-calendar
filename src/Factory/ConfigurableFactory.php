@@ -74,6 +74,17 @@ class ConfigurableFactory
     protected static $number = [
         'two_digits' => NumberConverter\TwoDigitsYear::class,
         'roman' => NumberConverter\Roman::class,
+        'rfc2550' => NumberConverter\RFC2550::class,
+    ];
+
+    /**
+     * Available values for option "additional_symbol_parser"
+     *
+     * @var array<string>
+     */
+    protected static $additional_symbol_parser = [
+        'none'    => false,
+        'rfc2550' => SymbolParser\PregNativeRFC2550::class,
     ];
 
     /**
@@ -97,6 +108,8 @@ class ConfigurableFactory
         $options['formatter'] = $this->buildFormatter($options);
 
         $options['mapper'] = $this->buildMapper($options);
+
+        $options['additional_symbol_parser'] = $this->buildAdditionalSymbolParser($options);
 
         $options['symbol_parser'] = $this->buildSymbolParser($options);
 
@@ -286,15 +299,41 @@ class ConfigurableFactory
         ]);
     }
 
+    protected function buildAdditionalSymbolParser(array &$options)
+    {
+        $parser = $this->getOptionValueChoice(
+            $options,
+            'additional_symbol_parser',
+            static::$additional_symbol_parser,
+            'none'
+        );
+
+        if (is_object($parser)) {
+            return $parser;
+        }
+
+        if ($parser === false) {
+            return null;
+        }
+
+        return new $parser($options['number_converter']);
+    }
+
     protected function buildSymbolParser(array &$options)
     {
-        return new SymbolParser\Chain([
+        $chain = [
             new SymbolParser\PregNativeDate(),
             new SymbolParser\PregNativeRecursive(),
             new SymbolParser\PregNativeDateSolar($options['number_converter']),
             new SymbolParser\PregNativeDateFragmented($options['locale']),
             new SymbolParser\PregNativeDateTime(),
-        ]);
+        ];
+
+        if ($options['additional_symbol_parser']) {
+            array_unshift($chain, $options['additional_symbol_parser']);
+        }
+
+        return new SymbolParser\Chain($chain);
     }
 
     protected function buildFormatParser(array &$options)
