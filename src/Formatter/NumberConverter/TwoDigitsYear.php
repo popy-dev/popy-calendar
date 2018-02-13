@@ -50,7 +50,7 @@ class TwoDigitsYear implements NumberConverterInterface
     {
         $input = intval($input);
 
-        if ($this->lateFiftyYearsArePreviousCentury && $input > 50) {
+        if ($this->lateFiftyYearsArePreviousCentury && $input >= 50) {
             return $this->referenceYear - 100 + $input;
         }
 

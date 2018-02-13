@@ -3,14 +3,17 @@
 namespace Popy\Calendar\Formatter;
 
 /**
- * Number converters : convert an integer to/from another number format/system.
+ * Number converters : convert an input value to/from another number format/system.
+ *
+ * To allow great numbers manupulation, string values can be used in place of
+ * integers.
  */
 interface NumberConverterInterface
 {
     /**
      * Converts an integer to implemented format/system.
      *
-     * @param integer $input
+     * @param integer|string $input
      *
      * @return string
      */
@@ -21,7 +24,7 @@ interface NumberConverterInterface
      *
      * @param string $input
      *
-     * @return integer
+     * @return integer|string|null
      */
     public function from($input);
 }
