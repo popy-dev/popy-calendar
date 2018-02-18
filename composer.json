@@ -2,6 +2,7 @@
     "name": "popy/calendar",
     "description": "Calendar Interfaces, tools, and basic implementation",
     "type": "library",
+    "license": "MIT",
     "authors": [
         {
             "name": "Popy",
@@ -12,15 +13,16 @@
             "email": "lewiscowles@me.com"
         }
     ],
+    "keywords": ["date", "datetime", "calendar"],
     "minimum-stability": "stable",
     "require": {},
     "require-dev": {
         "phpunit/phpunit": "^5.7"
     },
     "autoload": {
-        "psr-4": {
-            "Popy\\Calendar\\": "src/",
-            "Popy\\Calendar\\Tests\\": "tests/"
-        }
+        "psr-4": { "Popy\\Calendar\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Popy\\Calendar\\Tests\\": "tests/" }
     }
 }
