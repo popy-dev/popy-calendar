@@ -50,8 +50,8 @@ class Date implements UnixTimeConverterInterface
             $input = $input->withUnixTime($conversion->getUnixTime());
         }
 
-        if (null === $input->getUnixMicrotime()) {
-            $input = $input->withUnixMicroTime($conversion->getUnixMicrotime());
+        if (null === $input->getUnixMicroTime()) {
+            $input = $input->withUnixMicroTime($conversion->getUnixMicroTime());
         }
 
         $conversion->setTo($input);

@@ -116,7 +116,8 @@ class Time implements UnixTimeConverterInterface
         $conversion
             ->setTo($input->withTime($time))
             ->setUnixTime($conversion->getUnixTime() + intval($microsec / 1000000))
-            ->setUnixMicroTime($microsec % 1000000)
+            // Swatch time can return negative time. Shield against that.
+            ->setUnixMicroTime(max(0, $microsec % 1000000))
         ;
     }
 

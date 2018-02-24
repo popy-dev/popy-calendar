@@ -133,7 +133,7 @@ class Date implements DateRepresentationInterface
 
         $res = new static();
         $res->unixTime = (int)$time;
-        $res->unixMicrotime = (int)substr($micro, 2, 6);
+        $res->unixMicroTime = (int)substr($micro, 2, 6);
         $res->timezone = $timezone;
 
         return $res;
@@ -163,10 +163,10 @@ class Date implements DateRepresentationInterface
     {
         $res = new static();
 
-        $res->unixTime = $date->unixTime;
-        $res->unixMicrotime = $date->unixMicrotime;
-        $res->timezone = clone $date->timezone;
-        $res->offset   = clone $date->offset;
+        $res->unixTime = $date->getUnixTime();
+        $res->unixMicroTime = $date->getUnixMicroTime();
+        $res->timezone = $date->getTimezone();
+        $res->offset   = $date->getOffset();
 
         return $res;
     }
@@ -176,9 +176,9 @@ class Date implements DateRepresentationInterface
         $res = new static();
 
         $res->unixTime = $conversion->getUnixTime();
-        $res->unixMicrotime = $conversion->getUnixMicrotime();
-        $res->timezone = clone $conversion->getTo()->getTimezone();
-        $res->offset   = clone $conversion->getTo()->getOffset();
+        $res->unixMicroTime = $conversion->getUnixMicroTime();
+        $res->timezone = $conversion->getTo()->getTimezone();
+        $res->offset   = $conversion->getTo()->getOffset();
 
         return $res;
     }

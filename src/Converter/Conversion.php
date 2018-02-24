@@ -35,7 +35,7 @@ class Conversion
      *
      * @var integer|null
      */
-    protected $unixMicrotime;
+    protected $unixMicroTime;
 
     /**
      * Class constructor.
@@ -48,7 +48,7 @@ class Conversion
         $this->from = $from;
         $this->to = $to;
         $this->unixTime = $from->getUnixTime();
-        $this->unixMicrotime = $from->getUnixMicroTime();
+        $this->unixMicroTime = $from->getUnixMicroTime();
     }
 
     /**
@@ -114,21 +114,21 @@ class Conversion
      *
      * @return integer|null
      */
-    public function getUnixMicrotime()
+    public function getUnixMicroTime()
     {
-        return $this->unixMicrotime;
+        return $this->unixMicroTime;
     }
 
     /**
      * Sets unix micro time.
      *
-     * @param integer $unixMicrotime the unix microtime
+     * @param integer $unixMicroTime the unix microtime
      *
      * @return self
      */
-    public function setUnixMicrotime($unixMicrotime)
+    public function setUnixMicroTime($unixMicroTime)
     {
-        $this->unixMicrotime = $unixMicrotime;
+        $this->unixMicroTime = $unixMicroTime;
 
         return $this;
     }
