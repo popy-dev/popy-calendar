@@ -89,10 +89,12 @@ class TimeOffset implements UnixTimeConverterInterface
 
         // DateTimeZone
         if (false === $offsets) {
-            return $offset
-                ->withValue(
-                    $input->getTimezone()->getOffset(
-                        new DateTimeImmutable()
+            return $input->withOffset(
+                $offset
+                    ->withValue(
+                        $input->getTimezone()->getOffset(
+                            new DateTimeImmutable()
+                        )
                     )
                 )
             ;
@@ -110,7 +112,7 @@ class TimeOffset implements UnixTimeConverterInterface
         }
 
         if ($previous === null) {
-            return $offset;
+            return $input;
         }
 
         return $input->withOffset(new TimeOffsetValue(
