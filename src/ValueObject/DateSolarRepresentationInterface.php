@@ -55,5 +55,5 @@ interface DateSolarRepresentationInterface extends DateRepresentationInterface
      *
      * @return static
      */
-    public function withDayIndex($dayindex, $eraDayIndex);
+    public function withDayIndex($dayIndex, $eraDayIndex);
 }

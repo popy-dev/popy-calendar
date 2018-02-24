@@ -107,6 +107,6 @@ class NativeHardcoded implements LocalisationInterface
             return static::$ordinal[$number];
         }
 
-        return end(static::$ordinal);
+        return end(static::$ordinal) ?: null;
     }
 }

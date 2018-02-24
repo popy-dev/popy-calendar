@@ -28,8 +28,8 @@ abstract class AbstractFragmentedDuration
     /**
      * Class constructor.
      *
-     * @param array $fragments
-     * @param arra  $sizes
+     * @param array<integer|null> $fragments
+     * @param array<integer|null> $sizes
      */
     public function __construct(array $fragments = [], array $sizes = [])
     {
@@ -252,9 +252,11 @@ abstract class AbstractFragmentedDuration
     }
 
     /**
-     * Set fragments sizes, adding null sizes if needed.
+     * Ensure each consecutive key of the input array is set (filling with nulls)
      *
-     * @param array<integer|null> $sizes
+     * @param array<integer|null> $input
+     *
+     * @return array<integer|null>
      */
     protected function fillArrayInput(array $input)
     {

@@ -113,7 +113,7 @@ abstract class AbstractDatePartsSolarSplitter implements UnixTimeConverterInterf
      *
      * @param DateFragmentedRepresentationInterface $input
      *
-     * @return array<array><integer>
+     * @return array<array<integer>>
      */
     abstract protected function getAllFragmentSizes(DateFragmentedRepresentationInterface $input);
 }

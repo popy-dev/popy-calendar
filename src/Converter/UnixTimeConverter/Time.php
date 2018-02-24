@@ -145,7 +145,7 @@ class Time implements UnixTimeConverterInterface
         $len = count($this->ranges);
         $res = array_fill(0, $len, 0);
 
-        for ($i=$len - 1; $i > -1 ; $i--) {
+        for ($i=$len - 1; $i > -1; $i--) {
             $res[$i] = $time % $this->ranges[$i];
             $time = intval($time / $this->ranges[$i]);
         }

@@ -37,7 +37,7 @@ interface LeapYearCalculatorInterface
     /**
      * Gets year & dayIndex (in that year) from an eraDayIndex
      *
-     * @param integer $eraDayindex
+     * @param integer $eraDayIndex
      *
      * @return array [$year, $dayIndex]
      */

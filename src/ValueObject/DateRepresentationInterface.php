@@ -76,7 +76,7 @@ interface DateRepresentationInterface
     /**
      * Gets a new date instance having the input timezone.
      *
-     * @param DateTimeZone $offset
+     * @param DateTimeZone $timezone
      *
      * @return static
      */

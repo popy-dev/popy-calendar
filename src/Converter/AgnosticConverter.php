@@ -29,8 +29,6 @@ class AgnosticConverter implements ConverterInterface
     public function __construct(UnixTimeConverterInterface $converter)
     {
         $this->converter = $converter;
-
-        return $this;
     }
 
     /**

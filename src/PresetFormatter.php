@@ -12,7 +12,7 @@ class PresetFormatter
     /**
      * Formatter.
      *
-     * @var Formatter
+     * @var FormatterInterface
      */
     protected $formatter;
     
@@ -26,8 +26,8 @@ class PresetFormatter
     /**
      * Class constructor.
      *
-     * @param FormatterInterface $Formatter Formatter
-     * @param string            $format   Date format
+     * @param FormatterInterface $formatter Formatter
+     * @param string             $format    Date format
      */
     public function __construct(FormatterInterface $formatter, $format)
     {
