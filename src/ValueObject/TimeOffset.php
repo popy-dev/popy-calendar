@@ -98,7 +98,7 @@ class TimeOffset
     /**
      * Gets a new TimeOffset instance with the input value.
      *
-     * @param integer $value
+     * @param integer|null $value
      *
      * @return static
      */
@@ -113,7 +113,7 @@ class TimeOffset
     /**
      * Gets a new TimeOffset instance with the input dst.
      *
-     * @param boolean $dst
+     * @param boolean|null $dst
      *
      * @return static
      */
@@ -128,7 +128,7 @@ class TimeOffset
     /**
      * Gets a new TimeOffset instance with the input abbreviation.
      *
-     * @param integer $abbreviation
+     * @param string|null $abbreviation
      *
      * @return static
      */

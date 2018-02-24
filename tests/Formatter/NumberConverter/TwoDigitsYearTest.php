@@ -7,6 +7,8 @@ use Popy\Calendar\Formatter\NumberConverter\TwoDigitsYear;
 
 class TwoDigitsYearTest extends PHPUnit_Framework_TestCase
 {
+    protected $converter;
+
     public function setUp()
     {
         $this->converter = new TwoDigitsYear();

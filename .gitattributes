@@ -3,3 +3,4 @@
 .gitattributes export-ignore
 /tests/ export-ignore
 /phpunit.xml.dist export-ignore
+_config.yml export-ignore

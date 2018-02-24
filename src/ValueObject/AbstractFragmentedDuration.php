@@ -181,7 +181,7 @@ abstract class AbstractFragmentedDuration
      *
      * @param array        $values Actual values.
      * @param integer      $index  New value index.
-     * @param integer|null $value  New value.
+     * @param mixed|null   $value  New value.
      *
      * @return array new value list.
      */
