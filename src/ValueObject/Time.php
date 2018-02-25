@@ -81,7 +81,6 @@ class Time extends AbstractFragmentedDuration
         }
 
         return $value;
-
     }
 
     /**

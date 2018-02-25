@@ -110,8 +110,9 @@ class RFC2550 implements NumberConverterInterface
         $matches = [];
 
         if (
-            !preg_match('
-                /^0*(?<carets>\\^*)(?<alpha>[A-Z]*)(?<year>\d+)$/', 
+            !preg_match(
+                '
+                /^0*(?<carets>\\^*)(?<alpha>[A-Z]*)(?<year>\d+)$/',
                 $input,
                 $matches
             )
