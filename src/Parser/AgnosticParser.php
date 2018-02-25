@@ -77,7 +77,7 @@ class AgnosticParser implements ParserInterface
             return;
         }
 
-        return $result->setTimezone($date->getTimezone());
+        return $result->setTimezone($date->getTimezone()) ?: null;
     }
 
     /**

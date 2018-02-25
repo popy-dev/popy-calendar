@@ -2,6 +2,7 @@
 
 namespace Popy\Calendar\Converter\UnixTimeConverter;
 
+use BCMathExtended\BC;
 use Popy\Calendar\Converter\Conversion;
 use Popy\Calendar\Converter\UnixTimeConverterInterface;
 use Popy\Calendar\Converter\LeapYearCalculatorInterface;
@@ -64,7 +65,7 @@ class DateSolar implements UnixTimeConverterInterface
 
         $res = $conversion->getTo();
 
-        if (is_integer($this->dayLengthInSeconds) || !function_exists('bc_sub')) {
+        if (is_integer($this->dayLengthInSeconds) || !class_exists(BC::class)) {
             // bc not needed/not available
 
             // Relative time from era start.
@@ -74,10 +75,14 @@ class DateSolar implements UnixTimeConverterInterface
             // negative values
             $eraDayIndex = (int)floor($relativeTime / $this->dayLengthInSeconds);
 
-            $conversion->setUnixTime(
-                $relativeTime
-                - $eraDayIndex * $this->dayLengthInSeconds
-            );
+            $time = $relativeTime - $eraDayIndex * $this->dayLengthInSeconds;
+
+            // TODO : handle the loss as microseconds ?
+            if (is_float($time)) {
+                $time = (int)ceil($time);
+            }
+
+            $conversion->setUnixTime($time);
         } else {
             // Using bc math if available for non int dayLengthInSeconds in
             // order to stay as precise as possible.
@@ -87,14 +92,17 @@ class DateSolar implements UnixTimeConverterInterface
 
             // Calculating global day index. Floor is used to properly handle
             // negative values
-            $eraDayIndex = (int)floor(
+            $eraDayIndex = BC::floor(
                 bcdiv($relativeTime, $this->dayLengthInSeconds)
             );
 
-            $conversion->setUnixTime(bcsub(
+            // TODO : handle the loss as microseconds ?
+            $time = BC::ceil(bcsub(
                 $relativeTime,
                 bcmul($eraDayIndex, $this->dayLengthInSeconds)
             ));
+
+            $conversion->setUnixTime((int)$time);
         }
 
         list($year, $dayIndex) = $this->calculator
@@ -125,9 +133,10 @@ class DateSolar implements UnixTimeConverterInterface
             + $this->calculator->getYearEraDayIndex($year)
         ;
 
-        $conversion->setUnixTime(
+        // TODO : BC Math implementation
+        $conversion->setUnixTime(intval(
             $conversion->getUnixTime() + $this->eraStart
             + $eraDayIndex * $this->dayLengthInSeconds
-        );
+        ));
     }
 }
