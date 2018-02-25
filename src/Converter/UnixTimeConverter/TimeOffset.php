@@ -87,7 +87,7 @@ class TimeOffset implements UnixTimeConverterInterface
             max(0, $timestamp + $this->dayLengthInSeconds)
         );
 
-        // DateTimeZone
+        // DateTimeZone can return a false $offsets value for unsupported ranges.
         if (false === $offsets) {
             return $input->withOffset(
                 $offset

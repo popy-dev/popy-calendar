@@ -31,7 +31,7 @@ class Roman implements NumberConverterInterface
     public function to($input)
     {
         if ($input < 0) {
-            return '-' . $this->decimalToRoman(-$input);
+            return '-' . $this->to(-$input);
         }
         
         $res = '';

@@ -1,6 +1,6 @@
 <?php
 
-namespace Popy\RepublicanCalendar\LeapYearCalculator;
+namespace Popy\Calendar\Converter\LeapYearCalculator;
 
 /**
  * Futuristic leap day implementation, more precise than the modern one,

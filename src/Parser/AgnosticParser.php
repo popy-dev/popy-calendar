@@ -14,6 +14,27 @@ use Popy\Calendar\ValueObject\DateRepresentation\Date;
 class AgnosticParser implements ParserInterface
 {
     /**
+     * Format parser.
+     *
+     * @var FormatParserInterface
+     */
+    protected $parser;
+    
+    /**
+     * Result mapper.
+     *
+     * @var ResultMapperInterface
+     */
+    protected $mapper;
+    
+    /**
+     * Date converter.
+     *
+     * @var ConverterInterface
+     */
+    protected $converter;
+
+    /**
      * Class constructor.
      *
      * @param FormatParserInterface $parser    Format parser.
@@ -50,9 +71,13 @@ class AgnosticParser implements ParserInterface
             $date->getUnixMicroTime()
         );
 
-        return DateTimeImmutable::createFromFormat('U.u e', $timestamp)
-            ->setTimezone($date->getTimezone())
-        ;
+        $result = DateTimeImmutable::createFromFormat('U.u e', $timestamp);
+
+        if (false === $result) {
+            return;
+        }
+
+        return $result->setTimezone($date->getTimezone());
     }
 
     /**

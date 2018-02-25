@@ -39,7 +39,7 @@ abstract class AbstractDatePartsSolarSplitter implements UnixTimeConverterInterf
                 $dayIndex -= $size;
             }
 
-            throw new InvalidArgumentException(
+            throw new OutOfBoundsException(
                 'Input dayIndex too big for given fragment sizes'
             );
         }

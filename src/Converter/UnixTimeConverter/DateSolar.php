@@ -25,7 +25,7 @@ class DateSolar implements UnixTimeConverterInterface
     /**
      * Day length in seconds.
      *
-     * @var integer
+     * @var integer|float|string
      */
     protected $dayLengthInSeconds = 24 * 3600;
 
@@ -41,7 +41,7 @@ class DateSolar implements UnixTimeConverterInterface
      *
      * @param LeapYearCalculatorInterface $calculator         Leap year calculator.
      * @param integer                     $eraStart           Era start unix time.
-     * @param integer|null                $dayLengthInSeconds Day length in seconds.
+     * @param integer|float|string|null   $dayLengthInSeconds Day length in seconds.
      */
     public function __construct(LeapYearCalculatorInterface $calculator, $eraStart, $dayLengthInSeconds = null)
     {
@@ -93,7 +93,7 @@ class DateSolar implements UnixTimeConverterInterface
 
             $conversion->setUnixTime(bcsub(
                 $relativeTime,
-                bcmul($eraDayIndex * $this->dayLengthInSeconds)
+                bcmul($eraDayIndex, $this->dayLengthInSeconds)
             ));
         }
 

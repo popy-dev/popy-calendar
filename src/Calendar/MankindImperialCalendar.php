@@ -3,6 +3,7 @@
 namespace Popy\Calendar\Calendar;
 
 use DateTimeZone;
+use RuntimeException;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Popy\Calendar\CalendarInterface;
@@ -52,7 +53,7 @@ class MankindImperialCalendar implements CalendarInterface
      */
     public function formatDateRepresentation(DateRepresentationInterface $input, $format)
     {
-        throw new RunetimeException('Not implemented');
+        throw new RuntimeException('Not implemented');
     }
 
     /**
@@ -81,7 +82,7 @@ class MankindImperialCalendar implements CalendarInterface
         $seconds = $match[2] * $yearLength / 1000;
 
 
-        return $res->modify('+' . $seconds . 'seconds');
+        return $res->modify('+' . $seconds . 'seconds') ?: null;
     }
 
     /**
@@ -89,6 +90,6 @@ class MankindImperialCalendar implements CalendarInterface
      */
     public function parseToDateRepresentation($input, $format, DateTimeZone $timezone = null)
     {
-        throw new RunetimeException('Not implemented');
+        throw new RuntimeException('Not implemented');
     }
 }

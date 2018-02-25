@@ -23,6 +23,20 @@ use Popy\Calendar\Parser\SymbolParser\PregNative;
 class PregExtendedNative implements FormatParserInterface
 {
     /**
+     * Format lexer.
+     *
+     * @var FormatLexerInterface
+     */
+    protected $lexer;
+    
+    /**
+     * Symbol Parser.
+     *
+     * @var SymbolParserInterface
+     */
+    protected $symbolParser;
+
+    /**
      * Class constructor.
      *
      * @param FormatLexerInterface|null  $lexer        Format lexer.

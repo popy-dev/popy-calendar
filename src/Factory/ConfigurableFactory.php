@@ -2,6 +2,7 @@
 
 namespace Popy\Calendar\Factory;
 
+use InvalidArgumentException;
 use Popy\Calendar\Calendar\ComposedCalendar;
 use Popy\Calendar\Converter\AgnosticConverter;
 use Popy\Calendar\Converter\UnixTimeConverter;

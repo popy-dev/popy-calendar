@@ -17,7 +17,6 @@ class MbString implements FormatLexerInterface
     {
         $res = [];
         $escaped = false;
-        $symbols = str_split($format, 1);
         $length = mb_strlen($format);
 
         for ($i=0; $i < $length; $i++) {

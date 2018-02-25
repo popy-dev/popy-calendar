@@ -4,7 +4,7 @@ namespace Popy\Calendar\Calendar;
 
 use DateTimeZone;
 use DateTimeImmutable;
-use RunetimeException;
+use RuntimeException;
 use DateTimeInterface;
 use Popy\Calendar\CalendarInterface;
 use Popy\Calendar\ValueObject\DateRepresentationInterface;
@@ -27,7 +27,7 @@ class GregorianCalendar implements CalendarInterface
      */
     public function formatDateRepresentation(DateRepresentationInterface $input, $format)
     {
-        throw new RunetimeException('Not implemented');
+        throw new RuntimeException('Not implemented');
     }
 
     /**
@@ -47,6 +47,6 @@ class GregorianCalendar implements CalendarInterface
      */
     public function parseToDateRepresentation($input, $format, DateTimeZone $timezone = null)
     {
-        throw new RunetimeException('Not implemented');
+        throw new RuntimeException('Not implemented');
     }
 }
