@@ -65,6 +65,9 @@ class DateSolar implements UnixTimeConverterInterface
 
         $res = $conversion->getTo();
 
+        // TODO : remove code repetition by using a separate abstraction
+        // handling basic math operations.
+
         if (is_integer($this->dayLengthInSeconds) || !class_exists(BC::class)) {
             // bc not needed/not available
 
