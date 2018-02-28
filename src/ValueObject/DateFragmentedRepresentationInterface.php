@@ -17,9 +17,9 @@ interface DateFragmentedRepresentationInterface extends DateRepresentationInterf
     /**
      * Gets a new date instance with the input DateParts.
      *
-     * @param DateParts $DateParts
+     * @param DateParts $dateParts
      *
      * @return static
      */
-    public function withDateParts(DateParts $DateParts);
+    public function withDateParts(DateParts $dateParts);
 }

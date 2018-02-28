@@ -28,7 +28,7 @@ abstract class AbstractDatePartsSolarSplitter implements UnixTimeConverterInterf
 
         $fragments = $resultSizes = [];
 
-        foreach ($this->getAllFragmentSizes($input) as $frag => $sizes) {
+        foreach ($this->getAllFragmentSizes($input) as $sizes) {
             foreach ($sizes as $k => $size) {
                 if ($dayIndex < $size) {
                     $fragments[] = $k;

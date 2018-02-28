@@ -35,7 +35,7 @@ class Collection implements DateLexerInterface
     {
         $result = new DateLexerResult($offset);
 
-        foreach ($this->lexers as $k => $lexer) {
+        foreach ($this->lexers as $lexer) {
             if (null === $res = $lexer->tokenizeDate($string, $result->getOffset())) {
                 // A lexer failed to match : exit.
                 return null;

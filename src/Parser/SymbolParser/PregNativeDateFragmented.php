@@ -126,7 +126,7 @@ class PregNativeDateFragmented implements SymbolParserInterface
         $choices = [];
         $i = 0;
 
-        while (null !== $label = $this->locale->{"get${x}Name"}($i++)) {
+        while (null !== $label = $this->locale->{'get' . $x . 'Name'}($i++)) {
             $choices[] = $label;
         }
 

@@ -78,7 +78,7 @@ abstract class AbstractFragmentedDuration
     {
         $res = 0;
 
-        foreach ($this->fragments as $index => $value) {
+        foreach ($this->fragments as $value) {
             if (null === $value) {
                 break;
             }
