@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /home/popy/Documents/popy-calendar/src</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/nv.d3.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <!--[if lt IE 9]>
+  <script src="js/html5shiv.min.js"></script>
+  <script src="js/respond.min.js"></script>
+  <![endif]-->
+ </head>
+ <body>
+  <header>
+   <div class="container">
+    <div class="row">
+     <div class="col-md-12">
+      <ol class="breadcrumb">
+        <li><a href="index.html">/home/popy/Documents/popy-calendar/src</a></li>
+        <li class="active">(Dashboard)</li>
+
+      </ol>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Formatter/NullFormatter.php.html#9">NullFormatter</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/NullParser.php.html#11">NullParser</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Formatter/NumberConverter/Roman.php.html#10">Roman</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/DateLexer/Alternatives.php.html#12">Alternatives</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/DateLexer/NonSymbolMatcher.php.html#12">NonSymbolMatcher</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/DateLexer/Collection.php.html#12">Collection</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Converter/LeapYearCalculator/VonMadler.php.html#8">VonMadler</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/FormatParser/Basic.php.html#21">Basic</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Converter/LeapYearCalculator/Caesar.php.html#9">Caesar</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calendar/MankindImperialCalendar.php.html#15">MankindImperialCalendar</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Converter/LeapYearCalculator/Persian.php.html#10">Persian</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Converter/LeapYearCalculator/Futuristic.php.html#9">Futuristic</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Converter/LeapYearCalculator/NoLeap.php.html#8">NoLeap</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Converter/UnixTimeConverter/SimpleWeeks.php.html#13">SimpleWeeks</a></td><td class="text-right">34%</td></tr>
+       <tr><td><a href="Calendar/GregorianCalendar.php.html#15">GregorianCalendar</a></td><td class="text-right">50%</td></tr>
+       <tr><td><a href="ValueObject/DateRepresentation/Date.php.html#14">Date</a></td><td class="text-right">65%</td></tr>
+       <tr><td><a href="ValueObject/Time.php.html#16">Time</a></td><td class="text-right">70%</td></tr>
+       <tr><td><a href="Converter/LeapYearCalculator/FloatBased.php.html#8">FloatBased</a></td><td class="text-right">75%</td></tr>
+       <tr><td><a href="Calendar/ComposedCalendar.php.html#15">ComposedCalendar</a></td><td class="text-right">75%</td></tr>
+       <tr><td><a href="Parser/DateLexerResult.php.html#8">DateLexerResult</a></td><td class="text-right">76%</td></tr>
+       <tr><td><a href="Converter/UnixTimeConverter/DateSolar.php.html#17">DateSolar</a></td><td class="text-right">76%</td></tr>
+       <tr><td><a href="Parser/DateLexer/PregCollection.php.html#19">PregCollection</a></td><td class="text-right">76%</td></tr>
+       <tr><td><a href="ValueObject/AbstractFragmentedDuration.php.html#5">AbstractFragmentedDuration</a></td><td class="text-right">80%</td></tr>
+       <tr><td><a href="Parser/AgnosticParser.php.html#14">AgnosticParser</a></td><td class="text-right">81%</td></tr>
+       <tr><td><a href="Parser/FormatToken.php.html#8">FormatToken</a></td><td class="text-right">82%</td></tr>
+       <tr><td><a href="Parser/DateLexer/PregSimple.php.html#15">PregSimple</a></td><td class="text-right">82%</td></tr>
+       <tr><td><a href="Parser/FormatParser/PregExtendedNative.php.html#23">PregExtendedNative</a></td><td class="text-right">83%</td></tr>
+       <tr><td><a href="Converter/UnixTimeConverter/Iso8601Weeks.php.html#14">Iso8601Weeks</a></td><td class="text-right">84%</td></tr>
+       <tr><td><a href="Factory/ConfigurableFactory.php.html#20">ConfigurableFactory</a></td><td class="text-right">85%</td></tr>
+       <tr><td><a href="Converter/UnixTimeConverter/AbstractDatePartsSolarSplitter.php.html#11">AbstractDatePartsSolarSplitter</a></td><td class="text-right">86%</td></tr>
+       <tr><td><a href="Parser/SymbolParser/Chain.php.html#16">Chain</a></td><td class="text-right">87%</td></tr>
+       <tr><td><a href="Parser/ResultMapper/StandardDateSolar.php.html#13">StandardDateSolar</a></td><td class="text-right">88%</td></tr>
+       <tr><td><a href="Parser/SymbolParser/PregNativeRFC2550.php.html#14">PregNativeRFC2550</a></td><td class="text-right">88%</td></tr>
+       <tr><td><a href="Parser/DateLexer/PregChoice.php.html#9">PregChoice</a></td><td class="text-right">89%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Formatter/NumberConverter/Roman.php.html#10">Roman</a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="Parser/FormatParser/Basic.php.html#21">Basic</a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="Calendar/MankindImperialCalendar.php.html#15">MankindImperialCalendar</a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="Factory/ConfigurableFactory.php.html#20">ConfigurableFactory</a></td><td class="text-right">51</td></tr>
+       <tr><td><a href="Converter/LeapYearCalculator/Futuristic.php.html#9">Futuristic</a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Converter/UnixTimeConverter/SimpleWeeks.php.html#13">SimpleWeeks</a></td><td class="text-right">38</td></tr>
+       <tr><td><a href="ValueObject/Time.php.html#16">Time</a></td><td class="text-right">34</td></tr>
+       <tr><td><a href="Parser/DateLexer/NonSymbolMatcher.php.html#12">NonSymbolMatcher</a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Converter/LeapYearCalculator/Persian.php.html#10">Persian</a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="ValueObject/AbstractFragmentedDuration.php.html#5">AbstractFragmentedDuration</a></td><td class="text-right">29</td></tr>
+       <tr><td><a href="ValueObject/DateRepresentation/Date.php.html#14">Date</a></td><td class="text-right">26</td></tr>
+       <tr><td><a href="Parser/DateLexer/Collection.php.html#12">Collection</a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Parser/DateLexer/Alternatives.php.html#12">Alternatives</a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Converter/UnixTimeConverter/Iso8601Weeks.php.html#14">Iso8601Weeks</a></td><td class="text-right">18</td></tr>
+       <tr><td><a href="Parser/FormatToken.php.html#8">FormatToken</a></td><td class="text-right">17</td></tr>
+       <tr><td><a href="Converter/UnixTimeConverter/AbstractDatePartsSolarSplitter.php.html#11">AbstractDatePartsSolarSplitter</a></td><td class="text-right">16</td></tr>
+       <tr><td><a href="Parser/DateLexer/PregCollection.php.html#19">PregCollection</a></td><td class="text-right">15</td></tr>
+       <tr><td><a href="Calendar/GregorianCalendar.php.html#15">GregorianCalendar</a></td><td class="text-right">13</td></tr>
+       <tr><td><a href="Parser/DateLexer/PregSimple.php.html#15">PregSimple</a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Parser/FormatParser/PregExtendedNative.php.html#23">PregExtendedNative</a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Parser/AgnosticParser.php.html#14">AgnosticParser</a></td><td class="text-right">11</td></tr>
+       <tr><td><a href="Parser/DateLexerResult.php.html#8">DateLexerResult</a></td><td class="text-right">10</td></tr>
+       <tr><td><a href="Converter/UnixTimeConverter/DateSolar.php.html#17">DateSolar</a></td><td class="text-right">10</td></tr>
+       <tr><td><a href="Parser/DateLexer/PregChoice.php.html#9">PregChoice</a></td><td class="text-right">9</td></tr>
+       <tr><td><a href="Parser/SymbolParser/Chain.php.html#16">Chain</a></td><td class="text-right">8</td></tr>
+       <tr><td><a href="Converter/LeapYearCalculator/VonMadler.php.html#8">VonMadler</a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Parser/ResultMapper/StandardDateSolar.php.html#13">StandardDateSolar</a></td><td class="text-right">5</td></tr>
+       <tr><td><a href="Parser/SymbolParser/PregNativeRFC2550.php.html#14">PregNativeRFC2550</a></td><td class="text-right">4</td></tr>
+       <tr><td><a href="Converter/LeapYearCalculator/FloatBased.php.html#8">FloatBased</a></td><td class="text-right">3</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Factory/ConfigurableFactory.php.html#129"><abbr title="ConfigurableFactory::buildConverter">buildConverter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Factory/ConfigurableFactory.php.html#119"><abbr title="ConfigurableFactory::buildParser">buildParser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/FormatToken.php.html#176"><abbr title="FormatToken::getType">getType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/FormatToken.php.html#75"><abbr title="FormatToken::withAlias">withAlias</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/FormatParser/Basic.php.html#53"><abbr title="Basic::parseFormat">parseFormat</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Factory/ConfigurableFactory.php.html#109"><abbr title="ConfigurableFactory::buildFormatter">buildFormatter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ValueObject/Time.php.html#197"><abbr title="Time::withHalveds">withHalveds</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/NullParser.php.html#16"><abbr title="NullParser::parse">parse</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/DateLexer/NonSymbolMatcher.php.html#34"><abbr title="NonSymbolMatcher::tokenizeDate">tokenizeDate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ValueObject/Time.php.html#158"><abbr title="Time::isHalved">isHalved</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ValueObject/Time.php.html#170"><abbr title="Time::allHalved">allHalved</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Formatter/NullFormatter.php.html#14"><abbr title="NullFormatter::format">format</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Formatter/NullFormatter.php.html#22"><abbr title="NullFormatter::formatDateRepresentation">formatDateRepresentation</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/DateLexer/Alternatives.php.html#34"><abbr title="Alternatives::tokenizeDate">tokenizeDate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/DateLexer/Collection.php.html#26"><abbr title="Collection::addLexer">addLexer</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/DateLexer/Collection.php.html#34"><abbr title="Collection::tokenizeDate">tokenizeDate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/DateLexer/NonSymbolMatcher.php.html#26"><abbr title="NonSymbolMatcher::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/DateLexer/Alternatives.php.html#26"><abbr title="Alternatives::addLexer">addLexer</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/DateLexerResult.php.html#39"><abbr title="DateLexerResult::getOffset">getOffset</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Formatter/NumberConverter/Roman.php.html#31"><abbr title="Roman::to">to</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Formatter/NumberConverter/Roman.php.html#52"><abbr title="Roman::from">from</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/FormatParser/Basic.php.html#43"><abbr title="Basic::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/DateLexerResult.php.html#79"><abbr title="DateLexerResult::merge">merge</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/NullParser.php.html#24"><abbr title="NullParser::parseToDateRepresentation">parseToDateRepresentation</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ValueObject/Time.php.html#143"><abbr title="Time::withRatio">withRatio</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calendar/MankindImperialCalendar.php.html#91"><abbr title="MankindImperialCalendar::parseToDateRepresentation">parseToDateRepresentation</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calendar/MankindImperialCalendar.php.html#62"><abbr title="MankindImperialCalendar::parse">parse</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Converter/LeapYearCalculator/Caesar.php.html#14"><abbr title="Caesar::isLeapYear">isLeapYear</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Converter/LeapYearCalculator/Futuristic.php.html#14"><abbr title="Futuristic::isLeapYear">isLeapYear</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Converter/LeapYearCalculator/NoLeap.php.html#13"><abbr title="NoLeap::isLeapYear">isLeapYear</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calendar/MankindImperialCalendar.php.html#54"><abbr title="MankindImperialCalendar::formatDateRepresentation">formatDateRepresentation</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calendar/MankindImperialCalendar.php.html#20"><abbr title="MankindImperialCalendar::format">format</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calendar/ComposedCalendar.php.html#70"><abbr title="ComposedCalendar::parseToDateRepresentation">parseToDateRepresentation</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calendar/GregorianCalendar.php.html#28"><abbr title="GregorianCalendar::formatDateRepresentation">formatDateRepresentation</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ValueObject/AbstractFragmentedDuration.php.html#218"><abbr title="AbstractFragmentedDuration::allTransversals">allTransversals</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Calendar/GregorianCalendar.php.html#48"><abbr title="GregorianCalendar::parseToDateRepresentation">parseToDateRepresentation</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Converter/UnixTimeConverter/SimpleWeeks.php.html#58"><abbr title="SimpleWeeks::toUnixTime">toUnixTime</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Converter/LeapYearCalculator/Persian.php.html#15"><abbr title="Persian::isLeapYear">isLeapYear</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ValueObject/DateRepresentation/Date.php.html#162"><abbr title="Date::fromRepresentation">fromRepresentation</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ValueObject/AbstractFragmentedDuration.php.html#153"><abbr title="AbstractFragmentedDuration::withSize">withSize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ValueObject/AbstractFragmentedDuration.php.html#142"><abbr title="AbstractFragmentedDuration::allSizes">allSizes</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ValueObject/AbstractFragmentedDuration.php.html#98"><abbr title="AbstractFragmentedDuration::with">with</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ValueObject/DateRepresentation/Date.php.html#130"><abbr title="Date::buildFromMicroTime">buildFromMicroTime</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ValueObject/DateRepresentation/Date.php.html#121"><abbr title="Date::buildFromUnixTime">buildFromUnixTime</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Converter/LeapYearCalculator/VonMadler.php.html#13"><abbr title="VonMadler::isLeapYear">isLeapYear</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Parser/DateLexer/PregCollection.php.html#117"><abbr title="PregCollection::compileExpressions">compileExpressions</abbr></a></td><td class="text-right">30%</td></tr>
+       <tr><td><a href="Factory/ConfigurableFactory.php.html#404"><abbr title="ConfigurableFactory::getOptionValueChoice">getOptionValueChoice</abbr></a></td><td class="text-right">36%</td></tr>
+       <tr><td><a href="Calendar/ComposedCalendar.php.html#54"><abbr title="ComposedCalendar::formatDateRepresentation">formatDateRepresentation</abbr></a></td><td class="text-right">50%</td></tr>
+       <tr><td><a href="Factory/ConfigurableFactory.php.html#388"><abbr title="ConfigurableFactory::getOptionValue">getOptionValue</abbr></a></td><td class="text-right">57%</td></tr>
+       <tr><td><a href="Converter/LeapYearCalculator/FloatBased.php.html#36"><abbr title="FloatBased::isLeapYear">isLeapYear</abbr></a></td><td class="text-right">57%</td></tr>
+       <tr><td><a href="ValueObject/AbstractFragmentedDuration.php.html#188"><abbr title="AbstractFragmentedDuration::insertInList">insertInList</abbr></a></td><td class="text-right">60%</td></tr>
+       <tr><td><a href="Parser/SymbolParser/Chain.php.html#40"><abbr title="Chain::addParser">addParser</abbr></a></td><td class="text-right">60%</td></tr>
+       <tr><td><a href="Parser/AgnosticParser.php.html#86"><abbr title="AgnosticParser::parseToDateRepresentation">parseToDateRepresentation</abbr></a></td><td class="text-right">62%</td></tr>
+       <tr><td><a href="Factory/ConfigurableFactory.php.html#232"><abbr title="ConfigurableFactory::getTime">getTime</abbr></a></td><td class="text-right">63%</td></tr>
+       <tr><td><a href="Converter/UnixTimeConverter/DateSolar.php.html#60"><abbr title="DateSolar::fromUnixTime">fromUnixTime</abbr></a></td><td class="text-right">65%</td></tr>
+       <tr><td><a href="ValueObject/Time.php.html#94"><abbr title="Time::getHalved">getHalved</abbr></a></td><td class="text-right">66%</td></tr>
+       <tr><td><a href="ValueObject/AbstractFragmentedDuration.php.html#130"><abbr title="AbstractFragmentedDuration::getSize">getSize</abbr></a></td><td class="text-right">66%</td></tr>
+       <tr><td><a href="Calendar/GregorianCalendar.php.html#36"><abbr title="GregorianCalendar::parse">parse</abbr></a></td><td class="text-right">66%</td></tr>
+       <tr><td><a href="Parser/DateLexer/PregSimple.php.html#44"><abbr title="PregSimple::__construct">__construct</abbr></a></td><td class="text-right">68%</td></tr>
+       <tr><td><a href="Formatter/AgnosticFormatter.php.html#55"><abbr title="AgnosticFormatter::format">format</abbr></a></td><td class="text-right">75%</td></tr>
+       <tr><td><a href="ValueObject/Time.php.html#108"><abbr title="Time::canBeHalved">canBeHalved</abbr></a></td><td class="text-right">75%</td></tr>
+       <tr><td><a href="Parser/ResultMapper/StandardDateSolar.php.html#18"><abbr title="StandardDateSolar::map">map</abbr></a></td><td class="text-right">80%</td></tr>
+       <tr><td><a href="Parser/DateLexer/PregChoice.php.html#32"><abbr title="PregChoice::__construct">__construct</abbr></a></td><td class="text-right">81%</td></tr>
+       <tr><td><a href="Converter/UnixTimeConverter/AbstractDatePartsSolarSplitter.php.html#61"><abbr title="AbstractDatePartsSolarSplitter::toUnixTime">toUnixTime</abbr></a></td><td class="text-right">82%</td></tr>
+       <tr><td><a href="Parser/FormatParser/PregExtendedNative.php.html#54"><abbr title="PregExtendedNative::parseFormat">parseFormat</abbr></a></td><td class="text-right">82%</td></tr>
+       <tr><td><a href="Converter/UnixTimeConverter/Iso8601Weeks.php.html#48"><abbr title="Iso8601Weeks::fromUnixTime">fromUnixTime</abbr></a></td><td class="text-right">82%</td></tr>
+       <tr><td><a href="Factory/ConfigurableFactory.php.html#142"><abbr title="ConfigurableFactory::get">get</abbr></a></td><td class="text-right">83%</td></tr>
+       <tr><td><a href="Converter/UnixTimeConverter/Iso8601Weeks.php.html#102"><abbr title="Iso8601Weeks::toUnixTime">toUnixTime</abbr></a></td><td class="text-right">84%</td></tr>
+       <tr><td><a href="Parser/ResultMapper/StandardDateFragmented.php.html#86"><abbr title="StandardDateFragmented::determineDayOfWeek">determineDayOfWeek</abbr></a></td><td class="text-right">85%</td></tr>
+       <tr><td><a href="Parser/ResultMapper/StandardDate.php.html#99"><abbr title="StandardDate::determineTimezone">determineTimezone</abbr></a></td><td class="text-right">85%</td></tr>
+       <tr><td><a href="Parser/AgnosticParser.php.html#54"><abbr title="AgnosticParser::parse">parse</abbr></a></td><td class="text-right">86%</td></tr>
+       <tr><td><a href="Factory/ConfigurableFactory.php.html#174"><abbr title="ConfigurableFactory::getLocale">getLocale</abbr></a></td><td class="text-right">87%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Converter/LeapYearCalculator/Futuristic.php.html#14"><abbr title="Futuristic::isLeapYear">isLeapYear</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Converter/UnixTimeConverter/SimpleWeeks.php.html#58"><abbr title="SimpleWeeks::toUnixTime">toUnixTime</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Parser/FormatParser/Basic.php.html#53"><abbr title="Basic::parseFormat">parseFormat</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Converter/LeapYearCalculator/Persian.php.html#15"><abbr title="Persian::isLeapYear">isLeapYear</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Formatter/NumberConverter/Roman.php.html#52"><abbr title="Roman::from">from</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Formatter/NumberConverter/Roman.php.html#31"><abbr title="Roman::to">to</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Parser/DateLexer/NonSymbolMatcher.php.html#34"><abbr title="NonSymbolMatcher::tokenizeDate">tokenizeDate</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Calendar/MankindImperialCalendar.php.html#62"><abbr title="MankindImperialCalendar::parse">parse</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Parser/DateLexer/Collection.php.html#34"><abbr title="Collection::tokenizeDate">tokenizeDate</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Parser/DateLexer/Alternatives.php.html#34"><abbr title="Alternatives::tokenizeDate">tokenizeDate</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Parser/FormatParser/Basic.php.html#43"><abbr title="Basic::__construct">__construct</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Parser/DateLexer/PregCollection.php.html#117"><abbr title="PregCollection::compileExpressions">compileExpressions</abbr></a></td><td class="text-right">9</td></tr>
+       <tr><td><a href="Converter/UnixTimeConverter/AbstractDatePartsSolarSplitter.php.html#61"><abbr title="AbstractDatePartsSolarSplitter::toUnixTime">toUnixTime</abbr></a></td><td class="text-right">9</td></tr>
+       <tr><td><a href="Parser/FormatParser/PregExtendedNative.php.html#54"><abbr title="PregExtendedNative::parseFormat">parseFormat</abbr></a></td><td class="text-right">9</td></tr>
+       <tr><td><a href="Converter/UnixTimeConverter/Iso8601Weeks.php.html#102"><abbr title="Iso8601Weeks::toUnixTime">toUnixTime</abbr></a></td><td class="text-right">9</td></tr>
+       <tr><td><a href="Factory/ConfigurableFactory.php.html#232"><abbr title="ConfigurableFactory::getTime">getTime</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Converter/UnixTimeConverter/Iso8601Weeks.php.html#48"><abbr title="Iso8601Weeks::fromUnixTime">fromUnixTime</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Parser/AgnosticParser.php.html#54"><abbr title="AgnosticParser::parse">parse</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Converter/UnixTimeConverter/DateSolar.php.html#60"><abbr title="DateSolar::fromUnixTime">fromUnixTime</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Converter/LeapYearCalculator/VonMadler.php.html#13"><abbr title="VonMadler::isLeapYear">isLeapYear</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ValueObject/Time.php.html#158"><abbr title="Time::isHalved">isHalved</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Calendar/MankindImperialCalendar.php.html#20"><abbr title="MankindImperialCalendar::format">format</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Parser/DateLexer/PregSimple.php.html#44"><abbr title="PregSimple::__construct">__construct</abbr></a></td><td class="text-right">5</td></tr>
+       <tr><td><a href="Factory/ConfigurableFactory.php.html#404"><abbr title="ConfigurableFactory::getOptionValueChoice">getOptionValueChoice</abbr></a></td><td class="text-right">5</td></tr>
+       <tr><td><a href="Parser/AgnosticParser.php.html#86"><abbr title="AgnosticParser::parseToDateRepresentation">parseToDateRepresentation</abbr></a></td><td class="text-right">4</td></tr>
+       <tr><td><a href="Calendar/GregorianCalendar.php.html#36"><abbr title="GregorianCalendar::parse">parse</abbr></a></td><td class="text-right">4</td></tr>
+       <tr><td><a href="ValueObject/Time.php.html#108"><abbr title="Time::canBeHalved">canBeHalved</abbr></a></td><td class="text-right">4</td></tr>
+       <tr><td><a href="Parser/ResultMapper/StandardDate.php.html#99"><abbr title="StandardDate::determineTimezone">determineTimezone</abbr></a></td><td class="text-right">4</td></tr>
+       <tr><td><a href="Parser/ResultMapper/StandardDateFragmented.php.html#86"><abbr title="StandardDateFragmented::determineDayOfWeek">determineDayOfWeek</abbr></a></td><td class="text-right">4</td></tr>
+       <tr><td><a href="Factory/ConfigurableFactory.php.html#388"><abbr title="ConfigurableFactory::getOptionValue">getOptionValue</abbr></a></td><td class="text-right">3</td></tr>
+       <tr><td><a href="ValueObject/Time.php.html#94"><abbr title="Time::getHalved">getHalved</abbr></a></td><td class="text-right">3</td></tr>
+       <tr><td><a href="Parser/DateLexer/PregChoice.php.html#32"><abbr title="PregChoice::__construct">__construct</abbr></a></td><td class="text-right">3</td></tr>
+       <tr><td><a href="Factory/ConfigurableFactory.php.html#142"><abbr title="ConfigurableFactory::get">get</abbr></a></td><td class="text-right">3</td></tr>
+       <tr><td><a href="Converter/LeapYearCalculator/FloatBased.php.html#36"><abbr title="FloatBased::isLeapYear">isLeapYear</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="ValueObject/AbstractFragmentedDuration.php.html#188"><abbr title="AbstractFragmentedDuration::insertInList">insertInList</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="Parser/SymbolParser/Chain.php.html#40"><abbr title="Chain::addParser">addParser</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="ValueObject/AbstractFragmentedDuration.php.html#130"><abbr title="AbstractFragmentedDuration::getSize">getSize</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="Formatter/AgnosticFormatter.php.html#55"><abbr title="AgnosticFormatter::format">format</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="Parser/ResultMapper/StandardDateSolar.php.html#18"><abbr title="StandardDateSolar::map">map</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="Factory/ConfigurableFactory.php.html#174"><abbr title="ConfigurableFactory::getLocale">getLocale</abbr></a></td><td class="text-right">2</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 4.0.8</a> using <a href="https://secure.php.net/" target="_top">PHP 5.6.33-3+ubuntu16.04.1+deb.sury.org+1</a> with <a href="https://xdebug.org/">Xdebug 2.5.5</a> and <a href="https://phpunit.de/">PHPUnit 5.7.27</a> at Wed Feb 28 22:52:01 UTC 2018.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="js/jquery.min.js" type="text/javascript"></script>
+  <script src="js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="js/holder.min.js" type="text/javascript"></script>
+  <script src="js/d3.min.js" type="text/javascript"></script>
+  <script src="js/nv.d3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([13,0,0,0,1,0,1,1,6,12,9,23], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([45,0,0,0,2,0,3,9,2,11,15,151], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[75,5,"<a href=\"Calendar\/ComposedCalendar.php.html#15\">ComposedCalendar<\/a>"],[50,7,"<a href=\"Calendar\/GregorianCalendar.php.html#15\">GregorianCalendar<\/a>"],[0,7,"<a href=\"Calendar\/MankindImperialCalendar.php.html#15\">MankindImperialCalendar<\/a>"],[100,3,"<a href=\"Converter\/AgnosticConverter.php.html#15\">AgnosticConverter<\/a>"],[100,8,"<a href=\"Converter\/Conversion.php.html#8\">Conversion<\/a>"],[100,10,"<a href=\"Converter\/LeapYearCalculator\/AbstractCalculator.php.html#11\">AbstractCalculator<\/a>"],[0,1,"<a href=\"Converter\/LeapYearCalculator\/Caesar.php.html#9\">Caesar<\/a>"],[75,3,"<a href=\"Converter\/LeapYearCalculator\/FloatBased.php.html#8\">FloatBased<\/a>"],[0,6,"<a href=\"Converter\/LeapYearCalculator\/Futuristic.php.html#9\">Futuristic<\/a>"],[100,3,"<a href=\"Converter\/LeapYearCalculator\/Modern.php.html#8\">Modern<\/a>"],[0,1,"<a href=\"Converter\/LeapYearCalculator\/NoLeap.php.html#8\">NoLeap<\/a>"],[0,5,"<a href=\"Converter\/LeapYearCalculator\/Persian.php.html#10\">Persian<\/a>"],[0,2,"<a href=\"Converter\/LeapYearCalculator\/VonMadler.php.html#8\">VonMadler<\/a>"],[86.538461538462,16,"<a href=\"Converter\/UnixTimeConverter\/AbstractDatePartsSolarSplitter.php.html#11\">AbstractDatePartsSolarSplitter<\/a>"],[87.5,8,"<a href=\"Parser\/SymbolParser\/Chain.php.html#16\">Chain<\/a>"],[65.957446808511,16,"<a href=\"ValueObject\/DateRepresentation\/Date.php.html#14\">Date<\/a>"],[76.595744680851,9,"<a href=\"Converter\/UnixTimeConverter\/DateSolar.php.html#17\">DateSolar<\/a>"],[100,2,"<a href=\"Converter\/UnixTimeConverter\/EqualLengthMonthes.php.html#11\">EqualLengthMonthes<\/a>"],[100,2,"<a href=\"Converter\/UnixTimeConverter\/GregorianCalendarMonthes.php.html#11\">GregorianCalendarMonthes<\/a>"],[84.848484848485,17,"<a href=\"Converter\/UnixTimeConverter\/Iso8601Weeks.php.html#14\">Iso8601Weeks<\/a>"],[34.285714285714,10,"<a href=\"Converter\/UnixTimeConverter\/SimpleWeeks.php.html#13\">SimpleWeeks<\/a>"],[100,1,"<a href=\"Parser\/ResultMapper\/StandardDateFactory.php.html#13\">StandardDateFactory<\/a>"],[70.212765957447,22,"<a href=\"ValueObject\/Time.php.html#16\">Time<\/a>"],[100,11,"<a href=\"ValueObject\/TimeOffset.php.html#15\">TimeOffset<\/a>"],[85.185185185185,45,"<a href=\"Factory\/ConfigurableFactory.php.html#20\">ConfigurableFactory<\/a>"],[92.857142857143,5,"<a href=\"Formatter\/AgnosticFormatter.php.html#15\">AgnosticFormatter<\/a>"],[100,11,"<a href=\"Formatter\/Localisation\/NativeHardcoded.php.html#11\">NativeHardcoded<\/a>"],[0,2,"<a href=\"Formatter\/NullFormatter.php.html#9\">NullFormatter<\/a>"],[98.275862068966,7,"<a href=\"Formatter\/NumberConverter\/RFC2550.php.html#12\">RFC2550<\/a>"],[0,9,"<a href=\"Formatter\/NumberConverter\/Roman.php.html#10\">Roman<\/a>"],[100,5,"<a href=\"Formatter\/NumberConverter\/TwoDigitsYear.php.html#11\">TwoDigitsYear<\/a>"],[100,5,"<a href=\"Formatter\/SymbolFormatter\/Litteral.php.html#13\">Litteral<\/a>"],[92.682926829268,12,"<a href=\"Parser\/ResultMapper\/StandardDate.php.html#14\">StandardDate<\/a>"],[93.75,14,"<a href=\"Parser\/ResultMapper\/StandardDateFragmented.php.html#15\">StandardDateFragmented<\/a>"],[88.888888888889,5,"<a href=\"Parser\/ResultMapper\/StandardDateSolar.php.html#13\">StandardDateSolar<\/a>"],[95,7,"<a href=\"Parser\/ResultMapper\/StandardDateTime.php.html#13\">StandardDateTime<\/a>"],[100,3,"<a href=\"Formatter\/SymbolFormatter\/StandardRecursive.php.html#13\">StandardRecursive<\/a>"],[81.481481481481,11,"<a href=\"Parser\/AgnosticParser.php.html#14\">AgnosticParser<\/a>"],[91.666666666667,2,"<a href=\"Parser\/DateLexer\/AbstractPreg.php.html#11\">AbstractPreg<\/a>"],[0,4,"<a href=\"Parser\/DateLexer\/Alternatives.php.html#12\">Alternatives<\/a>"],[0,4,"<a href=\"Parser\/DateLexer\/Collection.php.html#12\">Collection<\/a>"],[0,5,"<a href=\"Parser\/DateLexer\/NonSymbolMatcher.php.html#12\">NonSymbolMatcher<\/a>"],[89.655172413793,9,"<a href=\"Parser\/DateLexer\/PregChoice.php.html#9\">PregChoice<\/a>"],[76.666666666667,13,"<a href=\"Parser\/DateLexer\/PregCollection.php.html#19\">PregCollection<\/a>"],[82.758620689655,12,"<a href=\"Parser\/DateLexer\/PregSimple.php.html#15\">PregSimple<\/a>"],[76.470588235294,9,"<a href=\"Parser\/DateLexerResult.php.html#8\">DateLexerResult<\/a>"],[100,4,"<a href=\"Parser\/FormatLexer\/MbString.php.html#11\">MbString<\/a>"],[0,8,"<a href=\"Parser\/FormatParser\/Basic.php.html#21\">Basic<\/a>"],[83.870967741935,12,"<a href=\"Parser\/FormatParser\/PregExtendedNative.php.html#23\">PregExtendedNative<\/a>"],[82.608695652174,16,"<a href=\"Parser\/FormatToken.php.html#8\">FormatToken<\/a>"],[0,2,"<a href=\"Parser\/NullParser.php.html#11\">NullParser<\/a>"],[100,9,"<a href=\"Parser\/SymbolParser\/PregNativeDate.php.html#14\">PregNativeDate<\/a>"],[96,24,"<a href=\"Parser\/SymbolParser\/PregNativeDateFragmented.php.html#16\">PregNativeDateFragmented<\/a>"],[93.333333333333,7,"<a href=\"Parser\/SymbolParser\/PregNativeDateSolar.php.html#14\">PregNativeDateSolar<\/a>"],[94.736842105263,10,"<a href=\"Parser\/SymbolParser\/PregNativeDateTime.php.html#14\">PregNativeDateTime<\/a>"],[88.888888888889,4,"<a href=\"Parser\/SymbolParser\/PregNativeRFC2550.php.html#14\">PregNativeRFC2550<\/a>"],[100,3,"<a href=\"Parser\/SymbolParser\/PregNativeRecursive.php.html#12\">PregNativeRecursive<\/a>"],[100,2,"<a href=\"PresetFormatter.php.html#10\">PresetFormatter<\/a>"],[100,2,"<a href=\"PresetParser.php.html#10\">PresetParser<\/a>"],[80.701754385965,25,"<a href=\"ValueObject\/AbstractFragmentedDuration.php.html#5\">AbstractFragmentedDuration<\/a>"],[100,0,"<a href=\"ValueObject\/DateParts.php.html#16\">DateParts<\/a>"],[100,0,"<a href=\"ValueObject\/DateRepresentation\/SolarTime.php.html#11\">SolarTime<\/a>"],[100,0,"<a href=\"ValueObject\/DateRepresentation\/Standard.php.html#15\">Standard<\/a>"],[100,3,"<a href=\"ValueObject\/DateRepresentation\/DateFragmentedTrait.php.html#10\">DateFragmentedTrait<\/a>"],[100,6,"<a href=\"ValueObject\/DateRepresentation\/DateSolarTrait.php.html#8\">DateSolarTrait<\/a>"],[100,3,"<a href=\"ValueObject\/DateRepresentation\/DateTimeTrait.php.html#10\">DateTimeTrait<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[100,1,"<a href=\"Calendar\/ComposedCalendar.php.html#37\">ComposedCalendar::__construct<\/a>"],[100,1,"<a href=\"Calendar\/ComposedCalendar.php.html#46\">ComposedCalendar::format<\/a>"],[50,1,"<a href=\"Calendar\/ComposedCalendar.php.html#54\">ComposedCalendar::formatDateRepresentation<\/a>"],[100,1,"<a href=\"Calendar\/ComposedCalendar.php.html#62\">ComposedCalendar::parse<\/a>"],[0,1,"<a href=\"Calendar\/ComposedCalendar.php.html#70\">ComposedCalendar::parseToDateRepresentation<\/a>"],[100,1,"<a href=\"Calendar\/GregorianCalendar.php.html#20\">GregorianCalendar::format<\/a>"],[0,1,"<a href=\"Calendar\/GregorianCalendar.php.html#28\">GregorianCalendar::formatDateRepresentation<\/a>"],[66.666666666667,4,"<a href=\"Calendar\/GregorianCalendar.php.html#36\">GregorianCalendar::parse<\/a>"],[0,1,"<a href=\"Calendar\/GregorianCalendar.php.html#48\">GregorianCalendar::parseToDateRepresentation<\/a>"],[0,2,"<a href=\"Calendar\/MankindImperialCalendar.php.html#20\">MankindImperialCalendar::format<\/a>"],[0,1,"<a href=\"Calendar\/MankindImperialCalendar.php.html#54\">MankindImperialCalendar::formatDateRepresentation<\/a>"],[0,3,"<a href=\"Calendar\/MankindImperialCalendar.php.html#62\">MankindImperialCalendar::parse<\/a>"],[0,1,"<a href=\"Calendar\/MankindImperialCalendar.php.html#91\">MankindImperialCalendar::parseToDateRepresentation<\/a>"],[100,1,"<a href=\"Converter\/AgnosticConverter.php.html#29\">AgnosticConverter::__construct<\/a>"],[100,1,"<a href=\"Converter\/AgnosticConverter.php.html#37\">AgnosticConverter::to<\/a>"],[100,1,"<a href=\"Converter\/AgnosticConverter.php.html#49\">AgnosticConverter::from<\/a>"],[100,1,"<a href=\"Converter\/Conversion.php.html#46\">Conversion::__construct<\/a>"],[100,1,"<a href=\"Converter\/Conversion.php.html#59\">Conversion::getFrom<\/a>"],[100,1,"<a href=\"Converter\/Conversion.php.html#69\">Conversion::getTo<\/a>"],[100,1,"<a href=\"Converter\/Conversion.php.html#81\">Conversion::setTo<\/a>"],[100,1,"<a href=\"Converter\/Conversion.php.html#93\">Conversion::getUnixTime<\/a>"],[100,1,"<a href=\"Converter\/Conversion.php.html#105\">Conversion::setUnixTime<\/a>"],[100,1,"<a href=\"Converter\/Conversion.php.html#117\">Conversion::getUnixMicroTime<\/a>"],[100,1,"<a href=\"Converter\/Conversion.php.html#129\">Conversion::setUnixMicroTime<\/a>"],[100,3,"<a href=\"Converter\/LeapYearCalculator\/AbstractCalculator.php.html#33\">AbstractCalculator::__construct<\/a>"],[100,1,"<a href=\"Converter\/LeapYearCalculator\/AbstractCalculator.php.html#47\">AbstractCalculator::getYearLength<\/a>"],[100,3,"<a href=\"Converter\/LeapYearCalculator\/AbstractCalculator.php.html#55\">AbstractCalculator::getYearEraDayIndex<\/a>"],[100,3,"<a href=\"Converter\/LeapYearCalculator\/AbstractCalculator.php.html#71\">AbstractCalculator::getYearAndDayIndexFromErayDayIndex<\/a>"],[0,1,"<a href=\"Converter\/LeapYearCalculator\/Caesar.php.html#14\">Caesar::isLeapYear<\/a>"],[100,1,"<a href=\"Converter\/LeapYearCalculator\/FloatBased.php.html#23\">FloatBased::__construct<\/a>"],[57.142857142857,2,"<a href=\"Converter\/LeapYearCalculator\/FloatBased.php.html#36\">FloatBased::isLeapYear<\/a>"],[0,6,"<a href=\"Converter\/LeapYearCalculator\/Futuristic.php.html#14\">Futuristic::isLeapYear<\/a>"],[100,3,"<a href=\"Converter\/LeapYearCalculator\/Modern.php.html#13\">Modern::isLeapYear<\/a>"],[0,1,"<a href=\"Converter\/LeapYearCalculator\/NoLeap.php.html#13\">NoLeap::isLeapYear<\/a>"],[0,5,"<a href=\"Converter\/LeapYearCalculator\/Persian.php.html#15\">Persian::isLeapYear<\/a>"],[0,2,"<a href=\"Converter\/LeapYearCalculator\/VonMadler.php.html#13\">VonMadler::isLeapYear<\/a>"],[91.666666666667,6,"<a href=\"Converter\/UnixTimeConverter\/AbstractDatePartsSolarSplitter.php.html#16\">AbstractDatePartsSolarSplitter::fromUnixTime<\/a>"],[82.142857142857,9,"<a href=\"Converter\/UnixTimeConverter\/AbstractDatePartsSolarSplitter.php.html#61\">AbstractDatePartsSolarSplitter::toUnixTime<\/a>"],[100,1,"<a href=\"Converter\/UnixTimeConverter\/AbstractDatePartsSolarSplitter.php.html#118\">AbstractDatePartsSolarSplitter::getAllFragmentSizes<\/a>"],[100,1,"<a href=\"Parser\/SymbolParser\/Chain.php.html#30\">Chain::__construct<\/a>"],[60,2,"<a href=\"Parser\/SymbolParser\/Chain.php.html#40\">Chain::addParser<\/a>"],[100,2,"<a href=\"Parser\/SymbolParser\/Chain.php.html#57\">Chain::addParsers<\/a>"],[100,3,"<a href=\"Parser\/SymbolParser\/Chain.php.html#69\">Chain::parseSymbol<\/a>"],[100,1,"<a href=\"ValueObject\/DateRepresentation\/Date.php.html#47\">Date::getUnixTime<\/a>"],[100,1,"<a href=\"ValueObject\/DateRepresentation\/Date.php.html#55\">Date::getUnixMicroTime<\/a>"],[100,2,"<a href=\"ValueObject\/DateRepresentation\/Date.php.html#63\">Date::getOffset<\/a>"],[100,2,"<a href=\"ValueObject\/DateRepresentation\/Date.php.html#71\">Date::getTimezone<\/a>"],[100,1,"<a href=\"ValueObject\/DateRepresentation\/Date.php.html#79\">Date::withUnixTime<\/a>"],[100,1,"<a href=\"ValueObject\/DateRepresentation\/Date.php.html#90\">Date::withUnixMicroTime<\/a>"],[100,1,"<a href=\"ValueObject\/DateRepresentation\/Date.php.html#101\">Date::withOffset<\/a>"],[100,1,"<a href=\"ValueObject\/DateRepresentation\/Date.php.html#112\">Date::withTimezone<\/a>"],[0,1,"<a href=\"ValueObject\/DateRepresentation\/Date.php.html#121\">Date::buildFromUnixTime<\/a>"],[0,1,"<a href=\"ValueObject\/DateRepresentation\/Date.php.html#130\">Date::buildFromMicroTime<\/a>"],[100,1,"<a href=\"ValueObject\/DateRepresentation\/Date.php.html#142\">Date::buildFromDateTimeInterface<\/a>"],[100,1,"<a href=\"ValueObject\/DateRepresentation\/Date.php.html#154\">Date::buildFromTimezone<\/a>"],[0,1,"<a href=\"ValueObject\/DateRepresentation\/Date.php.html#162\">Date::fromRepresentation<\/a>"],[100,1,"<a href=\"ValueObject\/DateRepresentation\/Date.php.html#174\">Date::fromConversion<\/a>"],[100,2,"<a href=\"Converter\/UnixTimeConverter\/DateSolar.php.html#47\">DateSolar::__construct<\/a>"],[65.51724137931,5,"<a href=\"Converter\/UnixTimeConverter\/DateSolar.php.html#60\">DateSolar::fromUnixTime<\/a>"],[91.666666666667,2,"<a href=\"Converter\/UnixTimeConverter\/DateSolar.php.html#126\">DateSolar::toUnixTime<\/a>"],[100,1,"<a href=\"Converter\/UnixTimeConverter\/EqualLengthMonthes.php.html#33\">EqualLengthMonthes::__construct<\/a>"],[100,1,"<a href=\"Converter\/UnixTimeConverter\/EqualLengthMonthes.php.html#42\">EqualLengthMonthes::getAllFragmentSizes<\/a>"],[100,1,"<a href=\"Converter\/UnixTimeConverter\/GregorianCalendarMonthes.php.html#25\">GregorianCalendarMonthes::__construct<\/a>"],[100,1,"<a href=\"Converter\/UnixTimeConverter\/GregorianCalendarMonthes.php.html#33\">GregorianCalendarMonthes::getAllFragmentSizes<\/a>"],[100,2,"<a href=\"Converter\/UnixTimeConverter\/Iso8601Weeks.php.html#36\">Iso8601Weeks::__construct<\/a>"],[82.142857142857,6,"<a href=\"Converter\/UnixTimeConverter\/Iso8601Weeks.php.html#48\">Iso8601Weeks::fromUnixTime<\/a>"],[84.848484848485,9,"<a href=\"Converter\/UnixTimeConverter\/Iso8601Weeks.php.html#102\">Iso8601Weeks::toUnixTime<\/a>"],[100,1,"<a href=\"Converter\/UnixTimeConverter\/SimpleWeeks.php.html#27\">SimpleWeeks::__construct<\/a>"],[90.909090909091,3,"<a href=\"Converter\/UnixTimeConverter\/SimpleWeeks.php.html#35\">SimpleWeeks::fromUnixTime<\/a>"],[0,6,"<a href=\"Converter\/UnixTimeConverter\/SimpleWeeks.php.html#58\">SimpleWeeks::toUnixTime<\/a>"],[100,1,"<a href=\"Parser\/ResultMapper\/StandardDateFactory.php.html#18\">StandardDateFactory::map<\/a>"],[100,1,"<a href=\"ValueObject\/Time.php.html#40\">Time::__construct<\/a>"],[100,7,"<a href=\"ValueObject\/Time.php.html#54\">Time::get<\/a>"],[66.666666666667,3,"<a href=\"ValueObject\/Time.php.html#94\">Time::getHalved<\/a>"],[75,4,"<a href=\"ValueObject\/Time.php.html#108\">Time::canBeHalved<\/a>"],[100,1,"<a href=\"ValueObject\/Time.php.html#131\">Time::getRatio<\/a>"],[0,1,"<a href=\"ValueObject\/Time.php.html#143\">Time::withRatio<\/a>"],[0,2,"<a href=\"ValueObject\/Time.php.html#158\">Time::isHalved<\/a>"],[0,1,"<a href=\"ValueObject\/Time.php.html#170\">Time::allHalved<\/a>"],[100,1,"<a href=\"ValueObject\/Time.php.html#181\">Time::withHalved<\/a>"],[0,1,"<a href=\"ValueObject\/Time.php.html#197\">Time::withHalveds<\/a>"],[100,1,"<a href=\"ValueObject\/TimeOffset.php.html#45\">TimeOffset::__construct<\/a>"],[100,1,"<a href=\"ValueObject\/TimeOffset.php.html#60\">TimeOffset::buildFromDateTimeInterface<\/a>"],[100,1,"<a href=\"ValueObject\/TimeOffset.php.html#72\">TimeOffset::getValue<\/a>"],[100,1,"<a href=\"ValueObject\/TimeOffset.php.html#82\">TimeOffset::isDst<\/a>"],[100,1,"<a href=\"ValueObject\/TimeOffset.php.html#92\">TimeOffset::getAbbreviation<\/a>"],[100,1,"<a href=\"ValueObject\/TimeOffset.php.html#105\">TimeOffset::withValue<\/a>"],[100,1,"<a href=\"ValueObject\/TimeOffset.php.html#120\">TimeOffset::withDst<\/a>"],[100,1,"<a href=\"ValueObject\/TimeOffset.php.html#135\">TimeOffset::withAbbreviation<\/a>"],[100,3,"<a href=\"ValueObject\/TimeOffset.php.html#148\">TimeOffset::buildTimeZone<\/a>"],[100,1,"<a href=\"Factory\/ConfigurableFactory.php.html#96\">ConfigurableFactory::build<\/a>"],[0,1,"<a href=\"Factory\/ConfigurableFactory.php.html#109\">ConfigurableFactory::buildFormatter<\/a>"],[0,1,"<a href=\"Factory\/ConfigurableFactory.php.html#119\">ConfigurableFactory::buildParser<\/a>"],[0,1,"<a href=\"Factory\/ConfigurableFactory.php.html#129\">ConfigurableFactory::buildConverter<\/a>"],[83.333333333333,3,"<a href=\"Factory\/ConfigurableFactory.php.html#142\">ConfigurableFactory::get<\/a>"],[90.909090909091,2,"<a href=\"Factory\/ConfigurableFactory.php.html#155\">ConfigurableFactory::getLeap<\/a>"],[87.5,2,"<a href=\"Factory\/ConfigurableFactory.php.html#174\">ConfigurableFactory::getLocale<\/a>"],[100,1,"<a href=\"Factory\/ConfigurableFactory.php.html#190\">ConfigurableFactory::getConverter<\/a>"],[100,2,"<a href=\"Factory\/ConfigurableFactory.php.html#203\">ConfigurableFactory::getSolar<\/a>"],[90,3,"<a href=\"Factory\/ConfigurableFactory.php.html#212\">ConfigurableFactory::getMonthes<\/a>"],[63.636363636364,5,"<a href=\"Factory\/ConfigurableFactory.php.html#232\">ConfigurableFactory::getTime<\/a>"],[92.307692307692,3,"<a href=\"Factory\/ConfigurableFactory.php.html#250\">ConfigurableFactory::getWeek<\/a>"],[92.307692307692,3,"<a href=\"Factory\/ConfigurableFactory.php.html#273\">ConfigurableFactory::getNumberConverter<\/a>"],[100,1,"<a href=\"Factory\/ConfigurableFactory.php.html#296\">ConfigurableFactory::getSymbolFormatter<\/a>"],[100,1,"<a href=\"Factory\/ConfigurableFactory.php.html#309\">ConfigurableFactory::getLexer<\/a>"],[100,1,"<a href=\"Factory\/ConfigurableFactory.php.html#314\">ConfigurableFactory::getFormatter<\/a>"],[100,1,"<a href=\"Factory\/ConfigurableFactory.php.html#323\">ConfigurableFactory::getMapper<\/a>"],[90,3,"<a href=\"Factory\/ConfigurableFactory.php.html#334\">ConfigurableFactory::getAdditionalSymbolParser<\/a>"],[100,2,"<a href=\"Factory\/ConfigurableFactory.php.html#354\">ConfigurableFactory::getSymbolParser<\/a>"],[100,1,"<a href=\"Factory\/ConfigurableFactory.php.html#371\">ConfigurableFactory::getFormatParser<\/a>"],[100,1,"<a href=\"Factory\/ConfigurableFactory.php.html#379\">ConfigurableFactory::getParser<\/a>"],[57.142857142857,3,"<a href=\"Factory\/ConfigurableFactory.php.html#388\">ConfigurableFactory::getOptionValue<\/a>"],[36.363636363636,3,"<a href=\"Factory\/ConfigurableFactory.php.html#404\">ConfigurableFactory::getOptionValueChoice<\/a>"],[100,1,"<a href=\"Formatter\/AgnosticFormatter.php.html#45\">AgnosticFormatter::__construct<\/a>"],[75,2,"<a href=\"Formatter\/AgnosticFormatter.php.html#55\">AgnosticFormatter::format<\/a>"],[100,2,"<a href=\"Formatter\/AgnosticFormatter.php.html#69\">AgnosticFormatter::formatDateRepresentation<\/a>"],[100,2,"<a href=\"Formatter\/Localisation\/NativeHardcoded.php.html#63\">NativeHardcoded::getMonthName<\/a>"],[100,2,"<a href=\"Formatter\/Localisation\/NativeHardcoded.php.html#73\">NativeHardcoded::getMonthShortName<\/a>"],[100,2,"<a href=\"Formatter\/Localisation\/NativeHardcoded.php.html#83\">NativeHardcoded::getDayName<\/a>"],[100,2,"<a href=\"Formatter\/Localisation\/NativeHardcoded.php.html#94\">NativeHardcoded::getDayShortName<\/a>"],[100,3,"<a href=\"Formatter\/Localisation\/NativeHardcoded.php.html#104\">NativeHardcoded::getNumberOrdinalSuffix<\/a>"],[0,1,"<a href=\"Formatter\/NullFormatter.php.html#14\">NullFormatter::format<\/a>"],[0,1,"<a href=\"Formatter\/NullFormatter.php.html#22\">NullFormatter::formatDateRepresentation<\/a>"],[100,3,"<a href=\"Formatter\/NumberConverter\/RFC2550.php.html#21\">RFC2550::to<\/a>"],[100,4,"<a href=\"Formatter\/NumberConverter\/RFC2550.php.html#39\">RFC2550::convertPositiveTo<\/a>"],[0,4,"<a href=\"Formatter\/NumberConverter\/Roman.php.html#31\">Roman::to<\/a>"],[0,5,"<a href=\"Formatter\/NumberConverter\/Roman.php.html#52\">Roman::from<\/a>"],[100,1,"<a href=\"Formatter\/NumberConverter\/TwoDigitsYear.php.html#32\">TwoDigitsYear::__construct<\/a>"],[100,1,"<a href=\"Formatter\/NumberConverter\/TwoDigitsYear.php.html#41\">TwoDigitsYear::to<\/a>"],[100,3,"<a href=\"Formatter\/NumberConverter\/TwoDigitsYear.php.html#49\">TwoDigitsYear::from<\/a>"],[100,1,"<a href=\"Formatter\/SymbolFormatter\/Litteral.php.html#27\">Litteral::__construct<\/a>"],[100,4,"<a href=\"Formatter\/SymbolFormatter\/Litteral.php.html#35\">Litteral::formatSymbol<\/a>"],[100,1,"<a href=\"Parser\/ResultMapper\/StandardDate.php.html#19\">StandardDate::map<\/a>"],[91.666666666667,7,"<a href=\"Parser\/ResultMapper\/StandardDate.php.html#49\">StandardDate::determineOffset<\/a>"],[85.714285714286,4,"<a href=\"Parser\/ResultMapper\/StandardDate.php.html#99\">StandardDate::determineTimezone<\/a>"],[92.857142857143,3,"<a href=\"Parser\/ResultMapper\/StandardDateFragmented.php.html#20\">StandardDateFragmented::map<\/a>"],[100,3,"<a href=\"Parser\/ResultMapper\/StandardDateFragmented.php.html#49\">StandardDateFragmented::determineMonth<\/a>"],[100,2,"<a href=\"Parser\/ResultMapper\/StandardDateFragmented.php.html#70\">StandardDateFragmented::determineDay<\/a>"],[85.714285714286,4,"<a href=\"Parser\/ResultMapper\/StandardDateFragmented.php.html#86\">StandardDateFragmented::determineDayOfWeek<\/a>"],[100,2,"<a href=\"Parser\/ResultMapper\/StandardDateFragmented.php.html#112\">StandardDateFragmented::determineWeekIndex<\/a>"],[80,2,"<a href=\"Parser\/ResultMapper\/StandardDateSolar.php.html#18\">StandardDateSolar::map<\/a>"],[100,1,"<a href=\"Parser\/ResultMapper\/StandardDateSolar.php.html#37\">StandardDateSolar::determineYear<\/a>"],[100,2,"<a href=\"Parser\/ResultMapper\/StandardDateSolar.php.html#50\">StandardDateSolar::determineDayIndex<\/a>"],[93.75,3,"<a href=\"Parser\/ResultMapper\/StandardDateTime.php.html#18\">StandardDateTime::map<\/a>"],[100,2,"<a href=\"Parser\/ResultMapper\/StandardDateTime.php.html#52\">StandardDateTime::intIfNotNull<\/a>"],[100,2,"<a href=\"Parser\/ResultMapper\/StandardDateTime.php.html#57\">StandardDateTime::determineAmPm<\/a>"],[100,3,"<a href=\"Formatter\/SymbolFormatter\/StandardRecursive.php.html#18\">StandardRecursive::formatSymbol<\/a>"],[100,1,"<a href=\"Parser\/AgnosticParser.php.html#44\">AgnosticParser::__construct<\/a>"],[86.666666666667,6,"<a href=\"Parser\/AgnosticParser.php.html#54\">AgnosticParser::parse<\/a>"],[62.5,4,"<a href=\"Parser\/AgnosticParser.php.html#86\">AgnosticParser::parseToDateRepresentation<\/a>"],[91.666666666667,2,"<a href=\"Parser\/DateLexer\/AbstractPreg.php.html#16\">AbstractPreg::tokenizeDate<\/a>"],[0,1,"<a href=\"Parser\/DateLexer\/Alternatives.php.html#26\">Alternatives::addLexer<\/a>"],[0,3,"<a href=\"Parser\/DateLexer\/Alternatives.php.html#34\">Alternatives::tokenizeDate<\/a>"],[0,1,"<a href=\"Parser\/DateLexer\/Collection.php.html#26\">Collection::addLexer<\/a>"],[0,3,"<a href=\"Parser\/DateLexer\/Collection.php.html#34\">Collection::tokenizeDate<\/a>"],[0,1,"<a href=\"Parser\/DateLexer\/NonSymbolMatcher.php.html#26\">NonSymbolMatcher::__construct<\/a>"],[0,4,"<a href=\"Parser\/DateLexer\/NonSymbolMatcher.php.html#34\">NonSymbolMatcher::tokenizeDate<\/a>"],[81.818181818182,3,"<a href=\"Parser\/DateLexer\/PregChoice.php.html#32\">PregChoice::__construct<\/a>"],[100,1,"<a href=\"Parser\/DateLexer\/PregChoice.php.html#54\">PregChoice::getExpression<\/a>"],[94.117647058824,5,"<a href=\"Parser\/DateLexer\/PregChoice.php.html#62\">PregChoice::hydrateResult<\/a>"],[100,1,"<a href=\"Parser\/DateLexer\/PregCollection.php.html#54\">PregCollection::register<\/a>"],[100,2,"<a href=\"Parser\/DateLexer\/PregCollection.php.html#65\">PregCollection::close<\/a>"],[100,2,"<a href=\"Parser\/DateLexer\/PregCollection.php.html#76\">PregCollection::compile<\/a>"],[100,1,"<a href=\"Parser\/DateLexer\/PregCollection.php.html#88\">PregCollection::getExpression<\/a>"],[100,3,"<a href=\"Parser\/DateLexer\/PregCollection.php.html#98\">PregCollection::hydrateResult<\/a>"],[30,4,"<a href=\"Parser\/DateLexer\/PregCollection.php.html#117\">PregCollection::compileExpressions<\/a>"],[68.75,5,"<a href=\"Parser\/DateLexer\/PregSimple.php.html#44\">PregSimple::__construct<\/a>"],[100,1,"<a href=\"Parser\/DateLexer\/PregSimple.php.html#80\">PregSimple::setCallback<\/a>"],[100,1,"<a href=\"Parser\/DateLexer\/PregSimple.php.html#88\">PregSimple::getExpression<\/a>"],[100,5,"<a href=\"Parser\/DateLexer\/PregSimple.php.html#96\">PregSimple::hydrateResult<\/a>"],[100,1,"<a href=\"Parser\/DateLexerResult.php.html#29\">DateLexerResult::__construct<\/a>"],[0,1,"<a href=\"Parser\/DateLexerResult.php.html#39\">DateLexerResult::getOffset<\/a>"],[100,1,"<a href=\"Parser\/DateLexerResult.php.html#50\">DateLexerResult::set<\/a>"],[100,2,"<a href=\"Parser\/DateLexerResult.php.html#65\">DateLexerResult::get<\/a>"],[0,1,"<a href=\"Parser\/DateLexerResult.php.html#79\">DateLexerResult::merge<\/a>"],[100,3,"<a href=\"Parser\/DateLexerResult.php.html#93\">DateLexerResult::getFirst<\/a>"],[100,4,"<a href=\"Parser\/FormatLexer\/MbString.php.html#16\">MbString::tokenizeFormat<\/a>"],[0,3,"<a href=\"Parser\/FormatParser\/Basic.php.html#43\">Basic::__construct<\/a>"],[0,5,"<a href=\"Parser\/FormatParser\/Basic.php.html#53\">Basic::parseFormat<\/a>"],[100,3,"<a href=\"Parser\/FormatParser\/PregExtendedNative.php.html#45\">PregExtendedNative::__construct<\/a>"],[82.142857142857,9,"<a href=\"Parser\/FormatParser\/PregExtendedNative.php.html#54\">PregExtendedNative::parseFormat<\/a>"],[100,1,"<a href=\"Parser\/FormatToken.php.html#42\">FormatToken::__construct<\/a>"],[100,1,"<a href=\"Parser\/FormatToken.php.html#53\">FormatToken::getValue<\/a>"],[100,2,"<a href=\"Parser\/FormatToken.php.html#63\">FormatToken::getName<\/a>"],[0,1,"<a href=\"Parser\/FormatToken.php.html#75\">FormatToken::withAlias<\/a>"],[100,2,"<a href=\"Parser\/FormatToken.php.html#90\">FormatToken::is<\/a>"],[100,3,"<a href=\"Parser\/FormatToken.php.html#104\">FormatToken::isOne<\/a>"],[100,1,"<a href=\"Parser\/FormatToken.php.html#122\">FormatToken::setType<\/a>"],[100,1,"<a href=\"Parser\/FormatToken.php.html#136\">FormatToken::isSymbol<\/a>"],[100,1,"<a href=\"Parser\/FormatToken.php.html#146\">FormatToken::isLitteral<\/a>"],[100,1,"<a href=\"Parser\/FormatToken.php.html#154\">FormatToken::setLitteral<\/a>"],[100,1,"<a href=\"Parser\/FormatToken.php.html#166\">FormatToken::isType<\/a>"],[0,1,"<a href=\"Parser\/FormatToken.php.html#176\">FormatToken::getType<\/a>"],[0,1,"<a href=\"Parser\/NullParser.php.html#16\">NullParser::parse<\/a>"],[0,1,"<a href=\"Parser\/NullParser.php.html#24\">NullParser::parseToDateRepresentation<\/a>"],[100,9,"<a href=\"Parser\/SymbolParser\/PregNativeDate.php.html#19\">PregNativeDate::parseSymbol<\/a>"],[100,2,"<a href=\"Parser\/SymbolParser\/PregNativeDateFragmented.php.html#30\">PregNativeDateFragmented::__construct<\/a>"],[93.548387096774,16,"<a href=\"Parser\/SymbolParser\/PregNativeDateFragmented.php.html#38\">PregNativeDateFragmented::parseSymbol<\/a>"],[100,2,"<a href=\"Parser\/SymbolParser\/PregNativeDateFragmented.php.html#124\">PregNativeDateFragmented::buildXNamesLexer<\/a>"],[100,4,"<a href=\"Parser\/SymbolParser\/PregNativeDateFragmented.php.html#144\">PregNativeDateFragmented::buildSuffixesLexer<\/a>"],[100,1,"<a href=\"Parser\/SymbolParser\/PregNativeDateSolar.php.html#28\">PregNativeDateSolar::__construct<\/a>"],[100,5,"<a href=\"Parser\/SymbolParser\/PregNativeDateSolar.php.html#36\">PregNativeDateSolar::parseSymbol<\/a>"],[100,1,"<a href=\"Parser\/SymbolParser\/PregNativeDateSolar.php.html#43\">PregNativeDateSolar::anonymous function<\/a>"],[94.736842105263,10,"<a href=\"Parser\/SymbolParser\/PregNativeDateTime.php.html#19\">PregNativeDateTime::parseSymbol<\/a>"],[100,1,"<a href=\"Parser\/SymbolParser\/PregNativeRFC2550.php.html#28\">PregNativeRFC2550::__construct<\/a>"],[100,2,"<a href=\"Parser\/SymbolParser\/PregNativeRFC2550.php.html#36\">PregNativeRFC2550::parseSymbol<\/a>"],[100,1,"<a href=\"Parser\/SymbolParser\/PregNativeRFC2550.php.html#43\">PregNativeRFC2550::anonymous function<\/a>"],[100,3,"<a href=\"Parser\/SymbolParser\/PregNativeRecursive.php.html#17\">PregNativeRecursive::parseSymbol<\/a>"],[100,1,"<a href=\"PresetFormatter.php.html#32\">PresetFormatter::__construct<\/a>"],[100,1,"<a href=\"PresetFormatter.php.html#45\">PresetFormatter::format<\/a>"],[100,1,"<a href=\"PresetParser.php.html#32\">PresetParser::__construct<\/a>"],[100,1,"<a href=\"PresetParser.php.html#45\">PresetParser::parse<\/a>"],[100,1,"<a href=\"ValueObject\/AbstractFragmentedDuration.php.html#34\">AbstractFragmentedDuration::__construct<\/a>"],[100,2,"<a href=\"ValueObject\/AbstractFragmentedDuration.php.html#47\">AbstractFragmentedDuration::get<\/a>"],[100,2,"<a href=\"ValueObject\/AbstractFragmentedDuration.php.html#59\">AbstractFragmentedDuration::all<\/a>"],[100,3,"<a href=\"ValueObject\/AbstractFragmentedDuration.php.html#77\">AbstractFragmentedDuration::countMeaningfull<\/a>"],[0,1,"<a href=\"ValueObject\/AbstractFragmentedDuration.php.html#98\">AbstractFragmentedDuration::with<\/a>"],[100,1,"<a href=\"ValueObject\/AbstractFragmentedDuration.php.html#114\">AbstractFragmentedDuration::withFragments<\/a>"],[66.666666666667,2,"<a href=\"ValueObject\/AbstractFragmentedDuration.php.html#130\">AbstractFragmentedDuration::getSize<\/a>"],[0,1,"<a href=\"ValueObject\/AbstractFragmentedDuration.php.html#142\">AbstractFragmentedDuration::allSizes<\/a>"],[0,1,"<a href=\"ValueObject\/AbstractFragmentedDuration.php.html#153\">AbstractFragmentedDuration::withSize<\/a>"],[100,1,"<a href=\"ValueObject\/AbstractFragmentedDuration.php.html#169\">AbstractFragmentedDuration::withSizes<\/a>"],[60,2,"<a href=\"ValueObject\/AbstractFragmentedDuration.php.html#188\">AbstractFragmentedDuration::insertInList<\/a>"],[100,2,"<a href=\"ValueObject\/AbstractFragmentedDuration.php.html#206\">AbstractFragmentedDuration::getTransversal<\/a>"],[0,1,"<a href=\"ValueObject\/AbstractFragmentedDuration.php.html#218\">AbstractFragmentedDuration::allTransversals<\/a>"],[100,1,"<a href=\"ValueObject\/AbstractFragmentedDuration.php.html#229\">AbstractFragmentedDuration::withTransversal<\/a>"],[100,1,"<a href=\"ValueObject\/AbstractFragmentedDuration.php.html#245\">AbstractFragmentedDuration::withTransversals<\/a>"],[100,3,"<a href=\"ValueObject\/AbstractFragmentedDuration.php.html#261\">AbstractFragmentedDuration::fillArrayInput<\/a>"],[100,2,"<a href=\"ValueObject\/DateRepresentation\/DateFragmentedTrait.php.html#22\">DateFragmentedTrait::getDateParts<\/a>"],[100,1,"<a href=\"ValueObject\/DateRepresentation\/DateFragmentedTrait.php.html#30\">DateFragmentedTrait::withDateParts<\/a>"],[100,1,"<a href=\"ValueObject\/DateRepresentation\/DateSolarTrait.php.html#41\">DateSolarTrait::getYear<\/a>"],[100,1,"<a href=\"ValueObject\/DateRepresentation\/DateSolarTrait.php.html#49\">DateSolarTrait::isLeapYear<\/a>"],[100,1,"<a href=\"ValueObject\/DateRepresentation\/DateSolarTrait.php.html#57\">DateSolarTrait::getDayIndex<\/a>"],[100,1,"<a href=\"ValueObject\/DateRepresentation\/DateSolarTrait.php.html#65\">DateSolarTrait::getEraDayIndex<\/a>"],[100,1,"<a href=\"ValueObject\/DateRepresentation\/DateSolarTrait.php.html#73\">DateSolarTrait::withYear<\/a>"],[100,1,"<a href=\"ValueObject\/DateRepresentation\/DateSolarTrait.php.html#85\">DateSolarTrait::withDayIndex<\/a>"],[100,2,"<a href=\"ValueObject\/DateRepresentation\/DateTimeTrait.php.html#22\">DateTimeTrait::getTime<\/a>"],[100,1,"<a href=\"ValueObject\/DateRepresentation\/DateTimeTrait.php.html#30\">DateTimeTrait::withTime<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>
