@@ -7,7 +7,7 @@ implementations.
 
 [![Build Status](https://api.travis-ci.org/popy-dev/popy-calendar.svg?branch=master)](https://travis-ci.org/popy-dev/popy-calendar)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/popy-dev/popy-calendar/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/popy-dev/popy-calendar/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/popy-dev/popy-calendar/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/popy-dev/popy-calendar/?branch=master)
+[Code Coverage](https://popy-dev.github.io/popy-calendar/doc/coverage/)
 
 Installation
 ------------
