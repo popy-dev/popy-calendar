@@ -3,7 +3,8 @@ PHP Calendar Library : Factory
 
 To simplify building calendars, a configurable factory is available :
 ```Popy\Calendar\Factory\ConfigurableFactory```, and accept some options altering the building
-process.
+process. This factory also allows to build smaller components, such as a Formatter, a Parser,
+a Converter (and maybe more to come).
 
 ```php
 <?php
@@ -17,9 +18,23 @@ $calendar = $factory->build([
     'leap' => ...,
 ]);
 
+$formatter = $factory->buildFormatter([
+    /// options here
+    'leap' => ...,
+]);
+
+$parser = $factory->buildParser([
+    /// options here
+    'leap' => ...,
+]);
+
+$converter = $factory->buildConverter([
+    /// options here
+    'leap' => ...,
+]);
+
 ?>
 ```
-
 
 Leap year calculators
 ---------------------
