@@ -30,6 +30,10 @@ class Roman implements NumberConverterInterface
      */
     public function to($input)
     {
+        if ($input === 0) {
+            return '0';
+        }
+
         if ($input < 0) {
             return '-' . $this->to(-$input);
         }
@@ -51,6 +55,10 @@ class Roman implements NumberConverterInterface
      */
     public function from($input)
     {
+        if ($input === '0') {
+            return 0;
+        }
+
         $res = $i = 0;
         $len = strlen($input);
         $sign = 1;
