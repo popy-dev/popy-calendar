@@ -5,7 +5,7 @@ namespace Popy\Calendar\Converter\UnixTimeConverter;
 use BCMathExtended\BC;
 use Popy\Calendar\Converter\Conversion;
 use Popy\Calendar\Converter\UnixTimeConverterInterface;
-use Popy\Calendar\Converter\LeapYearCalculatorInterface;
+use Popy\Calendar\Converter\CompleteLeapYearCalculatorInterface;
 use Popy\Calendar\ValueObject\DateSolarRepresentationInterface;
 
 /**
@@ -33,18 +33,18 @@ class DateSolar implements UnixTimeConverterInterface
     /**
      * Leap year calculator.
      *
-     * @var LeapYearCalculatorInterface
+     * @var CompleteLeapYearCalculatorInterface
      */
     protected $calculator;
 
     /**
      * Class constructor.
      *
-     * @param LeapYearCalculatorInterface $calculator         Leap year calculator.
+     * @param CompleteLeapYearCalculatorInterface $calculator         Leap year calculator.
      * @param integer                     $eraStart           Era start unix time.
      * @param integer|float|string|null   $dayLengthInSeconds Day length in seconds.
      */
-    public function __construct(LeapYearCalculatorInterface $calculator, $eraStart, $dayLengthInSeconds = null)
+    public function __construct(CompleteLeapYearCalculatorInterface $calculator, $eraStart, $dayLengthInSeconds = null)
     {
         $this->calculator = $calculator;
         $this->eraStart   = $eraStart;

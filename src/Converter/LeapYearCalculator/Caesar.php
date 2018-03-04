@@ -2,11 +2,13 @@
 
 namespace Popy\Calendar\Converter\LeapYearCalculator;
 
+use Popy\Calendar\Converter\SimpleLeapYearCalculatorInterface;
+
 /**
  * Julius Caesar implementation (julian calendar way). Imprecise, but that's
  * not somebody you should mess with.
  */
-class Caesar extends AbstractCalculator
+class Caesar implements SimpleLeapYearCalculatorInterface
 {
     /**
      * @inheritDoc

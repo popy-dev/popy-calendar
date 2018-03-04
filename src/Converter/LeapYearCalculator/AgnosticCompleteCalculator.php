@@ -2,14 +2,22 @@
 
 namespace Popy\Calendar\Converter\LeapYearCalculator;
 
-use Popy\Calendar\Converter\LeapYearCalculatorInterface;
+use Popy\Calendar\Converter\SimpleLeapYearCalculatorInterface;
+use Popy\Calendar\Converter\CompleteLeapYearCalculatorInterface;
 
 /**
  * Abstract calculator implementation, implementing every method but isLeapYear,
  * every method relying on it to produce their results.
  */
-abstract class AbstractCalculator implements LeapYearCalculatorInterface
+class AgnosticCompleteCalculator implements CompleteLeapYearCalculatorInterface
 {
+    /**
+     * Simple leap year calculator.
+     *
+     * @var SimpleLeapYearCalculatorInterface
+     */
+    protected $calculator;
+
     /**
      * Regular year duration, in days.
      *
@@ -27,11 +35,14 @@ abstract class AbstractCalculator implements LeapYearCalculatorInterface
     /**
      * Class constructor.
      *
-     * @param integer|null $yearLengthInDays Year length.
-     * @param integer|null $firstYear        First year number.
+     * @param SimpleLeapYearCalculatorInterface $calculator       Decorated calculator
+     * @param integer|null                      $yearLengthInDays Year length.
+     * @param integer|null                      $firstYear        First year number.
      */
-    public function __construct($yearLengthInDays = null, $firstYear = null)
+    public function __construct(SimpleLeapYearCalculatorInterface $calculator, $yearLengthInDays = null, $firstYear = null)
     {
+        $this->calculator = $calculator;
+
         if (null !== $yearLengthInDays) {
             $this->yearLengthInDays = $yearLengthInDays;
         }
@@ -39,6 +50,14 @@ abstract class AbstractCalculator implements LeapYearCalculatorInterface
         if (null !== $firstYear) {
             $this->firstYear = $firstYear;
         }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function isLeapYear($year)
+    {
+        return $this->calculator->isLeapYear($year);
     }
 
     /**

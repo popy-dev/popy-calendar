@@ -2,11 +2,13 @@
 
 namespace Popy\Calendar\Converter\LeapYearCalculator;
 
+use Popy\Calendar\Converter\SimpleLeapYearCalculatorInterface;
+
 /**
  * Futuristic leap day implementation, more precise than the modern one,
  * but not officially used.
  */
-class Futuristic extends AbstractCalculator
+class Futuristic implements SimpleLeapYearCalculatorInterface
 {
     /**
      * @inheritDoc

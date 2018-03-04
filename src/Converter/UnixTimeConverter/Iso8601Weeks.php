@@ -4,7 +4,7 @@ namespace Popy\Calendar\Converter\UnixTimeConverter;
 
 use Popy\Calendar\Converter\Conversion;
 use Popy\Calendar\Converter\UnixTimeConverterInterface;
-use Popy\Calendar\Converter\LeapYearCalculatorInterface;
+use Popy\Calendar\Converter\CompleteLeapYearCalculatorInterface;
 use Popy\Calendar\ValueObject\DateSolarRepresentationInterface;
 use Popy\Calendar\ValueObject\DateFragmentedRepresentationInterface;
 
@@ -16,7 +16,7 @@ class Iso8601Weeks implements UnixTimeConverterInterface
     /**
      * Leap year calculator.
      *
-     * @var LeapYearCalculatorInterface
+     * @var CompleteLeapYearCalculatorInterface
      */
     protected $calculator;
 
@@ -30,10 +30,10 @@ class Iso8601Weeks implements UnixTimeConverterInterface
     /**
      * Class constructor.
      *
-     * @param LeapYearCalculatorInterface $calculator         Leap year calculator.
-     * @param integer|null                $firstYearDayIndex  First day of first year weekday index.
+     * @param CompleteLeapYearCalculatorInterface $calculator         Leap year calculator.
+     * @param integer|null                        $firstYearDayIndex  First day of first year weekday index.
      */
-    public function __construct(LeapYearCalculatorInterface $calculator, $firstYearDayIndex = null)
+    public function __construct(CompleteLeapYearCalculatorInterface $calculator, $firstYearDayIndex = null)
     {
         $this->calculator = $calculator;
 

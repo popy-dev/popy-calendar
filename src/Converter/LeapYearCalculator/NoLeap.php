@@ -2,10 +2,12 @@
 
 namespace Popy\Calendar\Converter\LeapYearCalculator;
 
+use Popy\Calendar\Converter\SimpleLeapYearCalculatorInterface;
+
 /**
  * No leap, used for old calendars not implementing a leap.
  */
-class NoLeap extends AbstractCalculator
+class NoLeap implements SimpleLeapYearCalculatorInterface
 {
     /**
      * @inheritDoc

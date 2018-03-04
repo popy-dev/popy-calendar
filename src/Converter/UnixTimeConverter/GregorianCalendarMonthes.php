@@ -2,7 +2,7 @@
 
 namespace Popy\Calendar\Converter\UnixTimeConverter;
 
-use Popy\Calendar\Converter\LeapYearCalculatorInterface;
+use Popy\Calendar\Converter\SimpleLeapYearCalculatorInterface;
 use Popy\Calendar\ValueObject\DateFragmentedRepresentationInterface;
 
 /**
@@ -13,16 +13,16 @@ class GregorianCalendarMonthes extends AbstractDatePartsSolarSplitter
     /**
      * Leap year calculator.
      *
-     * @var LeapYearCalculatorInterface
+     * @var SimpleLeapYearCalculatorInterface
      */
     protected $calculator;
 
     /**
      * Class constructor.
      *
-     * @param LeapYearCalculatorInterface $calculator Leap year calculator.
+     * @param SimpleLeapYearCalculatorInterface $calculator Leap year calculator.
      */
-    public function __construct(LeapYearCalculatorInterface $calculator)
+    public function __construct(SimpleLeapYearCalculatorInterface $calculator)
     {
         $this->calculator = $calculator;
     }

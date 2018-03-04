@@ -2,10 +2,12 @@
 
 namespace Popy\Calendar\Converter\LeapYearCalculator;
 
+use Popy\Calendar\Converter\SimpleLeapYearCalculatorInterface;
+
 /**
  * Float based calculator.
  */
-class FloatBased extends AbstractCalculator
+class FloatBased implements SimpleLeapYearCalculatorInterface
 {
     /**
      * Remaining day part at the end of a regular year.
@@ -17,17 +19,14 @@ class FloatBased extends AbstractCalculator
     /**
      * Class constructor.
      *
-     * @param float        $yearLengthInDays Year length.
-     * @param integer|null $firstYear        First year number.
+     * @param float $yearLengthInDays Year length.
      */
-    public function __construct($yearLengthInDays, $firstYear = null)
+    public function __construct($yearLengthInDays)
     {
         $diff = explode('.', $yearLengthInDays);
         $diff[0] = '0';
 
         $this->remaining = implode('.', $diff);
-
-        parent::__construct(intval($yearLengthInDays), $firstYear);
     }
 
     /**

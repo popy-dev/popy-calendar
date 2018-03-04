@@ -7,6 +7,7 @@ use Popy\Calendar\Calendar\ComposedCalendar;
 use Popy\Calendar\Converter\AgnosticConverter;
 use Popy\Calendar\Converter\UnixTimeConverter;
 use Popy\Calendar\Converter\LeapYearCalculator;
+use Popy\Calendar\Converter\CompleteLeapYearCalculatorInterface;
 use Popy\Calendar\Formatter\Localisation;
 use Popy\Calendar\Formatter\SymbolFormatter;
 use Popy\Calendar\Formatter\NumberConverter;
@@ -161,12 +162,20 @@ class ConfigurableFactory
             'modern'
         );
 
-        if (is_object($leap)) {
+        if (!is_object($leap)) {
+            $leap = new $leap(
+                $this->getOptionValue($options, 'year_length', 365),
+                $this->getOptionValue($options, 'era_start_year', 1970)
+            );
+        }
+
+        if ($leap instanceof CompleteLeapYearCalculatorInterface) {
             return $leap;
         }
 
-        return new $leap(
-            $this->getOptionValue($options, 'year_length', 365),
+        return new LeapYearCalculator\AgnosticCompleteCalculator(
+            $leap,
+            (int)$this->getOptionValue($options, 'year_length', 365),
             $this->getOptionValue($options, 'era_start_year', 1970)
         );
     }

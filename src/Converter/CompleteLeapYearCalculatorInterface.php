@@ -3,19 +3,10 @@
 namespace Popy\Calendar\Converter;
 
 /**
- * Leap year calculator.
+ * Complete leap year calculator.
  */
-interface LeapYearCalculatorInterface
+interface CompleteLeapYearCalculatorInterface extends SimpleLeapYearCalculatorInterface
 {
-    /**
-     * Determines if input year is a leap year.
-     *
-     * @param integer $year
-     *
-     * @return boolean
-     */
-    public function isLeapYear($year);
-
     /**
      * Determines year length, in days.
      *

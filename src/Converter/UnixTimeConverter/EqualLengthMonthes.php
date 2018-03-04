@@ -2,7 +2,7 @@
 
 namespace Popy\Calendar\Converter\UnixTimeConverter;
 
-use Popy\Calendar\Converter\LeapYearCalculatorInterface;
+use Popy\Calendar\Converter\CompleteLeapYearCalculatorInterface;
 use Popy\Calendar\ValueObject\DateFragmentedRepresentationInterface;
 
 /**
@@ -13,7 +13,7 @@ class EqualLengthMonthes extends AbstractDatePartsSolarSplitter
     /**
      * Leap year calculator.
      *
-     * @var LeapYearCalculatorInterface
+     * @var CompleteLeapYearCalculatorInterface
      */
     protected $calculator;
 
@@ -27,13 +27,13 @@ class EqualLengthMonthes extends AbstractDatePartsSolarSplitter
     /**
      * Class constructor.
      *
-     * @param LeapYearCalculatorInterface $calculator Leap year calculator.
-     * @param integer                     $length     Month length.
+     * @param CompleteLeapYearCalculatorInterface $calculator Leap year calculator.
+     * @param integer                             $length     Month length.
      */
-    public function __construct(LeapYearCalculatorInterface $calculator, $length)
+    public function __construct(CompleteLeapYearCalculatorInterface $calculator, $length)
     {
         $this->calculator = $calculator;
-        $this->length = $length;
+        $this->length     = $length;
     }
 
     /**
