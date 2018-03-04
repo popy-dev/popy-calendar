@@ -68,4 +68,9 @@ class RFC2550Test extends PHPUnit_Framework_TestCase
         $y = '1' . str_repeat('0', 732);
         $this->assertSame($y, $this->converter->from('^^^AAA1'));
     }
+
+    public function testInvalidFormat()
+    {
+        $this->assertNull($this->converter->from('abc'));
+    }
 }
