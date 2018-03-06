@@ -19,7 +19,7 @@ class Conversion
      * conversion from unix time, and an eventually completed copy of the
      * source date.
      *
-     * @var DateRepresentationInterface|null
+     * @var DateRepresentationInterface
      */
     protected $to;
 
@@ -46,7 +46,7 @@ class Conversion
     public function __construct(DateRepresentationInterface $from, DateRepresentationInterface $to = null)
     {
         $this->from = $from;
-        $this->to = $to;
+        $this->to = $to ?: $from;
         $this->unixTime = $from->getUnixTime();
         $this->unixMicroTime = $from->getUnixMicroTime();
     }
@@ -64,7 +64,7 @@ class Conversion
     /**
      * Gets the Converted date.
      *
-     * @return DateRepresentationInterface|null
+     * @return DateRepresentationInterface
      */
     public function getTo()
     {
