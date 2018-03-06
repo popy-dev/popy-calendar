@@ -76,7 +76,7 @@ class Conversion
      *
      * @param DateRepresentationInterface $to the to
      *
-     * @return self|null
+     * @return self
      */
     public function setTo(DateRepresentationInterface $to)
     {
@@ -92,7 +92,7 @@ class Conversion
      */
     public function getUnixTime()
     {
-        return $this->unixTime;
+        return (int)$this->unixTime;
     }
 
     /**

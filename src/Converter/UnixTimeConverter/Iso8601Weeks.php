@@ -56,7 +56,7 @@ class Iso8601Weeks implements UnixTimeConverterInterface
             return;
         }
 
-        $year = $input->getYear();
+        $year = (int)$input->getYear();
         // Assuming the era starting year is 1970, it starts a Thursday.
         $dayOfWeek = ($input->getEraDayIndex() + $this->firstYearDayIndex) % 7;
 

@@ -30,7 +30,7 @@ class Date implements DateRepresentationInterface
     /**
      * Timezone.
      *
-     * @var DateTimeZone
+     * @var DateTimeZone|null
      */
     protected $timezone;
 

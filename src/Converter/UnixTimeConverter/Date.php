@@ -24,13 +24,9 @@ class Date implements UnixTimeConverterInterface
      */
     public function fromUnixTime(Conversion $conversion)
     {
-        if (null === $res = $conversion->getTo()) {
-            return;
-        }
-
         $from = $conversion->getFrom();
 
-        $res = $res
+        $res = $conversion->getTo()
             ->withUnixTime($from->getUnixTime())
             ->withUnixMicroTime($from->getUnixMicroTime())
             ->withTimezone($from->getTimezone())

@@ -65,25 +65,30 @@ class PregChoice extends AbstractPreg
             return $offset;
         }
 
-        // Did match
-        if ($match[$offset][1] !== -1) {
-            $found = array_search($match[$offset][0], $this->choices);
-
-            // DO THE MAGIC
-            if ($found === false) {
-                $res = preg_grep(
-                    '/^' . preg_quote($match[$offset][0], '/') . '$/i',
-                    $this->choices
-                );
-
-                if (count($res)) {
-                    reset($res);
-                    $found = key($res);
-                }
-            }
-            
-            $result->set($this->symbol, $found);
+        if (
+            null === $this->symbol // nothing to map
+            || $match[$offset][1] === -1 // didn't match
+        ) {
+            return $offset + 1;
         }
+
+        // Did match
+        $found = array_search($match[$offset][0], $this->choices);
+
+        // DO THE MAGIC
+        if ($found === false) {
+            $res = preg_grep(
+                '/^' . preg_quote($match[$offset][0], '/') . '$/i',
+                $this->choices
+            );
+
+            if (count($res)) {
+                reset($res);
+                $found = key($res);
+            }
+        }
+        
+        $result->set($this->symbol, $found);
 
         return $offset + 1;
     }

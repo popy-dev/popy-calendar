@@ -2,7 +2,6 @@
 
 namespace Popy\Calendar\Converter\UnixTimeConverter;
 
-use BCMathExtended\BC;
 use Popy\Calendar\Converter\Conversion;
 use Popy\Calendar\Converter\UnixTimeConverterInterface;
 use Popy\Calendar\Converter\CompleteLeapYearCalculatorInterface;
@@ -68,7 +67,7 @@ class DateSolar implements UnixTimeConverterInterface
         // TODO : remove code repetition by using a separate abstraction
         // handling basic math operations.
 
-        if (is_integer($this->dayLengthInSeconds) || !class_exists(BC::class)) {
+        if (is_integer($this->dayLengthInSeconds)) {
             // bc not needed/not available
 
             // Relative time from era start.
@@ -95,12 +94,12 @@ class DateSolar implements UnixTimeConverterInterface
 
             // Calculating global day index. Floor is used to properly handle
             // negative values
-            $eraDayIndex = BC::floor(
+            $eraDayIndex = floor(
                 bcdiv($relativeTime, $this->dayLengthInSeconds)
             );
 
             // TODO : handle the loss as microseconds ?
-            $time = BC::ceil(bcsub(
+            $time = ceil(bcsub(
                 $relativeTime,
                 bcmul($eraDayIndex, $this->dayLengthInSeconds)
             ));
@@ -131,7 +130,7 @@ class DateSolar implements UnixTimeConverterInterface
             return;
         }
 
-        $year = $input->getYear();
+        $year = (int)$input->getYear();
         $eraDayIndex = $input->getDayIndex()
             + $this->calculator->getYearEraDayIndex($year)
         ;

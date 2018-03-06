@@ -40,7 +40,7 @@ class PresetParser
      *
      * @param string $input
      *
-     * @return DateTimeInterface
+     * @return DateTimeInterface|null
      */
     public function parse($input)
     {

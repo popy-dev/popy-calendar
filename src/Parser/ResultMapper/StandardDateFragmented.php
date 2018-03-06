@@ -112,7 +112,7 @@ class StandardDateFragmented implements ResultMapperInterface
     protected function determineWeekIndex(DateLexerResult $parts)
     {
         if (null === $w = $parts->get('W')) {
-            return;
+            return null;
         }
 
         return intval($w) - 1;

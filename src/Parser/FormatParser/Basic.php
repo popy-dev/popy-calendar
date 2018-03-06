@@ -3,11 +3,9 @@
 namespace Popy\Calendar\Parser\FormatParser;
 
 use Popy\Calendar\Parser\FormatLexerInterface;
-use Popy\Calendar\Parser\FormatLexer\MbString;
 use Popy\Calendar\Parser\SymbolParserInterface;
 use Popy\Calendar\Parser\FormatParserInterface;
 use Popy\Calendar\Parser\DateLexer\Collection;
-use Popy\Calendar\Parser\SymbolParser\PregNative;
 use Popy\Calendar\Parser\DateLexer\NonSymbolMatcher;
 
 /**
@@ -37,13 +35,13 @@ class Basic implements FormatParserInterface
     /**
      * Class constructor.
      *
-     * @param FormatLexerInterface|null  $lexer        Format lexer.
-     * @param SymbolParserInterface|null $symbolParser Symbol Parser
+     * @param FormatLexerInterface  $lexer        Format lexer.
+     * @param SymbolParserInterface $symbolParser Symbol Parser
      */
-    public function __construct(FormatLexerInterface $lexer = null, SymbolParserInterface $symbolParser = null)
+    public function __construct(FormatLexerInterface $lexer, SymbolParserInterface $symbolParser)
     {
-        $this->lexer = $lexer ?: new MbString();
-        $this->symbolParser = $symbolParser ?: new PregNative();
+        $this->lexer = $lexer;
+        $this->symbolParser = $symbolParser;
     }
 
 

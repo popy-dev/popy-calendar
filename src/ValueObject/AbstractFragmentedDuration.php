@@ -254,17 +254,18 @@ abstract class AbstractFragmentedDuration
     /**
      * Ensure each consecutive key of the input array is set (filling with nulls)
      *
-     * @param array<integer|null> $input
+     * @param array<mixed|null> $input
+     * @param mixed             $default Filling value.
      *
-     * @return array<integer|null>
+     * @return array<mixed|null>
      */
-    protected function fillArrayInput(array $input)
+    protected function fillArrayInput(array $input, $default = 0)
     {
         if (empty($input)) {
             return [];
         }
 
-        $res = array_fill(0, max(array_keys($input)), null);
+        $res = array_fill($default, max(array_keys($input)), null);
 
         foreach ($input as $index => $value) {
             $res[$index] = $value;

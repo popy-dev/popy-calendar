@@ -32,11 +32,9 @@ class TimeOffset implements UnixTimeConverterInterface
             $conversion->getUnixTime() + $offset->getValue()
         );
 
-        if (null !== $conversion->getTo()) {
-            $conversion->setTo(
-                $conversion->getTo()->withOffset($offset)
-            );
-        }
+        $conversion->setTo(
+            $conversion->getTo()->withOffset($offset)
+        );
     }
 
     /**

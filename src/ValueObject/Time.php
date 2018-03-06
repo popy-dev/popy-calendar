@@ -54,7 +54,7 @@ class Time extends AbstractFragmentedDuration
     public function get($i)
     {
         if (!isset($this->fragments[$i])) {
-            return;
+            return null;
         }
 
         if (
@@ -89,13 +89,14 @@ class Time extends AbstractFragmentedDuration
      *
      * @param integer $i Fragment index
      *
-     * @return integer
+     * @return integer|null
      */
     public function getHalved($i)
     {
         if (!isset($this->fragments[$i])) {
-            return;
+            return null;
         }
+
         if (!isset($this->sizes[$i])) {
             return $this->fragments[$i];
         }
@@ -115,7 +116,7 @@ class Time extends AbstractFragmentedDuration
             !isset($this->fragments[$i])
             || !isset($this->sizes[$i])
         ) {
-            return;
+            return null;
         }
 
         $half = (int)floor($this->sizes[$i] / 2);
@@ -198,7 +199,7 @@ class Time extends AbstractFragmentedDuration
     {
         $res = clone $this;
 
-        $this->halved = $this->fillArrayInput($halved);
+        $this->halved = $this->fillArrayInput($halved, false);
 
         return $res;
     }

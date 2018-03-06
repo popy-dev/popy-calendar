@@ -147,7 +147,7 @@ class PregNativeDateFragmented implements SymbolParserInterface
         $i = 0;
         $repetitions = 0;
 
-        while (null !== $label = $this->locale->getNumberOrdinalSuffix($i++)) {
+        while ($label = $this->locale->getNumberOrdinalSuffix($i++)) {
             if (!in_array($label, $choices)) {
                 $choices[] = $label;
                 $repetitions = 0;

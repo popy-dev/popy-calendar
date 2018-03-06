@@ -90,13 +90,13 @@ class StandardDate implements ResultMapperInterface
      * Determine date's timezone. If an offset has been found, Timezone has
      * no effect on the date parsing, but will have on the date display.
      *
-     * @param DateLexerResult $parts   Date lexer results.
-     * @param integer|null    $offset  Date offset if it has been found.
-     * @param DateTimeZone    $inputTz Default timezone if any.
+     * @param DateLexerResult   $parts   Date lexer results.
+     * @param TimeOffset        $offset  Date offset.
+     * @param DateTimeZone|null $inputTz Default timezone if any.
      *
      * @return DateTimeZone
      */
-    protected function determineTimezone(DateLexerResult $parts, TimeOffset $offset, DateTimeZone $inputTz)
+    protected function determineTimezone(DateLexerResult $parts, TimeOffset $offset, DateTimeZone $inputTz = null)
     {
         // e   Timezone identifier (added in PHP 5.1.0)    Examples: UTC, GMT, Atlantic/Azores
         // O   Difference to Greenwich time (GMT) in hours Example: +0200

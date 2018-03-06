@@ -103,7 +103,7 @@ class RFC2550 implements NumberConverterInterface
      *
      * @param string $input
      *
-     * @return string
+     * @return string|null
      */
     public function convertFromPositive($input)
     {
@@ -117,7 +117,7 @@ class RFC2550 implements NumberConverterInterface
                 $matches
             )
         ) {
-            return;
+            return null;
         }
 
         if ($matches['alpha'] === '') {
@@ -148,7 +148,7 @@ class RFC2550 implements NumberConverterInterface
      *
      * @param string $input
      *
-     * @return string
+     * @return string|null
      */
     public function convertFromNegative($input)
     {

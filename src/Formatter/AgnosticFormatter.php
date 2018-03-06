@@ -56,9 +56,7 @@ class AgnosticFormatter implements FormatterInterface
     {
         $date = Date::buildFromDateTimeInterface($input);
 
-        if (null === $date = $this->converter->to($date)) {
-            return;
-        }
+        $date = $this->converter->to($date);
 
         return $this->formatDateRepresentation($date, $format);
     }

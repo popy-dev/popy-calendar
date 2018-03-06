@@ -44,12 +44,16 @@ class StandardDateFragmented implements SymbolFormatterInterface
 
         if ($token->is('F')) {
             // F   A full textual representation of a month
-            return (string)$this->locale->getMonthName($input->getDateParts()->get(0));
+            return (string)$this->locale->getMonthName(
+                $input->getDateParts()->get(0)
+            );
         }
 
         if ($token->is('M')) {
             // M   A short textual representation of a month, three letters
-            return (string)$this->locale->getMonthShortName($input->getDateParts()->get(0));
+            return (string)$this->locale->getMonthShortName(
+                $input->getDateParts()->get(0)
+            );
         }
 
         if ($token->is('m')) {
@@ -79,17 +83,23 @@ class StandardDateFragmented implements SymbolFormatterInterface
 
         if ($token->is('S')) {
             // S   English ordinal suffix for the day of the month, 2 characters
-            return (string)$this->locale->getNumberOrdinalSuffix($input->getDateParts()->get(1));
+            return $this->locale->getNumberOrdinalSuffix(
+                (int)$input->getDateParts()->get(1)
+            );
         }
 
         if ($token->is('l')) {
             // l (lowercase 'L')   A full textual representation of the day of the week
-            return (string)$this->locale->getDayName($input->getDateParts()->getTransversal(2));
+            return (string)$this->locale->getDayName(
+                $input->getDateParts()->getTransversal(2)
+            );
         }
 
         if ($token->is('D')) {
             // D   A textual representation of a day, three letters
-            return (string)$this->locale->getDayShortName($input->getDateParts()->getTransversal(2));
+            return (string)$this->locale->getDayShortName(
+                $input->getDateParts()->getTransversal(2)
+            );
         }
         
         if ($token->is('w')) {

@@ -48,7 +48,7 @@ class FormatToken
     /**
      * Gets the token value.
      *
-     * @return string
+     * @return string|null
      */
     public function getValue()
     {
@@ -58,7 +58,7 @@ class FormatToken
     /**
      * Gets the token name (possibly aliased).
      *
-     * @return string
+     * @return string|null
      */
     public function getName()
     {
@@ -97,7 +97,7 @@ class FormatToken
      * or one of the symbol contained in the first argument if it is an array
      *
      * @param array|string $symbols
-     * @param string       ...$symbol
+     * @param string       ...$symbols
      *
      * @return boolean
      */

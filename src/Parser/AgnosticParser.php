@@ -85,20 +85,18 @@ class AgnosticParser implements ParserInterface
      */
     public function parseToDateRepresentation($input, $format, DateTimeZone $timezone = null)
     {
-        if (null === $lexer = $this->parser->parseFormat($format)) {
-            return;
-        }
+        $lexer = $this->parser->parseFormat($format);
 
         if (null === $parts = $lexer->tokenizeDate($input)) {
-            return;
+            return null;
         }
 
         $date = Date::buildFromTimezone($timezone);
 
         if (null === $date = $this->mapper->map($parts, $date)) {
-            return;
+            return null;
         }
 
-        return $date;
+        return $this->mapper->map($parts, $date);
     }
 }

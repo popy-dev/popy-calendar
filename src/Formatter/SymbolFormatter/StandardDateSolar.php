@@ -41,7 +41,7 @@ class StandardDateSolar implements SymbolFormatterInterface
         }
         if ($token->is('y')) {
             // y   A two digit representation of a year
-            return $this->converter->to($input->getYear());
+            return $this->converter->to($input->getYear() ?: 0);
         }
 
         if ($token->is('Y')) {

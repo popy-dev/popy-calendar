@@ -82,7 +82,7 @@ class ConfigurableFactory
     /**
      * Available values for option "additional_symbol_parser"
      *
-     * @var array<string>
+     * @var array<string|boolean>
      */
     protected $additional_symbol_parser = [
         'none'    => false,
@@ -135,8 +135,8 @@ class ConfigurableFactory
     /**
      * Generic service getter.
      *
-     * @param string $service  Service name.
-     * @param array  &$options Option array
+     * @param string $service Service name.
+     * @param array  $options Option array
      *
      * @return mixed
      */
